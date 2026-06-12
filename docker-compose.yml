@@ -1,0 +1,23 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: api.buki.redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+  postgres:
+    image: postgres:15-alpine
+    container_name: api.buki.db
+    ports:
+      - '5437:5432'
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  redis_data:
+  postgres_data:

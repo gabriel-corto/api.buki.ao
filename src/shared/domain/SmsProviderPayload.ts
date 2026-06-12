@@ -1,4 +1,4 @@
-export interface ISmsProviderPayload {
+export interface SmsProviderPayload {
   recipient: string;
   content: string;
 }
