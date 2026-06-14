@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { APP_GUARD } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
+import { AuthGuard } from './shared/guard/auth.guard';
 
-import { AppController } from './shared/infra/AppController';
+import { AppController } from './shared/infra/http/AppController';
 import { AuthController } from './modules/auth/infra/AuthController';
 
 import { RequestOtpUseCase } from './modules/auth/application/RequestOtpUseCase';
@@ -10,12 +12,12 @@ import { VerifyOtpUseCase } from './modules/auth/application/VerifyOtpUseCase';
 
 import { SmsProvider } from './shared/domain/SmsProvider';
 import { TwilioSmsProvider } from './shared/infra/sms/TwilioSmsProvider';
-
 import { RedisModule } from './shared/infra/database/redis/redis.module';
 import { PrismaModule } from './shared/infra/database/prisma/prisma.module';
+
 import { OtpRepository } from './shared/domain/OtpRepository';
-import { RedisOtpRepository } from './shared/infra/database/redis/RedisOtpRepository';
 import { UserRepository } from './shared/domain/user/UserRepository';
+import { RedisOtpRepository } from './shared/infra/database/redis/RedisOtpRepository';
 import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemoryUserRepository';
 
 @Module({
@@ -25,7 +27,7 @@ import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemor
     }),
     JwtModule.register({
       global: true,
-      secret: 'secret',
+      secret: process.env.JWT_SECRET_KEY,
       signOptions: { expiresIn: '1d' },
     }),
     RedisModule,
@@ -35,7 +37,6 @@ import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemor
   providers: [
     RequestOtpUseCase,
     VerifyOtpUseCase,
-
     {
       provide: SmsProvider,
       useClass: TwilioSmsProvider,
@@ -47,6 +48,10 @@ import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemor
     {
       provide: UserRepository,
       useClass: InMemoryUserRepository,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
   ],
 })

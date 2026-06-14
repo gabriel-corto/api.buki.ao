@@ -1,4 +1,4 @@
-export interface ApiDataResponse<T> {
+export interface ApiDataResponse<T = any> {
   data: T;
   message?: string;
   success: boolean;

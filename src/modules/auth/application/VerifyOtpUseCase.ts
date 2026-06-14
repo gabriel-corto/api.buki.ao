@@ -1,25 +1,22 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 import { VerifyOtpUseCaseInput } from './VerifyOtpUseCaseInput';
-import { VerifyOtpUseCaseOutput } from './VerifyOtpUseCaseOutput';
+import { TokenPayload } from '@/shared/types/TokenPayload';
 
 import { OtpRepository } from '@/shared/domain/OtpRepository';
 import { UserRepository } from '@/shared/domain/user/UserRepository';
-import { AuthTokenPayload } from '@/shared/types/AuthTokenPayload';
 
 @Injectable()
 export class VerifyOtpUseCase {
   constructor(
     private readonly otpRepository: OtpRepository,
     private readonly userRepository: UserRepository,
-    private readonly jwtService: JwtService,
+    private jwtService: JwtService,
   ) {}
 
-  async execute(input: VerifyOtpUseCaseInput): Promise<VerifyOtpUseCaseOutput> {
+  async execute(input: VerifyOtpUseCaseInput) {
     const storedCode = await this.otpRepository.get(input.phone);
-
-    console.log(input);
 
     if (!storedCode) {
       throw new BadRequestException('Código OTP não encontrado ou expirado.');
@@ -33,22 +30,32 @@ export class VerifyOtpUseCase {
     const user = await this.userRepository.findByPhone(input.phone);
 
     if (user) {
-      const tokenPayload: AuthTokenPayload = {
+      const accessTokenPayload: TokenPayload = {
+        scope: 'access',
         id: user.getId(),
-        phone: user.getPhone().getValue(),
         role: user.getRole(),
+        accountType: user.getAcountType(),
+        phone: user.getPhone().getValue(),
       };
 
-      const token = await this.jwtService.signAsync(tokenPayload);
+      const accessToken = this.jwtService.sign(accessTokenPayload);
 
       return {
+        accessToken,
         hasUser: true,
-        token,
       };
     }
 
+    const onboardingTokenPayload: TokenPayload = {
+      scope: 'onboarding',
+      phone: input.phone,
+    };
+
+    const onboardingToken = this.jwtService.sign(onboardingTokenPayload);
+
     return {
       hasUser: false,
+      onboardingToken,
     };
   }
 }

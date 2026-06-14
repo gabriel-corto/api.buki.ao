@@ -10,6 +10,7 @@ import {
   ApiDataResponse,
   type ApiNoDataResponse,
 } from '@/shared/types/ApiResponse';
+import { Public } from '@/shared/decorators/public.decorator';
 
 @Controller('/auth')
 export class AuthController {
@@ -18,6 +19,7 @@ export class AuthController {
     private verifyOtp: VerifyOtpUseCase,
   ) {}
 
+  @Public()
   @Post('/request-otp')
   async request(@Body() body: RequestOtpDto): Promise<ApiNoDataResponse> {
     await this.requestOtp.execute(body);
@@ -28,13 +30,19 @@ export class AuthController {
     };
   }
 
+  @Public()
   @Post('/verify-otp')
-  async verify(@Body() body: VerifyOtpDto): Promise<ApiDataResponse<string>> {
-    const { hasUser, token } = await this.verifyOtp.execute(body);
+  async verify(@Body() body: VerifyOtpDto): Promise<ApiDataResponse> {
+    const { hasUser, accessToken, onboardingToken } =
+      await this.verifyOtp.execute(body);
 
     return {
-      data: token || '',
-      success: hasUser,
+      data: {
+        hasUser,
+        accessToken,
+        onboardingToken,
+      },
+      success: true,
       message: 'Código OTP verificado com sucesso!',
     };
   }
