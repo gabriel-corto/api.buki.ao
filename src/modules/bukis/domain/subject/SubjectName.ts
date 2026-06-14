@@ -1,21 +1,23 @@
-export type SubjectName =
-  | 'Matemática'
-  | 'Física'
-  | 'Química'
-  | 'Biologia'
-  | 'História'
-  | 'Geografia'
-  | 'Português'
-  | 'Inglês'
-  | 'Francês'
-  | 'Filosofia'
-  | 'Sociologia'
-  | 'Economia'
-  | 'Direito'
-  | 'Psicologia'
-  | 'Informática'
-  | 'Geometria Descritiva'
-  | 'Educação Visual'
-  | 'Música'
-  | 'Antropologia'
-  | 'Literatura';
+export enum SubjectName {
+  MATHEMATICS = 'MATHEMATICS',
+  PHYSICS = 'PHYSICS',
+  CHEMISTRY = 'CHEMISTRY',
+  BIOLOGY = 'BIOLOGY',
+  HISTORY = 'HISTORY',
+  GEOGRAPHY = 'GEOGRAPHY',
+  PORTUGUESE = 'PORTUGUESE',
+  ENGLISH = 'ENGLISH',
+  FRENCH = 'FRENCH',
+  PHILOSOPHY = 'PHILOSOPHY',
+  SOCIOLOGY = 'SOCIOLOGY',
+  ECONOMICS = 'ECONOMICS',
+  LAW = 'LAW',
+  PSYCHOLOGY = 'PSYCHOLOGY',
+  COMPUTER_SCIENCE = 'COMPUTER_SCIENCE',
+  DESCRIPTIVE_GEOMETRY = 'DESCRIPTIVE_GEOMETRY',
+  VISUAL_ARTS = 'VISUAL_ARTS',
+  MUSIC = 'MUSIC',
+  ANTHROPOLOGY = 'ANTHROPOLOGY',
+  LITERATURE = 'LITERATURE',
+  PROGRAMMING = 'PROGRAMMING',
+}

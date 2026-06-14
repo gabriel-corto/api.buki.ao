@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { VerifyOtpUseCaseInput } from './VerifyOtpUseCaseInput';
@@ -19,12 +19,14 @@ export class VerifyOtpUseCase {
   async execute(input: VerifyOtpUseCaseInput): Promise<VerifyOtpUseCaseOutput> {
     const storedCode = await this.otpRepository.get(input.phone);
 
+    console.log(input);
+
     if (!storedCode) {
-      throw new Error('Código OTP não encontrado ou expirado.');
+      throw new BadRequestException('Código OTP não encontrado ou expirado.');
     }
 
     if (storedCode !== input.code) {
-      throw new Error('Código OTP inválido.');
+      throw new BadRequestException('Código OTP inválido.');
     }
     await this.otpRepository.delete(input.phone);
 

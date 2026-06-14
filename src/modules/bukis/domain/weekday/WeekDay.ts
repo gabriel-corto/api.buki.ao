@@ -32,6 +32,9 @@ export class WeekDay {
   public setName(name: WeekDayName): void {
     this.name = name;
   }
+  public getStatus(): SharedStatus {
+    return this.status;
+  }
   public activate(): void {
     this.status = SharedStatus.ACTIVE;
   }

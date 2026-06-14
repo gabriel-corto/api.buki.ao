@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import twilio from 'twilio';
 
 import { SmsProvider } from '@/shared/domain/SmsProvider';
@@ -19,20 +21,17 @@ export class TwilioSmsProvider implements SmsProvider {
 
   async send(data: SmsProviderPayload): Promise<void> {
     try {
+      console.log(`[TwilioSmsProvider] Sending SMS to ${data.recipient}...`);
       await this.client.messages.create({
         body: data.content,
         from: this.fromNumber,
-        to: data.recipient,
+        to: '+244' + data.recipient,
       });
+      console.log(`[TwilioSmsProvider] SMS sent to ${data.recipient}`);
     } catch (error: any) {
-      console.error('Twilio Error Details:', {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        message: error.message,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        code: error.code,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        status: error.status,
-      });
+      console.error(
+        `[TwilioSmsProvider] Error sending SMS to ${data.recipient}: ${error.message}`,
+      );
       throw error;
     }
   }
