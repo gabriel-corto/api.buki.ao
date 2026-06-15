@@ -18,7 +18,7 @@ import { RedisModule } from './shared/infra/database/redis/redis.module';
 import { PrismaModule } from './shared/infra/database/prisma/prisma.module';
 
 import { OtpRepository } from './modules/auth/domain/OtpRepository';
-import { RedisOtpRepository } from './shared/infra/database/redis/RedisOtpRepository';
+import { RedisOtpRepository } from './modules/auth/infra/RedisOtpRepository';
 
 import { UserRepository } from './shared/domain/user/UserRepository';
 import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemoryUserRepository';

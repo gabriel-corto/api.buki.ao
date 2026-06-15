@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-
 import { SmsProvider, SmsProviderPayload } from '@/shared/domain/SmsProvider';
 
 @Injectable()
-export class ZiettSmsProvider implements SmsProvider {
+export class FakeSmsProvider implements SmsProvider {
   async send(data: SmsProviderPayload): Promise<void> {
     await Promise.resolve();
-    console.log('Mensagem Enviada com a ziett para ', data.recipient);
+    // eslint-disable-next-line no-console
+    console.log('Mensagem Enviada para ', data.recipient);
   }
 }
