@@ -3,9 +3,8 @@ import { SmsProvider, SmsProviderPayload } from '@/shared/domain/SmsProvider';
 
 @Injectable()
 export class FakeSmsProvider implements SmsProvider {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async send(data: SmsProviderPayload): Promise<void> {
     await Promise.resolve();
-    // eslint-disable-next-line no-console
-    console.log('Mensagem Enviada para ', data.recipient);
   }
 }
