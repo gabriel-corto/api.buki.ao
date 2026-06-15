@@ -18,9 +18,13 @@ import { RedisModule } from './shared/infra/database/redis/redis.module';
 import { PrismaModule } from './shared/infra/database/prisma/prisma.module';
 
 import { OtpRepository } from './modules/auth/domain/OtpRepository';
-import { UserRepository } from './shared/domain/user/UserRepository';
 import { RedisOtpRepository } from './shared/infra/database/redis/RedisOtpRepository';
+
+import { UserRepository } from './shared/domain/user/UserRepository';
 import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemoryUserRepository';
+
+import { CustomerRepository } from './modules/user/domain/CustomerRepository';
+import { InMemoryCustomerRepository } from './modules/user/infra/database/inmemory/InMemoryCustomerRepository';
 
 @Module({
   imports: [
@@ -51,6 +55,10 @@ import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemor
     {
       provide: UserRepository,
       useClass: InMemoryUserRepository,
+    },
+    {
+      provide: CustomerRepository,
+      useClass: InMemoryCustomerRepository,
     },
     {
       provide: APP_GUARD,

@@ -2,10 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { User } from '@/shared/domain/user/User';
+import { TokenPayload } from '@/shared/types/TokenPayload';
 import { UserAccountType } from '@/shared/domain/user/UserAccountType';
 
+import { Customer } from '../domain/Customer';
+
 import { UserRepository } from '@/shared/domain/user/UserRepository';
-import { TokenPayload } from '@/shared/types/TokenPayload';
+import { CustomerRepository } from '../domain/CustomerRepository';
 
 import { StartOnboardingUseCaseInput } from './StartOnboardingUseCaseInput';
 
@@ -14,6 +17,7 @@ export class StartOnBoardingUseCase {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
+    private readonly customerRepository: CustomerRepository,
   ) {}
 
   async execute(input: StartOnboardingUseCaseInput) {
@@ -23,8 +27,10 @@ export class StartOnBoardingUseCase {
         input.phone,
         UserAccountType.CUSTOMER,
       );
-
       await this.userRepository.save(user);
+
+      const customer = Customer.create(user.getId());
+      await this.customerRepository.save(customer);
 
       const accessTokenPayload: TokenPayload = {
         scope: 'access',
