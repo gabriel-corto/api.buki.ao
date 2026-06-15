@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';
 
-import { OtpRepository } from '@/shared/domain/OtpRepository';
+import { OtpRepository } from '@/modules/auth/domain/OtpRepository';
 
 @Injectable()
 export class RedisOtpRepository implements OtpRepository {

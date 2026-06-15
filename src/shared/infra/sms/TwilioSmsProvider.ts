@@ -4,8 +4,7 @@ import { ConfigService } from '@nestjs/config';
 
 import twilio from 'twilio';
 
-import { SmsProvider } from '@/shared/domain/SmsProvider';
-import { SmsProviderPayload } from '@/shared/domain/SmsProviderPayload';
+import { SmsProvider, SmsProviderPayload } from '@/shared/domain/SmsProvider';
 
 @Injectable()
 export class TwilioSmsProvider implements SmsProvider {

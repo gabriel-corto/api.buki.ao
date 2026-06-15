@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { SmsProvider } from '@/shared/domain/SmsProvider';
-import { SmsProviderPayload } from '@/shared/domain/SmsProviderPayload';
+import { SmsProvider, SmsProviderPayload } from '@/shared/domain/SmsProvider';
 
 @Injectable()
 export class ZiettSmsProvider extends SmsProvider {

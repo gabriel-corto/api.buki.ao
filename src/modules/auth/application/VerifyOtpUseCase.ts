@@ -4,7 +4,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { VerifyOtpUseCaseInput } from './VerifyOtpUseCaseInput';
 import { TokenPayload } from '@/shared/types/TokenPayload';
 
-import { OtpRepository } from '@/shared/domain/OtpRepository';
+import { OtpRepository } from '@/modules/auth/domain/OtpRepository';
 import { UserRepository } from '@/shared/domain/user/UserRepository';
 
 @Injectable()
@@ -51,7 +51,9 @@ export class VerifyOtpUseCase {
       phone: input.phone,
     };
 
-    const onboardingToken = this.jwtService.sign(onboardingTokenPayload);
+    const onboardingToken = this.jwtService.sign(onboardingTokenPayload, {
+      expiresIn: '45min',
+    });
 
     return {
       hasUser: false,

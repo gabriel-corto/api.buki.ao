@@ -4,7 +4,7 @@ import { RequestOtpUseCaseInput } from './RequestOtpUseCaseInput';
 import { generateOTPCode } from '@/shared/helpers/GenerateOTPCode';
 
 import { SmsProvider } from '@/shared/domain/SmsProvider';
-import { OtpRepository } from '@/shared/domain/OtpRepository';
+import { OtpRepository } from '@/modules/auth/domain/OtpRepository';
 
 @Injectable()
 export class RequestOtpUseCase {

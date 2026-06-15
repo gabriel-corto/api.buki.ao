@@ -1,4 +1,4 @@
-import { Phone } from '../Phone';
+import { Phone } from './Phone';
 import { UserRole } from './UserRole';
 import { UserStatus } from './UserStatus';
 import { UserAccountType } from './UserAccountType';
