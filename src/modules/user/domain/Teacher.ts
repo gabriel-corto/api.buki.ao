@@ -6,8 +6,11 @@ import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
 import { PricePolicy } from '@/modules/bukis/domain/price/PricePolicy';
 
 import { TeacherProfileStatus } from './TeacherProfileStatus';
+import { PriceTier } from '@/modules/bukis/domain/price/PriceTier';
+import { generateTeacherId } from '@/shared/helpers/GenerateBukiIDs';
 
 export class Teacher {
+  private readonly id: string;
   private readonly userId: string;
   private avatar: string;
   private subjects: Subject[];
@@ -18,6 +21,8 @@ export class Teacher {
   private status: TeacherProfileStatus;
 
   private constructor(
+    id: string,
+    teacherId: string,
     userId: string,
     avatar: string,
     subjects: Subject[],
@@ -27,6 +32,7 @@ export class Teacher {
     pricePolicy: PricePolicy,
     status: TeacherProfileStatus,
   ) {
+    this.id = id;
     this.userId = userId;
     this.avatar = avatar;
     this.subjects = subjects;
@@ -37,29 +43,27 @@ export class Teacher {
     this.status = status;
   }
 
-  public static create(
-    userId: string,
-    avatar: string,
-    subjects: Subject[],
-    weekDays: WeekDay[],
-    lessonZones: Zone[],
-    gradeLevels: GradeLevel[],
-    pricePolicy: PricePolicy,
-  ): Teacher {
+  public static create(userId: string): Teacher {
     return new Teacher(
+      generateTeacherId(),
+      crypto.randomUUID(),
       userId,
-      avatar,
-      subjects,
-      weekDays,
-      lessonZones,
-      gradeLevels,
-      pricePolicy,
+      '',
+      [],
+      [],
+      [],
+      [],
+      PricePolicy.create(PriceTier['0K']),
       TeacherProfileStatus.PENDING,
     );
   }
 
   public getUserId(): string {
     return this.userId;
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   public getAvatar(): string {
@@ -86,6 +90,10 @@ export class Teacher {
     return this.pricePolicy;
   }
 
+  public getStatus(): TeacherProfileStatus {
+    return this.status;
+  }
+
   public updateAvatar(avatar: string): void {
     this.avatar = avatar;
   }
@@ -108,5 +116,13 @@ export class Teacher {
 
   public updatePricePolicy(pricePolicy: PricePolicy): void {
     this.pricePolicy = pricePolicy;
+  }
+
+  public approve(): void {
+    this.status = TeacherProfileStatus.APPROVED;
+  }
+
+  public reject(): void {
+    this.status = TeacherProfileStatus.REJECTED;
   }
 }

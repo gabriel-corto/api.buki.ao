@@ -21,6 +21,8 @@ export class InMemoryTeacherRepository implements TeacherRepository {
     );
     if (index !== -1) {
       this.teachers[index] = teacher;
+    } else {
+      this.teachers.push(teacher);
     }
   }
 }

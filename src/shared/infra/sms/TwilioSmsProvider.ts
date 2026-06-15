@@ -27,6 +27,7 @@ export class TwilioSmsProvider implements SmsProvider {
         to: '+244' + data.recipient,
       });
       console.log(`[TwilioSmsProvider] SMS sent to ${data.recipient}`);
+      console.log(data.content);
     } catch (error: any) {
       console.error(
         `[TwilioSmsProvider] Error sending SMS to ${data.recipient}: ${error.message}`,

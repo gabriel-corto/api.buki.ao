@@ -8,6 +8,8 @@ import { Customer } from '../domain/Customer';
 
 import { UserRepository } from '@/shared/domain/user/UserRepository';
 import { CustomerRepository } from '../domain/CustomerRepository';
+import { Teacher } from '../domain/Teacher';
+import { TeacherRepository } from '../domain/TeacherRepository';
 
 import { StartOnboardingUseCaseInput } from './StartOnboardingUseCaseInput';
 import { TokenPayload } from '@/modules/auth/domain/TokenService';
@@ -18,6 +20,7 @@ export class StartOnBoardingUseCase {
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
     private readonly customerRepository: CustomerRepository,
+    private readonly teacherRepository: TeacherRepository,
   ) {}
 
   async execute(input: StartOnboardingUseCaseInput) {
@@ -49,6 +52,9 @@ export class StartOnBoardingUseCase {
 
     const user = User.create(input.name, input.phone, input.accountType);
     await this.userRepository.save(user);
+
+    const teacher = Teacher.create(user.getId());
+    await this.teacherRepository.save(teacher);
 
     const onboardingTokenPayload: TokenPayload = {
       scope: 'onboarding',

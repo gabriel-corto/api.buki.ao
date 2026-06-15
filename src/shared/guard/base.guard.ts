@@ -17,8 +17,8 @@ export abstract class BaseJwtGuard implements CanActivate {
   protected abstract readonly expectedScope: TokenPayload['scope'];
 
   constructor(
-    private jwtService: JwtService,
-    private reflector: Reflector,
+    protected jwtService: JwtService,
+    protected reflector: Reflector,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -46,7 +46,12 @@ export abstract class BaseJwtGuard implements CanActivate {
       }
 
       request['user'] = payload;
-    } catch {
+    } catch (err) {
+      if (err instanceof UnauthorizedException) {
+        throw err;
+      }
+      // eslint-disable-next-line no-console
+      console.error('JWT Verification Error:', err);
       throw new UnauthorizedException('Token inválido.');
     }
     return true;
