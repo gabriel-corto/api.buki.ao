@@ -1,12 +1,13 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 
 import { StartOnBoardingUseCase } from '../../application/StartOnboardingUseCase';
 
 import { StartOnBoardingDto } from './StartOnBoardingDto';
 
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
-import { type TokenPayload } from '@/shared/types/TokenPayload';
 import { type ApiDataResponse } from '@/shared/types/ApiResponse';
+import { OnboardingGuard } from '@/shared/guard/onboarding.guard';
+import { type TokenPayload } from '@/modules/auth/domain/TokenService';
 
 @Controller('users')
 export class UserController {
@@ -15,6 +16,7 @@ export class UserController {
   ) {}
 
   @Post('/profile/onboarding')
+  @UseGuards(OnboardingGuard)
   async startOnBoarding(
     @CurrentUser() user: TokenPayload,
     @Body() body: StartOnBoardingDto,

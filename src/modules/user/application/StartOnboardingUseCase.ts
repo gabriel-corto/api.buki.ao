@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { User } from '@/shared/domain/user/User';
-import { TokenPayload } from '@/shared/types/TokenPayload';
 import { UserAccountType } from '@/shared/domain/user/UserAccountType';
 
 import { Customer } from '../domain/Customer';
@@ -11,6 +10,7 @@ import { UserRepository } from '@/shared/domain/user/UserRepository';
 import { CustomerRepository } from '../domain/CustomerRepository';
 
 import { StartOnboardingUseCaseInput } from './StartOnboardingUseCaseInput';
+import { TokenPayload } from '@/modules/auth/domain/TokenService';
 
 @Injectable()
 export class StartOnBoardingUseCase {
@@ -47,8 +47,12 @@ export class StartOnBoardingUseCase {
       };
     }
 
+    const user = User.create(input.name, input.phone, input.accountType);
+    await this.userRepository.save(user);
+
     const onboardingTokenPayload: TokenPayload = {
       scope: 'onboarding',
+      userId: user.getId(),
       phone: input.phone,
     };
 

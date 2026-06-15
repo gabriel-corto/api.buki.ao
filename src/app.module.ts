@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
-import { AuthGuard } from './shared/guard/auth.guard';
 
 import { AppController } from './shared/infra/http/AppController';
 import { AuthController } from './modules/auth/infra/AuthController';
@@ -25,6 +24,11 @@ import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemor
 
 import { CustomerRepository } from './modules/user/domain/CustomerRepository';
 import { InMemoryCustomerRepository } from './modules/user/infra/database/inmemory/InMemoryCustomerRepository';
+import { AuthGuard } from './shared/guard/auth.guard';
+import { JsGeneratorOtpService } from './modules/auth/infra/JsGeneratorOtpService';
+import { OtpService } from './modules/auth/domain/OtpService';
+import { JwtTokenService } from './modules/auth/infra/JwtTokenService';
+import { TokenService } from './modules/auth/domain/TokenService';
 
 @Module({
   imports: [
@@ -51,6 +55,14 @@ import { InMemoryCustomerRepository } from './modules/user/infra/database/inmemo
     {
       provide: OtpRepository,
       useClass: RedisOtpRepository,
+    },
+    {
+      provide: OtpService,
+      useClass: JsGeneratorOtpService,
+    },
+    {
+      provide: TokenService,
+      useClass: JwtTokenService,
     },
     {
       provide: UserRepository,

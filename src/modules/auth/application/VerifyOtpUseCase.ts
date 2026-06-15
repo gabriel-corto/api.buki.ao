@@ -1,18 +1,17 @@
-import { JwtService } from '@nestjs/jwt';
 import { BadRequestException, Injectable } from '@nestjs/common';
 
 import { VerifyOtpUseCaseInput } from './VerifyOtpUseCaseInput';
-import { TokenPayload } from '@/shared/types/TokenPayload';
 
 import { OtpRepository } from '@/modules/auth/domain/OtpRepository';
 import { UserRepository } from '@/shared/domain/user/UserRepository';
+import { TokenPayload, TokenService } from '../domain/TokenService';
 
 @Injectable()
 export class VerifyOtpUseCase {
   constructor(
     private readonly otpRepository: OtpRepository,
     private readonly userRepository: UserRepository,
-    private jwtService: JwtService,
+    private readonly tokenService: TokenService,
   ) {}
 
   async execute(input: VerifyOtpUseCaseInput) {
@@ -38,7 +37,8 @@ export class VerifyOtpUseCase {
         phone: user.getPhone().getValue(),
       };
 
-      const accessToken = this.jwtService.sign(accessTokenPayload);
+      const accessToken =
+        this.tokenService.generateAccessToken(accessTokenPayload);
 
       return {
         accessToken,
@@ -51,9 +51,9 @@ export class VerifyOtpUseCase {
       phone: input.phone,
     };
 
-    const onboardingToken = this.jwtService.sign(onboardingTokenPayload, {
-      expiresIn: '45min',
-    });
+    const onboardingToken = this.tokenService.generateOnboardingToken(
+      onboardingTokenPayload,
+    );
 
     return {
       hasUser: false,
