@@ -7,3 +7,159 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id          String      @id
+  name        String
+  phone       String      @unique
+  email       String?     @unique
+  role        UserRole
+  accountType AccountType
+  status      UserStatus  @default(ACTIVE)
+  createdAt   DateTime
+  updatedAt   DateTime
+
+  teacherProfile  Teacher?
+  customerProfile Customer?
+
+  @@map("users")
+}
+
+enum UserRole {
+  MANAGER
+  COMMON
+}
+
+enum AccountType {
+  TEACHER
+  CUSTOMER
+  MANAGER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum SharedStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model Customer {
+  id     String @id
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("customers")
+}
+
+model Teacher {
+  id          String       @id
+  avatar      String
+  subjects    Subject[]
+  weekDays    WeekDay[]
+  zones       Zone[]
+  gradeLevels GradeLevel[]
+
+  pricePolicyId String?
+  pricePolicy   PricePolicy?  @relation(fields: [pricePolicyId], references: [id])
+  status        TeacherStatus @default(PENDING)
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("teachers")
+}
+
+enum TeacherStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Subject {
+  id       String       @id
+  name     SubjectName
+  status   SharedStatus @default(ACTIVE)
+  teachers Teacher[]
+
+  @@map("subjects")
+}
+
+enum SubjectName {
+  MATHEMATICS
+  PHYSICS
+  CHEMISTRY
+  BIOLOGY
+  HISTORY
+  GEOGRAPHY
+  PORTUGUESE
+  ENGLISH
+  FRENCH
+  PHILOSOPHY
+  SOCIOLOGY
+  ECONOMICS
+  LAW
+  PSYCHOLOGY
+  COMPUTER_SCIENCE
+  DESCRIPTIVE_GEOMETRY
+  VISUAL_ARTS
+  MUSIC
+  ANTHROPOLOGY
+  LITERATURE
+  PROGRAMMING
+}
+
+model WeekDay {
+  id       String       @id
+  name     WeekDayName
+  status   SharedStatus @default(ACTIVE)
+  teachers Teacher[]
+
+  @@map("weekdays")
+}
+
+enum WeekDayName {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+model GradeLevel {
+  id       String         @id
+  name     GradeLevelName
+  status   SharedStatus   @default(ACTIVE)
+  teachers Teacher[]
+
+  @@map("gradelevels")
+}
+
+enum GradeLevelName {
+  PRIMARY
+  CYCLE_1
+  CYCLE_2
+  UNIVERSITY
+}
+
+model Zone {
+  id       String       @id
+  name     String
+  status   SharedStatus @default(ACTIVE)
+  teachers Teacher[]
+
+  @@map("zones")
+}
+
+model PricePolicy {
+  id       String       @id
+  value    String
+  status   SharedStatus @default(ACTIVE)
+  teachers Teacher[]
+
+  @@map("pricepolicy")
+}

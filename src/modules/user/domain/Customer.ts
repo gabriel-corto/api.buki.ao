@@ -9,6 +9,10 @@ export class Customer {
     return new Customer(userId);
   }
 
+  public static restore(userId: string): Customer {
+    return new Customer(userId);
+  }
+
   public getUserId(): string {
     return this.userId;
   }

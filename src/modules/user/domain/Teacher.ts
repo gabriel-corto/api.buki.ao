@@ -22,7 +22,6 @@ export class Teacher {
 
   private constructor(
     id: string,
-    teacherId: string,
     userId: string,
     avatar: string,
     subjects: Subject[],
@@ -46,7 +45,6 @@ export class Teacher {
   public static create(userId: string): Teacher {
     return new Teacher(
       generateTeacherId(),
-      crypto.randomUUID(),
       userId,
       '',
       [],
@@ -55,6 +53,30 @@ export class Teacher {
       [],
       PricePolicy.create(PriceTier['0K']),
       TeacherProfileStatus.PENDING,
+    );
+  }
+
+  public static restore(
+    id: string,
+    userId: string,
+    avatar: string,
+    subjects: Subject[],
+    weekDays: WeekDay[],
+    lessonZones: Zone[],
+    gradeLevels: GradeLevel[],
+    pricePolicy: PricePolicy,
+    status: TeacherProfileStatus,
+  ): Teacher {
+    return new Teacher(
+      id,
+      userId,
+      avatar,
+      subjects,
+      weekDays,
+      lessonZones,
+      gradeLevels,
+      pricePolicy,
+      status,
     );
   }
 

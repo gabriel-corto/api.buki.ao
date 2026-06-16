@@ -12,6 +12,7 @@ import { RequestOtpUseCase } from './modules/auth/application/RequestOtpUseCase'
 import { VerifyOtpUseCase } from './modules/auth/application/VerifyOtpUseCase';
 import { StartOnBoardingUseCase } from './modules/user/application/StartOnboardingUseCase';
 import { UploadTeacherAvatarUseCase } from './modules/user/application/UploadTeacherAvatarUseCase';
+import { UpdateTeacherBukiInformationUseCase } from './modules/user/application/UpdateTeacherBukiInformationUseCase';
 
 import { SmsProvider } from './shared/domain/SmsProvider';
 import { RedisModule } from './shared/infra/database/redis/redis.module';
@@ -19,15 +20,12 @@ import { PrismaModule } from './shared/infra/database/prisma/prisma.module';
 
 import { OtpRepository } from './modules/auth/domain/OtpRepository';
 import { RedisOtpRepository } from './modules/auth/infra/RedisOtpRepository';
-
 import { UserRepository } from './shared/domain/user/UserRepository';
-import { InMemoryUserRepository } from './shared/infra/database/inmemory/InMemoryUserRepository';
-
+import { PrismaUserRepository } from './modules/user/infra/database/prisma/repositories/PrismaUserRepository';
+import { PrismaCustomerRepository } from './modules/user/infra/database/prisma/repositories/PrismaCustomerRepository';
+import { PrismaTeacherRepository } from './modules/user/infra/database/prisma/repositories/PrismaTeacherRepository';
 import { CustomerRepository } from './modules/user/domain/CustomerRepository';
-import { InMemoryCustomerRepository } from './modules/user/infra/database/inmemory/InMemoryCustomerRepository';
-
 import { TeacherRepository } from './modules/user/domain/TeacherRepository';
-import { InMemoryTeacherRepository } from './modules/user/infra/database/inmemory/InMemoryTeacherRepository';
 
 import { JsGeneratorOtpService } from './modules/auth/infra/JsGeneratorOtpService';
 import { OtpService } from './modules/auth/domain/OtpService';
@@ -56,6 +54,7 @@ import { CloudinaryStorageService } from './shared/infra/storage/CloudinaryStora
     VerifyOtpUseCase,
     StartOnBoardingUseCase,
     UploadTeacherAvatarUseCase,
+    UpdateTeacherBukiInformationUseCase,
     {
       provide: SmsProvider,
       useClass: TwilioSmsProvider,
@@ -78,15 +77,15 @@ import { CloudinaryStorageService } from './shared/infra/storage/CloudinaryStora
     },
     {
       provide: UserRepository,
-      useClass: InMemoryUserRepository,
+      useClass: PrismaUserRepository,
     },
     {
       provide: CustomerRepository,
-      useClass: InMemoryCustomerRepository,
+      useClass: PrismaCustomerRepository,
     },
     {
       provide: TeacherRepository,
-      useClass: InMemoryTeacherRepository,
+      useClass: PrismaTeacherRepository,
     },
     {
       provide: APP_GUARD,

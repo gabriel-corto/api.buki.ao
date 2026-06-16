@@ -2,7 +2,7 @@ import { RequestOtpUseCase } from '@/modules/auth/application/RequestOtpUseCase'
 import { VerifyOtpUseCase } from '@/modules/auth/application/VerifyOtpUseCase';
 
 import { InMemoryOtpRepository } from '@/modules/auth/infra/InMemoryOtpRepository';
-import { InMemoryUserRepository } from '@/shared/infra/database/inmemory/InMemoryUserRepository';
+import { InMemoryUserRepository } from '@/modules/user/infra/database/inmemory/InMemoryUserRepository';
 
 import { FakeSmsProvider } from '@/shared/infra/sms/FakeSmsProvider';
 import { FakeOtpService } from '@/modules/auth/infra/FakeOtpService';

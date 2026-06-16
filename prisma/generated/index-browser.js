@@ -132,6 +132,49 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+};
+
+exports.Prisma.TeacherScalarFieldEnum = {
+  id: 'id',
+  avatar: 'avatar',
+  pricePolicyId: 'pricePolicyId',
+  status: 'status',
+  userId: 'userId'
+};
+
+exports.Prisma.SubjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  status: 'status'
+};
+
+exports.Prisma.WeekDayScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  status: 'status'
+};
+
+exports.Prisma.GradeLevelScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  status: 'status'
+};
+
+exports.Prisma.ZoneScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  status: 'status'
+};
+
+exports.Prisma.PricePolicyScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  status: 'status'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -146,10 +189,84 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.UserRole = exports.$Enums.UserRole = {
+  MANAGER: 'MANAGER',
+  COMMON: 'COMMON'
+};
 
+exports.AccountType = exports.$Enums.AccountType = {
+  TEACHER: 'TEACHER',
+  CUSTOMER: 'CUSTOMER',
+  MANAGER: 'MANAGER'
+};
+
+exports.UserStatus = exports.$Enums.UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  BLOCKED: 'BLOCKED'
+};
+
+exports.TeacherStatus = exports.$Enums.TeacherStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
+exports.SubjectName = exports.$Enums.SubjectName = {
+  MATHEMATICS: 'MATHEMATICS',
+  PHYSICS: 'PHYSICS',
+  CHEMISTRY: 'CHEMISTRY',
+  BIOLOGY: 'BIOLOGY',
+  HISTORY: 'HISTORY',
+  GEOGRAPHY: 'GEOGRAPHY',
+  PORTUGUESE: 'PORTUGUESE',
+  ENGLISH: 'ENGLISH',
+  FRENCH: 'FRENCH',
+  PHILOSOPHY: 'PHILOSOPHY',
+  SOCIOLOGY: 'SOCIOLOGY',
+  ECONOMICS: 'ECONOMICS',
+  LAW: 'LAW',
+  PSYCHOLOGY: 'PSYCHOLOGY',
+  COMPUTER_SCIENCE: 'COMPUTER_SCIENCE',
+  DESCRIPTIVE_GEOMETRY: 'DESCRIPTIVE_GEOMETRY',
+  VISUAL_ARTS: 'VISUAL_ARTS',
+  MUSIC: 'MUSIC',
+  ANTHROPOLOGY: 'ANTHROPOLOGY',
+  LITERATURE: 'LITERATURE',
+  PROGRAMMING: 'PROGRAMMING'
+};
+
+exports.SharedStatus = exports.$Enums.SharedStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
+
+exports.WeekDayName = exports.$Enums.WeekDayName = {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+};
+
+exports.GradeLevelName = exports.$Enums.GradeLevelName = {
+  PRIMARY: 'PRIMARY',
+  CYCLE_1: 'CYCLE_1',
+  CYCLE_2: 'CYCLE_2',
+  UNIVERSITY: 'UNIVERSITY'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Customer: 'Customer',
+  Teacher: 'Teacher',
+  Subject: 'Subject',
+  WeekDay: 'WeekDay',
+  GradeLevel: 'GradeLevel',
+  Zone: 'Zone',
+  PricePolicy: 'PricePolicy'
 };
 
 /**

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadGatewayException, Injectable } from '@nestjs/common';
 
 import { RequestOtpUseCaseInput } from './RequestOtpUseCaseInput';
 
@@ -18,10 +18,14 @@ export class RequestOtpUseCase {
     const phone = input.phone;
     const generatedOTP = this.otpService.generate();
 
-    await this.smsProvider.send({
-      content: `Seu código de acesso é ${generatedOTP}`,
-      recipient: phone,
-    });
+    try {
+      await this.smsProvider.send({
+        content: `Seu código de acesso é ${generatedOTP}`,
+        recipient: phone,
+      });
+    } catch {
+      throw new BadGatewayException();
+    }
 
     return await this.otpRepository.save(phone, generatedOTP);
   }

@@ -9,7 +9,7 @@ export class User {
   private phone: Phone;
   private email: string | null;
   private role: UserRole;
-  private accountType: UserAccountType | null;
+  private accountType: UserAccountType;
   private status: UserStatus;
   private createdAt: Date;
   private updatedAt: Date;
@@ -20,7 +20,7 @@ export class User {
     phone: Phone,
     email: string | null,
     role: UserRole,
-    accountType: UserAccountType | null,
+    accountType: UserAccountType,
     status: UserStatus,
     createdAt: Date,
     updatedAt: Date,
@@ -54,6 +54,30 @@ export class User {
     );
   }
 
+  public static restore(
+    id: string,
+    name: string,
+    phone: Phone,
+    email: string | null,
+    role: UserRole,
+    accountType: UserAccountType,
+    status: UserStatus,
+    createdAt: Date,
+    updatedAt: Date,
+  ): User {
+    return new User(
+      id,
+      name,
+      phone,
+      email,
+      role,
+      accountType,
+      status,
+      createdAt,
+      updatedAt,
+    );
+  }
+
   public getId(): string {
     return this.id;
   }
@@ -69,7 +93,7 @@ export class User {
   public getRole(): UserRole {
     return this.role;
   }
-  public getAcountType(): UserAccountType | null {
+  public getAcountType(): UserAccountType {
     return this.accountType;
   }
   public getStatus(): UserStatus {
