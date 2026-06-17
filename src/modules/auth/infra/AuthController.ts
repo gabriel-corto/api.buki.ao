@@ -1,4 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
+import { Public } from '@/shared/decorators/public.decorator';
 
 import { RequestOtpUseCase } from '../application/RequestOtpUseCase';
 import { VerifyOtpUseCase } from '../application/VerifyOtpUseCase';
@@ -6,11 +7,10 @@ import { VerifyOtpUseCase } from '../application/VerifyOtpUseCase';
 import { RequestOtpDto } from './RequestOtpDto';
 import { VerifyOtpDto } from './VerifyOtpDto';
 
-import {
+import type {
   ApiDataResponse,
-  type ApiNoDataResponse,
+  ApiNoDataResponse,
 } from '@/shared/types/ApiResponse';
-import { Public } from '@/shared/decorators/public.decorator';
 
 @Controller('/auth')
 export class AuthController {

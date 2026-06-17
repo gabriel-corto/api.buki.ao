@@ -1,3 +1,4 @@
 export abstract class StorageService {
-  abstract upload(file: Express.Multer.File): Promise<string>;
+  abstract publicUpload(file: Express.Multer.File): Promise<string>;
+  abstract privateUpload(file: Express.Multer.File): Promise<string>;
 }

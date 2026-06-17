@@ -4025,6 +4025,7 @@ export namespace Prisma {
   export type TeacherMinAggregateOutputType = {
     id: string | null
     avatar: string | null
+    biUrl: string | null
     pricePolicyId: string | null
     status: $Enums.TeacherStatus | null
     userId: string | null
@@ -4033,6 +4034,7 @@ export namespace Prisma {
   export type TeacherMaxAggregateOutputType = {
     id: string | null
     avatar: string | null
+    biUrl: string | null
     pricePolicyId: string | null
     status: $Enums.TeacherStatus | null
     userId: string | null
@@ -4041,6 +4043,7 @@ export namespace Prisma {
   export type TeacherCountAggregateOutputType = {
     id: number
     avatar: number
+    biUrl: number
     pricePolicyId: number
     status: number
     userId: number
@@ -4051,6 +4054,7 @@ export namespace Prisma {
   export type TeacherMinAggregateInputType = {
     id?: true
     avatar?: true
+    biUrl?: true
     pricePolicyId?: true
     status?: true
     userId?: true
@@ -4059,6 +4063,7 @@ export namespace Prisma {
   export type TeacherMaxAggregateInputType = {
     id?: true
     avatar?: true
+    biUrl?: true
     pricePolicyId?: true
     status?: true
     userId?: true
@@ -4067,6 +4072,7 @@ export namespace Prisma {
   export type TeacherCountAggregateInputType = {
     id?: true
     avatar?: true
+    biUrl?: true
     pricePolicyId?: true
     status?: true
     userId?: true
@@ -4148,6 +4154,7 @@ export namespace Prisma {
   export type TeacherGroupByOutputType = {
     id: string
     avatar: string
+    biUrl: string | null
     pricePolicyId: string | null
     status: $Enums.TeacherStatus
     userId: string
@@ -4173,6 +4180,7 @@ export namespace Prisma {
   export type TeacherSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     avatar?: boolean
+    biUrl?: boolean
     pricePolicyId?: boolean
     status?: boolean
     userId?: boolean
@@ -4188,6 +4196,7 @@ export namespace Prisma {
   export type TeacherSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     avatar?: boolean
+    biUrl?: boolean
     pricePolicyId?: boolean
     status?: boolean
     userId?: boolean
@@ -4198,6 +4207,7 @@ export namespace Prisma {
   export type TeacherSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     avatar?: boolean
+    biUrl?: boolean
     pricePolicyId?: boolean
     status?: boolean
     userId?: boolean
@@ -4208,12 +4218,13 @@ export namespace Prisma {
   export type TeacherSelectScalar = {
     id?: boolean
     avatar?: boolean
+    biUrl?: boolean
     pricePolicyId?: boolean
     status?: boolean
     userId?: boolean
   }
 
-  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "avatar" | "pricePolicyId" | "status" | "userId", ExtArgs["result"]["teacher"]>
+  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "avatar" | "biUrl" | "pricePolicyId" | "status" | "userId", ExtArgs["result"]["teacher"]>
   export type TeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subjects?: boolean | Teacher$subjectsArgs<ExtArgs>
     weekDays?: boolean | Teacher$weekDaysArgs<ExtArgs>
@@ -4245,6 +4256,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       avatar: string
+      biUrl: string | null
       pricePolicyId: string | null
       status: $Enums.TeacherStatus
       userId: string
@@ -4679,6 +4691,7 @@ export namespace Prisma {
   interface TeacherFieldRefs {
     readonly id: FieldRef<"Teacher", 'String'>
     readonly avatar: FieldRef<"Teacher", 'String'>
+    readonly biUrl: FieldRef<"Teacher", 'String'>
     readonly pricePolicyId: FieldRef<"Teacher", 'String'>
     readonly status: FieldRef<"Teacher", 'TeacherStatus'>
     readonly userId: FieldRef<"Teacher", 'String'>
@@ -10501,6 +10514,7 @@ export namespace Prisma {
   export const TeacherScalarFieldEnum: {
     id: 'id',
     avatar: 'avatar',
+    biUrl: 'biUrl',
     pricePolicyId: 'pricePolicyId',
     status: 'status',
     userId: 'userId'
@@ -10864,6 +10878,7 @@ export namespace Prisma {
     NOT?: TeacherWhereInput | TeacherWhereInput[]
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
+    biUrl?: StringNullableFilter<"Teacher"> | string | null
     pricePolicyId?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringFilter<"Teacher"> | string
@@ -10878,6 +10893,7 @@ export namespace Prisma {
   export type TeacherOrderByWithRelationInput = {
     id?: SortOrder
     avatar?: SortOrder
+    biUrl?: SortOrderInput | SortOrder
     pricePolicyId?: SortOrderInput | SortOrder
     status?: SortOrder
     userId?: SortOrder
@@ -10896,6 +10912,7 @@ export namespace Prisma {
     OR?: TeacherWhereInput[]
     NOT?: TeacherWhereInput | TeacherWhereInput[]
     avatar?: StringFilter<"Teacher"> | string
+    biUrl?: StringNullableFilter<"Teacher"> | string | null
     pricePolicyId?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     subjects?: SubjectListRelationFilter
@@ -10909,6 +10926,7 @@ export namespace Prisma {
   export type TeacherOrderByWithAggregationInput = {
     id?: SortOrder
     avatar?: SortOrder
+    biUrl?: SortOrderInput | SortOrder
     pricePolicyId?: SortOrderInput | SortOrder
     status?: SortOrder
     userId?: SortOrder
@@ -10923,6 +10941,7 @@ export namespace Prisma {
     NOT?: TeacherScalarWhereWithAggregatesInput | TeacherScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Teacher"> | string
     avatar?: StringWithAggregatesFilter<"Teacher"> | string
+    biUrl?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     pricePolicyId?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusWithAggregatesFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringWithAggregatesFilter<"Teacher"> | string
@@ -11282,6 +11301,7 @@ export namespace Prisma {
   export type TeacherCreateInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -11294,6 +11314,7 @@ export namespace Prisma {
   export type TeacherUncheckedCreateInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     pricePolicyId?: string | null
     status?: $Enums.TeacherStatus
     userId: string
@@ -11306,6 +11327,7 @@ export namespace Prisma {
   export type TeacherUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -11318,6 +11340,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -11330,6 +11353,7 @@ export namespace Prisma {
   export type TeacherCreateManyInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     pricePolicyId?: string | null
     status?: $Enums.TeacherStatus
     userId: string
@@ -11338,12 +11362,14 @@ export namespace Prisma {
   export type TeacherUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
   }
 
   export type TeacherUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -11847,6 +11873,7 @@ export namespace Prisma {
   export type TeacherCountOrderByAggregateInput = {
     id?: SortOrder
     avatar?: SortOrder
+    biUrl?: SortOrder
     pricePolicyId?: SortOrder
     status?: SortOrder
     userId?: SortOrder
@@ -11855,6 +11882,7 @@ export namespace Prisma {
   export type TeacherMaxOrderByAggregateInput = {
     id?: SortOrder
     avatar?: SortOrder
+    biUrl?: SortOrder
     pricePolicyId?: SortOrder
     status?: SortOrder
     userId?: SortOrder
@@ -11863,6 +11891,7 @@ export namespace Prisma {
   export type TeacherMinOrderByAggregateInput = {
     id?: SortOrder
     avatar?: SortOrder
+    biUrl?: SortOrder
     pricePolicyId?: SortOrder
     status?: SortOrder
     userId?: SortOrder
@@ -12792,6 +12821,7 @@ export namespace Prisma {
   export type TeacherCreateWithoutUserInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -12803,6 +12833,7 @@ export namespace Prisma {
   export type TeacherUncheckedCreateWithoutUserInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     pricePolicyId?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -12843,6 +12874,7 @@ export namespace Prisma {
   export type TeacherUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -12854,6 +12886,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -13228,6 +13261,7 @@ export namespace Prisma {
   export type TeacherCreateWithoutSubjectsInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
@@ -13239,6 +13273,7 @@ export namespace Prisma {
   export type TeacherUncheckedCreateWithoutSubjectsInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     pricePolicyId?: string | null
     status?: $Enums.TeacherStatus
     userId: string
@@ -13274,6 +13309,7 @@ export namespace Prisma {
     NOT?: TeacherScalarWhereInput | TeacherScalarWhereInput[]
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
+    biUrl?: StringNullableFilter<"Teacher"> | string | null
     pricePolicyId?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringFilter<"Teacher"> | string
@@ -13282,6 +13318,7 @@ export namespace Prisma {
   export type TeacherCreateWithoutWeekDaysInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
@@ -13293,6 +13330,7 @@ export namespace Prisma {
   export type TeacherUncheckedCreateWithoutWeekDaysInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     pricePolicyId?: string | null
     status?: $Enums.TeacherStatus
     userId: string
@@ -13325,6 +13363,7 @@ export namespace Prisma {
   export type TeacherCreateWithoutGradeLevelsInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -13336,6 +13375,7 @@ export namespace Prisma {
   export type TeacherUncheckedCreateWithoutGradeLevelsInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     pricePolicyId?: string | null
     status?: $Enums.TeacherStatus
     userId: string
@@ -13368,6 +13408,7 @@ export namespace Prisma {
   export type TeacherCreateWithoutZonesInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -13379,6 +13420,7 @@ export namespace Prisma {
   export type TeacherUncheckedCreateWithoutZonesInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     pricePolicyId?: string | null
     status?: $Enums.TeacherStatus
     userId: string
@@ -13411,6 +13453,7 @@ export namespace Prisma {
   export type TeacherCreateWithoutPricePolicyInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -13422,6 +13465,7 @@ export namespace Prisma {
   export type TeacherUncheckedCreateWithoutPricePolicyInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -13531,6 +13575,7 @@ export namespace Prisma {
   export type TeacherUpdateWithoutSubjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
@@ -13542,6 +13587,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateWithoutSubjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13553,6 +13599,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateManyWithoutSubjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13561,6 +13608,7 @@ export namespace Prisma {
   export type TeacherUpdateWithoutWeekDaysInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
@@ -13572,6 +13620,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateWithoutWeekDaysInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13583,6 +13632,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateManyWithoutWeekDaysInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13591,6 +13641,7 @@ export namespace Prisma {
   export type TeacherUpdateWithoutGradeLevelsInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -13602,6 +13653,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateWithoutGradeLevelsInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13613,6 +13665,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateManyWithoutGradeLevelsInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13621,6 +13674,7 @@ export namespace Prisma {
   export type TeacherUpdateWithoutZonesInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -13632,6 +13686,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateWithoutZonesInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13643,6 +13698,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateManyWithoutZonesInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
@@ -13651,6 +13707,7 @@ export namespace Prisma {
   export type TeacherCreateManyPricePolicyInput = {
     id: string
     avatar: string
+    biUrl?: string | null
     status?: $Enums.TeacherStatus
     userId: string
   }
@@ -13658,6 +13715,7 @@ export namespace Prisma {
   export type TeacherUpdateWithoutPricePolicyInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -13669,6 +13727,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateWithoutPricePolicyInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -13680,6 +13739,7 @@ export namespace Prisma {
   export type TeacherUncheckedUpdateManyWithoutPricePolicyInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }

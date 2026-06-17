@@ -1,21 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { UploadTeacherAvatarUseCaseInput } from './UploadTeacherAvatarUseCaseInput';
-
 import { StorageService } from '@/shared/domain/StorageService';
 
 import { TeacherRepository } from '../domain/TeacherRepository';
 import { UserRepository } from '@/shared/domain/user/UserRepository';
 
+import { UploadTeacherDocumentUseCaseInput } from './UploadTeacherDocumentUseCaseInput';
+
 @Injectable()
-export class UploadTeacherAvatarUseCase {
+export class UploadTeacherDocumentUseCase {
   constructor(
     private readonly teacherRepository: TeacherRepository,
     private readonly userRepository: UserRepository,
     private readonly storageService: StorageService,
   ) {}
 
-  async execute(input: UploadTeacherAvatarUseCaseInput) {
+  async execute(input: UploadTeacherDocumentUseCaseInput) {
     const user = await this.userRepository.findById(input.userId);
 
     if (!user) {
@@ -27,7 +27,7 @@ export class UploadTeacherAvatarUseCase {
       throw new NotFoundException('Professor não encontrado');
     }
 
-    const avatarUrl = await this.storageService.upload(input.avatar);
+    const avatarUrl = await this.storageService.publicUpload(input.avatar);
     teacher.updateAvatar(avatarUrl);
 
     await this.teacherRepository.save(teacher);

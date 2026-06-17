@@ -11,7 +11,7 @@ import { UserController } from './modules/user/infra/http/UserController';
 import { RequestOtpUseCase } from './modules/auth/application/RequestOtpUseCase';
 import { VerifyOtpUseCase } from './modules/auth/application/VerifyOtpUseCase';
 import { StartOnBoardingUseCase } from './modules/user/application/StartOnboardingUseCase';
-import { UploadTeacherAvatarUseCase } from './modules/user/application/UploadTeacherAvatarUseCase';
+import { UploadTeacherDocumentUseCase } from './modules/user/application/UploadTeacherDocumentUseCase';
 import { UpdateTeacherBukiInformationUseCase } from './modules/user/application/UpdateTeacherBukiInformationUseCase';
 
 import { SmsProvider } from './shared/domain/SmsProvider';
@@ -53,7 +53,7 @@ import { CloudinaryStorageService } from './shared/infra/storage/CloudinaryStora
     RequestOtpUseCase,
     VerifyOtpUseCase,
     StartOnBoardingUseCase,
-    UploadTeacherAvatarUseCase,
+    UploadTeacherDocumentUseCase,
     UpdateTeacherBukiInformationUseCase,
     {
       provide: SmsProvider,

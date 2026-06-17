@@ -11,7 +11,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { StartOnBoardingUseCase } from '../../application/StartOnboardingUseCase';
-import { UploadTeacherAvatarUseCase } from '../../application/UploadTeacherAvatarUseCase';
+import { UploadTeacherDocumentUseCase } from '../../application/UploadTeacherDocumentUseCase';
 import { UpdateTeacherBukiInformationUseCase } from '../../application/UpdateTeacherBukiInformationUseCase';
 
 import { StartOnBoardingDto } from './StartOnBoardingDto';
@@ -31,7 +31,7 @@ import {
 export class UserController {
   constructor(
     private readonly startOnBoardingUseCase: StartOnBoardingUseCase,
-    private readonly uploadTeacherAvatarUseCase: UploadTeacherAvatarUseCase,
+    private readonly uploadTeacherDocumentUseCase: UploadTeacherDocumentUseCase,
     private readonly updateTeacherBukiInformationUseCase: UpdateTeacherBukiInformationUseCase,
   ) {}
 
@@ -60,17 +60,19 @@ export class UserController {
     };
   }
 
-  @Patch('/profile/teacher-avatar')
+  @Patch('/profile/teacher-document')
   @SkipAuth()
   @UseGuards(OnboardingGuard)
   @UseInterceptors(FileInterceptor('avatar'))
   async uploadTeacherAvatar(
     @CurrentUser() user: OnboardingTokenPayload,
-    @UploadedFile() avatar: Express.Multer.File,
+    @UploadedFile('avatar') avatar: Express.Multer.File,
+    @UploadedFile('bi') bi: Express.Multer.File,
   ): Promise<ApiDataResponse> {
-    const { avatarUrl } = await this.uploadTeacherAvatarUseCase.execute({
+    const { avatarUrl } = await this.uploadTeacherDocumentUseCase.execute({
       userId: user.userId as string,
       avatar,
+      bi,
     });
 
     return {

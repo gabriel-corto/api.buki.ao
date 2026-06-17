@@ -57,6 +57,7 @@ model Customer {
 model Teacher {
   id          String       @id
   avatar      String
+  biUrl       String?
   subjects    Subject[]
   weekDays    WeekDay[]
   zones       Zone[]

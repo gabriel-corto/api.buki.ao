@@ -129,7 +129,7 @@ describe('Verify OTP Use Case', () => {
 
     await expect(async () => {
       await verifyOTPUseCase.execute({
-        code: '123456',
+        code: '1234565',
         phone: '922454558',
       });
     }).rejects.toThrow();

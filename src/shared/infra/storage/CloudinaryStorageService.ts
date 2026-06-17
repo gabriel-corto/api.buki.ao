@@ -10,10 +10,20 @@ export class CloudinaryStorageService implements StorageService {
     });
   }
 
-  async upload(file: Express.Multer.File): Promise<string> {
+  async publicUpload(file: Express.Multer.File): Promise<string> {
     const dataUri = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
     const { secure_url } = await cloudinary.uploader.upload(dataUri, {
-      folder: 'buki',
+      folder: 'pubic',
+    });
+
+    return secure_url;
+  }
+
+  async privateUpload(file: Express.Multer.File): Promise<string> {
+    const dataUri = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
+    const { secure_url } = await cloudinary.uploader.upload(dataUri, {
+      folder: 'private',
+      secure: true,
     });
 
     return secure_url;

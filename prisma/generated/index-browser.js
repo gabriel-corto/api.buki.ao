@@ -140,6 +140,7 @@ exports.Prisma.CustomerScalarFieldEnum = {
 exports.Prisma.TeacherScalarFieldEnum = {
   id: 'id',
   avatar: 'avatar',
+  biUrl: 'biUrl',
   pricePolicyId: 'pricePolicyId',
   status: 'status',
   userId: 'userId'

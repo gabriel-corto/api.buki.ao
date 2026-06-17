@@ -13,6 +13,7 @@ export class Teacher {
   private readonly id: string;
   private readonly userId: string;
   private avatar: string;
+  private biUrl: string;
   private subjects: Subject[];
   private weekDays: WeekDay[];
   private lessonZones: Zone[];
@@ -24,6 +25,7 @@ export class Teacher {
     id: string,
     userId: string,
     avatar: string,
+    biUrl: string,
     subjects: Subject[],
     weekDays: WeekDay[],
     lessonZones: Zone[],
@@ -34,6 +36,7 @@ export class Teacher {
     this.id = id;
     this.userId = userId;
     this.avatar = avatar;
+    this.biUrl = biUrl;
     this.subjects = subjects;
     this.weekDays = weekDays;
     this.lessonZones = lessonZones;
@@ -46,6 +49,7 @@ export class Teacher {
     return new Teacher(
       generateTeacherId(),
       userId,
+      '',
       '',
       [],
       [],
@@ -60,6 +64,7 @@ export class Teacher {
     id: string,
     userId: string,
     avatar: string,
+    biUrl: string,
     subjects: Subject[],
     weekDays: WeekDay[],
     lessonZones: Zone[],
@@ -71,6 +76,7 @@ export class Teacher {
       id,
       userId,
       avatar,
+      biUrl,
       subjects,
       weekDays,
       lessonZones,
@@ -90,6 +96,10 @@ export class Teacher {
 
   public getAvatar(): string {
     return this.avatar;
+  }
+
+  public getBiUrl(): string {
+    return this.biUrl;
   }
 
   public getSubjects(): Subject[] {
@@ -118,6 +128,10 @@ export class Teacher {
 
   public updateAvatar(avatar: string): void {
     this.avatar = avatar;
+  }
+
+  public updateBiUrl(biUrl: string): void {
+    this.biUrl = biUrl;
   }
 
   public updateSubjects(subjects: Subject[]): void {

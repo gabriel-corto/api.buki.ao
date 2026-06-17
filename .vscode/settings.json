@@ -1,7 +1,9 @@
 {
-  "editor.fontSize": 10,
   "editor.formatOnSave": true,
+  "editor.fontFamily": "SF Mono",
+  "editor.fontSize": 10,
+  "editor.fontWeight": "600",
   "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
-  }
+    "editor.defaultFormatter": "Prisma.prisma",
+  },
 }

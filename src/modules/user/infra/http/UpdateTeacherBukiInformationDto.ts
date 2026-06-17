@@ -1,24 +1,15 @@
-import { IsArray, IsEnum } from 'class-validator';
-
-import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
-import { Subject } from '@/modules/bukis/domain/subject/Subject';
-import { WeekDay } from '@/modules/bukis/domain/weekday/WeekDay';
-import { Zone } from '@/modules/bukis/domain/zone/Zone';
+import { IsArray } from 'class-validator';
 
 export class UpdateTeacherBukiInformationDto {
   @IsArray()
-  @IsEnum(Zone, { each: true })
-  zones: Zone[];
+  zones: string[];
 
   @IsArray()
-  @IsEnum(WeekDay, { each: true })
-  weekdays: WeekDay[];
+  weekdays: string[];
 
   @IsArray()
-  @IsEnum(Subject, { each: true })
-  subjects: Subject[];
+  subjects: string[];
 
   @IsArray()
-  @IsEnum(GradeLevel, { each: true })
-  gradeLevel: GradeLevel[];
+  gradeLevel: string[];
 }

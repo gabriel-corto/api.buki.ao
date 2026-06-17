@@ -34,6 +34,7 @@ export class PrismaTeacherMapper {
       raw.id,
       raw.userId,
       raw.avatar,
+      raw.biUrl as string,
       raw.subjects.map((s) =>
         Subject.restore(s.id, s.name as SubjectName, s.status as SharedStatus),
       ),
