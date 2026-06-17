@@ -1,15 +1,16 @@
-import { NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { UserRepository } from '@/shared/domain/user/UserRepository';
 import { TeacherRepository } from '../domain/TeacherRepository';
 
-import { GradeLevelRepository } from '@/modules/bukis/domain/grade-level/GradeLevelRepository';
+import { ZoneRepository } from '@/modules/bukis/domain/zone/ZoneRepository';
 import { SubjectRepository } from '@/modules/bukis/domain/subject/SubjectRepository';
 import { WeekDayRepository } from '@/modules/bukis/domain/weekday/WeekDayRepository';
-import { ZoneRepository } from '@/modules/bukis/domain/zone/ZoneRepository';
+import { GradeLevelRepository } from '@/modules/bukis/domain/grade-level/GradeLevelRepository';
 
 import { UpdateTeacherBukiInformationUseCaseInput } from './UpdateTeacherBukiInformationUseCaseInput';
 
+@Injectable()
 export class UpdateTeacherBukiInformationUseCase {
   constructor(
     private readonly userRepository: UserRepository,
@@ -31,49 +32,56 @@ export class UpdateTeacherBukiInformationUseCase {
       throw new NotFoundException('Professor não encontrado.');
     }
 
-    input.subjects.forEach(async (subjectId) => {
-      const subject = await this.subjectRepository.findById(subjectId);
+    const subjects = await Promise.all(
+      input.subjects.map(async (subjectId) => {
+        const subject = await this.subjectRepository.findById(subjectId);
+        if (!subject) {
+          throw new NotFoundException(
+            `Disciplina não encontrada: ${subjectId}`,
+          );
+        }
+        return subject;
+      }),
+    );
 
-      if (!subject) {
-        throw new NotFoundException(`Disciplina não encontrada: ${subjectId}`);
-      }
+    const gradeLevels = await Promise.all(
+      input.gradeLevel.map(async (levelId) => {
+        const level = await this.gradeLevelRepository.findById(levelId);
+        if (!level) {
+          throw new NotFoundException(
+            `Nível de ensino não encontrado: ${levelId}`,
+          );
+        }
+        return level;
+      }),
+    );
 
-      teacher.updateSubjects([subject]);
-    });
+    const weekDays = await Promise.all(
+      input.weekdays.map(async (weekdayId) => {
+        const weekday = await this.weekDayRepository.findById(weekdayId);
+        if (!weekday) {
+          throw new NotFoundException(
+            `Dia da semana não encontrado: ${weekdayId}`,
+          );
+        }
+        return weekday;
+      }),
+    );
 
-    input.gradeLevel.forEach(async (levelId) => {
-      const level = await this.gradeLevelRepository.findById(levelId);
+    const zones = await Promise.all(
+      input.zones.map(async (zoneId) => {
+        const zone = await this.lessonZoneRepository.findById(zoneId);
+        if (!zone) {
+          throw new NotFoundException(`Zona não encontrada: ${zoneId}`);
+        }
+        return zone;
+      }),
+    );
 
-      if (!level) {
-        throw new NotFoundException(
-          `Nível de ensino não encontrado: ${levelId}`,
-        );
-      }
-
-      teacher.updateGradeLevels([level]);
-    });
-
-    input.weekdays.forEach(async (weekdayId) => {
-      const weekday = await this.weekDayRepository.findById(weekdayId);
-
-      if (!weekday) {
-        throw new NotFoundException(
-          `Dia da semana não encontrado: ${weekdayId}`,
-        );
-      }
-
-      teacher.updateWeekDays([weekday]);
-    });
-
-    input.zones.forEach(async (zoneId) => {
-      const zone = await this.lessonZoneRepository.findById(zoneId);
-
-      if (!zone) {
-        throw new NotFoundException(`Zona não encontrada: ${zoneId}`);
-      }
-
-      teacher.updateLessonZones([zone]);
-    });
+    teacher.updateSubjects(subjects);
+    teacher.updateGradeLevels(gradeLevels);
+    teacher.updateWeekDays(weekDays);
+    teacher.updateLessonZones(zones);
 
     await this.teacherRepository.save(teacher);
   }

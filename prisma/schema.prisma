@@ -63,8 +63,10 @@ model Teacher {
   zones       Zone[]
   gradeLevels GradeLevel[]
 
-  priceTier String?
-  status    TeacherStatus @default(PENDING)
+  status TeacherStatus @default(PENDING)
+
+  pricingTierId String?
+  priceTier     TeacherPricingTier? @relation(fields: [pricingTierId], references: [id])
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
@@ -112,4 +114,13 @@ model Zone {
   teachers Teacher[]
 
   @@map("zones")
+}
+
+model TeacherPricingTier {
+  id       String       @id
+  value    String
+  status   SharedStatus
+  teachers Teacher[]
+
+  @@map("teacher_pricing_tiers")
 }

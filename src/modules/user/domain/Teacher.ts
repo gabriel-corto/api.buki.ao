@@ -6,6 +6,7 @@ import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
 
 import { TeacherProfileStatus } from './TeacherProfileStatus';
 import { generateTeacherId } from '@/shared/helpers/GenerateBukiIDs';
+import { TeacherPricingTier } from '@/modules/bukis/domain/teacher-pricing-tier/TeacherPricingTier';
 
 export class Teacher {
   private readonly id: string;
@@ -16,7 +17,7 @@ export class Teacher {
   private weekDays: WeekDay[];
   private lessonZones: Zone[];
   private gradeLevels: GradeLevel[];
-  private priceTier: string | null;
+  private priceTier: TeacherPricingTier | null;
   private status: TeacherProfileStatus;
 
   private constructor(
@@ -28,7 +29,7 @@ export class Teacher {
     weekDays: WeekDay[],
     lessonZones: Zone[],
     gradeLevels: GradeLevel[],
-    priceTier: string | null,
+    priceTier: TeacherPricingTier | null,
     status: TeacherProfileStatus,
   ) {
     this.id = id;
@@ -67,7 +68,7 @@ export class Teacher {
     weekDays: WeekDay[],
     lessonZones: Zone[],
     gradeLevels: GradeLevel[],
-    priceTier: string | null,
+    priceTier: TeacherPricingTier | null,
     status: TeacherProfileStatus,
   ): Teacher {
     return new Teacher(
@@ -116,7 +117,7 @@ export class Teacher {
     return this.gradeLevels;
   }
 
-  public getPriceTier(): string | null {
+  public getPriceTier(): TeacherPricingTier | null {
     return this.priceTier;
   }
 
@@ -148,8 +149,8 @@ export class Teacher {
     this.gradeLevels = gradeLevels;
   }
 
-  public updatePriceTier(priceTier: string): void {
-    this.priceTier = priceTier;
+  public updatePriceTier(value: TeacherPricingTier): void {
+    this.priceTier = value;
   }
 
   public approve(): void {

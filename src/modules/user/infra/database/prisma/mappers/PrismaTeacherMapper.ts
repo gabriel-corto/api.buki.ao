@@ -4,6 +4,7 @@ import {
   WeekDay as PrismaWeekDay,
   Zone as PrismaZone,
   GradeLevel as PrismaGradeLevel,
+  TeacherPricingTier as PrismaTeacherPricingTier,
   Prisma,
 } from 'prisma/generated';
 
@@ -14,12 +15,14 @@ import { Zone } from '@/modules/bukis/domain/zone/Zone';
 import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
 import { TeacherProfileStatus } from '@/modules/user/domain/TeacherProfileStatus';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
+import { TeacherPricingTier } from '@/modules/bukis/domain/teacher-pricing-tier/TeacherPricingTier';
 
 export type PrismaTeacherWithRelations = PrismaTeacher & {
   subjects: PrismaSubject[];
   weekDays: PrismaWeekDay[];
   zones: PrismaZone[];
   gradeLevels: PrismaGradeLevel[];
+  priceTier: PrismaTeacherPricingTier | null;
 };
 
 export class PrismaTeacherMapper {
@@ -41,7 +44,7 @@ export class PrismaTeacherMapper {
       raw.gradeLevels.map((g) =>
         GradeLevel.restore(g.id, g.name, g.status as SharedStatus),
       ),
-      raw.priceTier,
+      raw.priceTier as TeacherPricingTier | null,
       raw.status as TeacherProfileStatus,
     );
   }
@@ -52,7 +55,6 @@ export class PrismaTeacherMapper {
       avatar: teacher.getAvatar(),
       biUrl: teacher.getBiUrl(),
       status: teacher.getStatus(),
-      priceTier: teacher.getPriceTier(),
       user: {
         connect: {
           id: teacher.getUserId(),

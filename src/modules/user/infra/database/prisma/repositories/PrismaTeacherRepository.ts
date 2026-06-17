@@ -27,32 +27,35 @@ export class PrismaTeacherRepository implements TeacherRepository {
         weekDays: true,
         zones: true,
         gradeLevels: true,
+        priceTier: true,
       },
     });
     return teachers.map((teacher) => PrismaTeacherMapper.toDomain(teacher));
   }
 
   async findById(id: string): Promise<Teacher | null> {
-    const teacher = await this.prisma.teacher.findUnique({
+    const teacher = await this.prisma.teacher.findFirst({
       where: { id },
       include: {
         subjects: true,
         weekDays: true,
         zones: true,
         gradeLevels: true,
+        priceTier: true,
       },
     });
     return teacher ? PrismaTeacherMapper.toDomain(teacher) : null;
   }
 
   async findByUserId(userId: string): Promise<Teacher | null> {
-    const teacher = await this.prisma.teacher.findUnique({
+    const teacher = await this.prisma.teacher.findFirst({
       where: { userId },
       include: {
         subjects: true,
         weekDays: true,
         zones: true,
         gradeLevels: true,
+        priceTier: true,
       },
     });
     return teacher ? PrismaTeacherMapper.toDomain(teacher) : null;

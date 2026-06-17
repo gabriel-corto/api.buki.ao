@@ -141,8 +141,8 @@ exports.Prisma.TeacherScalarFieldEnum = {
   id: 'id',
   avatar: 'avatar',
   biUrl: 'biUrl',
-  priceTier: 'priceTier',
   status: 'status',
+  pricingTierId: 'pricingTierId',
   userId: 'userId'
 };
 
@@ -167,6 +167,12 @@ exports.Prisma.GradeLevelScalarFieldEnum = {
 exports.Prisma.ZoneScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  status: 'status'
+};
+
+exports.Prisma.TeacherPricingTierScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
   status: 'status'
 };
 
@@ -219,7 +225,8 @@ exports.Prisma.ModelName = {
   Subject: 'Subject',
   WeekDay: 'WeekDay',
   GradeLevel: 'GradeLevel',
-  Zone: 'Zone'
+  Zone: 'Zone',
+  TeacherPricingTier: 'TeacherPricingTier'
 };
 
 /**

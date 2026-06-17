@@ -48,6 +48,11 @@ export type GradeLevel = $Result.DefaultSelection<Prisma.$GradeLevelPayload>
  * 
  */
 export type Zone = $Result.DefaultSelection<Prisma.$ZonePayload>
+/**
+ * Model TeacherPricingTier
+ * 
+ */
+export type TeacherPricingTier = $Result.DefaultSelection<Prisma.$TeacherPricingTierPayload>
 
 /**
  * Enums
@@ -307,6 +312,16 @@ export class PrismaClient<
     * ```
     */
   get zone(): Prisma.ZoneDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.teacherPricingTier`: Exposes CRUD operations for the **TeacherPricingTier** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TeacherPricingTiers
+    * const teacherPricingTiers = await prisma.teacherPricingTier.findMany()
+    * ```
+    */
+  get teacherPricingTier(): Prisma.TeacherPricingTierDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -747,7 +762,8 @@ export namespace Prisma {
     Subject: 'Subject',
     WeekDay: 'WeekDay',
     GradeLevel: 'GradeLevel',
-    Zone: 'Zone'
+    Zone: 'Zone',
+    TeacherPricingTier: 'TeacherPricingTier'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -763,7 +779,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "customer" | "teacher" | "subject" | "weekDay" | "gradeLevel" | "zone"
+      modelProps: "user" | "customer" | "teacher" | "subject" | "weekDay" | "gradeLevel" | "zone" | "teacherPricingTier"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1285,6 +1301,80 @@ export namespace Prisma {
           }
         }
       }
+      TeacherPricingTier: {
+        payload: Prisma.$TeacherPricingTierPayload<ExtArgs>
+        fields: Prisma.TeacherPricingTierFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TeacherPricingTierFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TeacherPricingTierFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>
+          }
+          findFirst: {
+            args: Prisma.TeacherPricingTierFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TeacherPricingTierFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>
+          }
+          findMany: {
+            args: Prisma.TeacherPricingTierFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>[]
+          }
+          create: {
+            args: Prisma.TeacherPricingTierCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>
+          }
+          createMany: {
+            args: Prisma.TeacherPricingTierCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TeacherPricingTierCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>[]
+          }
+          delete: {
+            args: Prisma.TeacherPricingTierDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>
+          }
+          update: {
+            args: Prisma.TeacherPricingTierUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>
+          }
+          deleteMany: {
+            args: Prisma.TeacherPricingTierDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TeacherPricingTierUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TeacherPricingTierUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>[]
+          }
+          upsert: {
+            args: Prisma.TeacherPricingTierUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeacherPricingTierPayload>
+          }
+          aggregate: {
+            args: Prisma.TeacherPricingTierAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTeacherPricingTier>
+          }
+          groupBy: {
+            args: Prisma.TeacherPricingTierGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TeacherPricingTierGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TeacherPricingTierCountArgs<ExtArgs>
+            result: $Utils.Optional<TeacherPricingTierCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1400,6 +1490,7 @@ export namespace Prisma {
     weekDay?: WeekDayOmit
     gradeLevel?: GradeLevelOmit
     zone?: ZoneOmit
+    teacherPricingTier?: TeacherPricingTierOmit
   }
 
   /* Types for Logging */
@@ -1653,6 +1744,37 @@ export namespace Prisma {
    * ZoneCountOutputType without action
    */
   export type ZoneCountOutputTypeCountTeachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeacherWhereInput
+  }
+
+
+  /**
+   * Count Type TeacherPricingTierCountOutputType
+   */
+
+  export type TeacherPricingTierCountOutputType = {
+    teachers: number
+  }
+
+  export type TeacherPricingTierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    teachers?: boolean | TeacherPricingTierCountOutputTypeCountTeachersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TeacherPricingTierCountOutputType without action
+   */
+  export type TeacherPricingTierCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTierCountOutputType
+     */
+    select?: TeacherPricingTierCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TeacherPricingTierCountOutputType without action
+   */
+  export type TeacherPricingTierCountOutputTypeCountTeachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TeacherWhereInput
   }
 
@@ -3842,8 +3964,8 @@ export namespace Prisma {
     id: string | null
     avatar: string | null
     biUrl: string | null
-    priceTier: string | null
     status: $Enums.TeacherStatus | null
+    pricingTierId: string | null
     userId: string | null
   }
 
@@ -3851,8 +3973,8 @@ export namespace Prisma {
     id: string | null
     avatar: string | null
     biUrl: string | null
-    priceTier: string | null
     status: $Enums.TeacherStatus | null
+    pricingTierId: string | null
     userId: string | null
   }
 
@@ -3860,8 +3982,8 @@ export namespace Prisma {
     id: number
     avatar: number
     biUrl: number
-    priceTier: number
     status: number
+    pricingTierId: number
     userId: number
     _all: number
   }
@@ -3871,8 +3993,8 @@ export namespace Prisma {
     id?: true
     avatar?: true
     biUrl?: true
-    priceTier?: true
     status?: true
+    pricingTierId?: true
     userId?: true
   }
 
@@ -3880,8 +4002,8 @@ export namespace Prisma {
     id?: true
     avatar?: true
     biUrl?: true
-    priceTier?: true
     status?: true
+    pricingTierId?: true
     userId?: true
   }
 
@@ -3889,8 +4011,8 @@ export namespace Prisma {
     id?: true
     avatar?: true
     biUrl?: true
-    priceTier?: true
     status?: true
+    pricingTierId?: true
     userId?: true
     _all?: true
   }
@@ -3971,8 +4093,8 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl: string | null
-    priceTier: string | null
     status: $Enums.TeacherStatus
+    pricingTierId: string | null
     userId: string
     _count: TeacherCountAggregateOutputType | null
     _min: TeacherMinAggregateOutputType | null
@@ -3997,13 +4119,14 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    priceTier?: boolean
     status?: boolean
+    pricingTierId?: boolean
     userId?: boolean
     subjects?: boolean | Teacher$subjectsArgs<ExtArgs>
     weekDays?: boolean | Teacher$weekDaysArgs<ExtArgs>
     zones?: boolean | Teacher$zonesArgs<ExtArgs>
     gradeLevels?: boolean | Teacher$gradeLevelsArgs<ExtArgs>
+    priceTier?: boolean | Teacher$priceTierArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
@@ -4012,9 +4135,10 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    priceTier?: boolean
     status?: boolean
+    pricingTierId?: boolean
     userId?: boolean
+    priceTier?: boolean | Teacher$priceTierArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
 
@@ -4022,9 +4146,10 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    priceTier?: boolean
     status?: boolean
+    pricingTierId?: boolean
     userId?: boolean
+    priceTier?: boolean | Teacher$priceTierArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
 
@@ -4032,24 +4157,27 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    priceTier?: boolean
     status?: boolean
+    pricingTierId?: boolean
     userId?: boolean
   }
 
-  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "avatar" | "biUrl" | "priceTier" | "status" | "userId", ExtArgs["result"]["teacher"]>
+  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "avatar" | "biUrl" | "status" | "pricingTierId" | "userId", ExtArgs["result"]["teacher"]>
   export type TeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subjects?: boolean | Teacher$subjectsArgs<ExtArgs>
     weekDays?: boolean | Teacher$weekDaysArgs<ExtArgs>
     zones?: boolean | Teacher$zonesArgs<ExtArgs>
     gradeLevels?: boolean | Teacher$gradeLevelsArgs<ExtArgs>
+    priceTier?: boolean | Teacher$priceTierArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeacherIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    priceTier?: boolean | Teacher$priceTierArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type TeacherIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    priceTier?: boolean | Teacher$priceTierArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
@@ -4060,14 +4188,15 @@ export namespace Prisma {
       weekDays: Prisma.$WeekDayPayload<ExtArgs>[]
       zones: Prisma.$ZonePayload<ExtArgs>[]
       gradeLevels: Prisma.$GradeLevelPayload<ExtArgs>[]
+      priceTier: Prisma.$TeacherPricingTierPayload<ExtArgs> | null
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       avatar: string
       biUrl: string | null
-      priceTier: string | null
       status: $Enums.TeacherStatus
+      pricingTierId: string | null
       userId: string
     }, ExtArgs["result"]["teacher"]>
     composites: {}
@@ -4467,6 +4596,7 @@ export namespace Prisma {
     weekDays<T extends Teacher$weekDaysArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$weekDaysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeekDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     zones<T extends Teacher$zonesArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$zonesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ZonePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gradeLevels<T extends Teacher$gradeLevelsArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$gradeLevelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GradeLevelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    priceTier<T extends Teacher$priceTierArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$priceTierArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4500,8 +4630,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Teacher", 'String'>
     readonly avatar: FieldRef<"Teacher", 'String'>
     readonly biUrl: FieldRef<"Teacher", 'String'>
-    readonly priceTier: FieldRef<"Teacher", 'String'>
     readonly status: FieldRef<"Teacher", 'TeacherStatus'>
+    readonly pricingTierId: FieldRef<"Teacher", 'String'>
     readonly userId: FieldRef<"Teacher", 'String'>
   }
     
@@ -4997,6 +5127,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: GradeLevelScalarFieldEnum | GradeLevelScalarFieldEnum[]
+  }
+
+  /**
+   * Teacher.priceTier
+   */
+  export type Teacher$priceTierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    where?: TeacherPricingTierWhereInput
   }
 
   /**
@@ -9215,6 +9364,1055 @@ export namespace Prisma {
 
 
   /**
+   * Model TeacherPricingTier
+   */
+
+  export type AggregateTeacherPricingTier = {
+    _count: TeacherPricingTierCountAggregateOutputType | null
+    _min: TeacherPricingTierMinAggregateOutputType | null
+    _max: TeacherPricingTierMaxAggregateOutputType | null
+  }
+
+  export type TeacherPricingTierMinAggregateOutputType = {
+    id: string | null
+    value: string | null
+    status: $Enums.SharedStatus | null
+  }
+
+  export type TeacherPricingTierMaxAggregateOutputType = {
+    id: string | null
+    value: string | null
+    status: $Enums.SharedStatus | null
+  }
+
+  export type TeacherPricingTierCountAggregateOutputType = {
+    id: number
+    value: number
+    status: number
+    _all: number
+  }
+
+
+  export type TeacherPricingTierMinAggregateInputType = {
+    id?: true
+    value?: true
+    status?: true
+  }
+
+  export type TeacherPricingTierMaxAggregateInputType = {
+    id?: true
+    value?: true
+    status?: true
+  }
+
+  export type TeacherPricingTierCountAggregateInputType = {
+    id?: true
+    value?: true
+    status?: true
+    _all?: true
+  }
+
+  export type TeacherPricingTierAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TeacherPricingTier to aggregate.
+     */
+    where?: TeacherPricingTierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeacherPricingTiers to fetch.
+     */
+    orderBy?: TeacherPricingTierOrderByWithRelationInput | TeacherPricingTierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TeacherPricingTierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeacherPricingTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeacherPricingTiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TeacherPricingTiers
+    **/
+    _count?: true | TeacherPricingTierCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TeacherPricingTierMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TeacherPricingTierMaxAggregateInputType
+  }
+
+  export type GetTeacherPricingTierAggregateType<T extends TeacherPricingTierAggregateArgs> = {
+        [P in keyof T & keyof AggregateTeacherPricingTier]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTeacherPricingTier[P]>
+      : GetScalarType<T[P], AggregateTeacherPricingTier[P]>
+  }
+
+
+
+
+  export type TeacherPricingTierGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeacherPricingTierWhereInput
+    orderBy?: TeacherPricingTierOrderByWithAggregationInput | TeacherPricingTierOrderByWithAggregationInput[]
+    by: TeacherPricingTierScalarFieldEnum[] | TeacherPricingTierScalarFieldEnum
+    having?: TeacherPricingTierScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TeacherPricingTierCountAggregateInputType | true
+    _min?: TeacherPricingTierMinAggregateInputType
+    _max?: TeacherPricingTierMaxAggregateInputType
+  }
+
+  export type TeacherPricingTierGroupByOutputType = {
+    id: string
+    value: string
+    status: $Enums.SharedStatus
+    _count: TeacherPricingTierCountAggregateOutputType | null
+    _min: TeacherPricingTierMinAggregateOutputType | null
+    _max: TeacherPricingTierMaxAggregateOutputType | null
+  }
+
+  type GetTeacherPricingTierGroupByPayload<T extends TeacherPricingTierGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TeacherPricingTierGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TeacherPricingTierGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TeacherPricingTierGroupByOutputType[P]>
+            : GetScalarType<T[P], TeacherPricingTierGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TeacherPricingTierSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    status?: boolean
+    teachers?: boolean | TeacherPricingTier$teachersArgs<ExtArgs>
+    _count?: boolean | TeacherPricingTierCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["teacherPricingTier"]>
+
+  export type TeacherPricingTierSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    status?: boolean
+  }, ExtArgs["result"]["teacherPricingTier"]>
+
+  export type TeacherPricingTierSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    status?: boolean
+  }, ExtArgs["result"]["teacherPricingTier"]>
+
+  export type TeacherPricingTierSelectScalar = {
+    id?: boolean
+    value?: boolean
+    status?: boolean
+  }
+
+  export type TeacherPricingTierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "value" | "status", ExtArgs["result"]["teacherPricingTier"]>
+  export type TeacherPricingTierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    teachers?: boolean | TeacherPricingTier$teachersArgs<ExtArgs>
+    _count?: boolean | TeacherPricingTierCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TeacherPricingTierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TeacherPricingTierIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $TeacherPricingTierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TeacherPricingTier"
+    objects: {
+      teachers: Prisma.$TeacherPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      value: string
+      status: $Enums.SharedStatus
+    }, ExtArgs["result"]["teacherPricingTier"]>
+    composites: {}
+  }
+
+  type TeacherPricingTierGetPayload<S extends boolean | null | undefined | TeacherPricingTierDefaultArgs> = $Result.GetResult<Prisma.$TeacherPricingTierPayload, S>
+
+  type TeacherPricingTierCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TeacherPricingTierFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TeacherPricingTierCountAggregateInputType | true
+    }
+
+  export interface TeacherPricingTierDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TeacherPricingTier'], meta: { name: 'TeacherPricingTier' } }
+    /**
+     * Find zero or one TeacherPricingTier that matches the filter.
+     * @param {TeacherPricingTierFindUniqueArgs} args - Arguments to find a TeacherPricingTier
+     * @example
+     * // Get one TeacherPricingTier
+     * const teacherPricingTier = await prisma.teacherPricingTier.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TeacherPricingTierFindUniqueArgs>(args: SelectSubset<T, TeacherPricingTierFindUniqueArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TeacherPricingTier that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TeacherPricingTierFindUniqueOrThrowArgs} args - Arguments to find a TeacherPricingTier
+     * @example
+     * // Get one TeacherPricingTier
+     * const teacherPricingTier = await prisma.teacherPricingTier.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TeacherPricingTierFindUniqueOrThrowArgs>(args: SelectSubset<T, TeacherPricingTierFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TeacherPricingTier that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeacherPricingTierFindFirstArgs} args - Arguments to find a TeacherPricingTier
+     * @example
+     * // Get one TeacherPricingTier
+     * const teacherPricingTier = await prisma.teacherPricingTier.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TeacherPricingTierFindFirstArgs>(args?: SelectSubset<T, TeacherPricingTierFindFirstArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TeacherPricingTier that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeacherPricingTierFindFirstOrThrowArgs} args - Arguments to find a TeacherPricingTier
+     * @example
+     * // Get one TeacherPricingTier
+     * const teacherPricingTier = await prisma.teacherPricingTier.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TeacherPricingTierFindFirstOrThrowArgs>(args?: SelectSubset<T, TeacherPricingTierFindFirstOrThrowArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TeacherPricingTiers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeacherPricingTierFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TeacherPricingTiers
+     * const teacherPricingTiers = await prisma.teacherPricingTier.findMany()
+     * 
+     * // Get first 10 TeacherPricingTiers
+     * const teacherPricingTiers = await prisma.teacherPricingTier.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const teacherPricingTierWithIdOnly = await prisma.teacherPricingTier.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TeacherPricingTierFindManyArgs>(args?: SelectSubset<T, TeacherPricingTierFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TeacherPricingTier.
+     * @param {TeacherPricingTierCreateArgs} args - Arguments to create a TeacherPricingTier.
+     * @example
+     * // Create one TeacherPricingTier
+     * const TeacherPricingTier = await prisma.teacherPricingTier.create({
+     *   data: {
+     *     // ... data to create a TeacherPricingTier
+     *   }
+     * })
+     * 
+     */
+    create<T extends TeacherPricingTierCreateArgs>(args: SelectSubset<T, TeacherPricingTierCreateArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TeacherPricingTiers.
+     * @param {TeacherPricingTierCreateManyArgs} args - Arguments to create many TeacherPricingTiers.
+     * @example
+     * // Create many TeacherPricingTiers
+     * const teacherPricingTier = await prisma.teacherPricingTier.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TeacherPricingTierCreateManyArgs>(args?: SelectSubset<T, TeacherPricingTierCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TeacherPricingTiers and returns the data saved in the database.
+     * @param {TeacherPricingTierCreateManyAndReturnArgs} args - Arguments to create many TeacherPricingTiers.
+     * @example
+     * // Create many TeacherPricingTiers
+     * const teacherPricingTier = await prisma.teacherPricingTier.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TeacherPricingTiers and only return the `id`
+     * const teacherPricingTierWithIdOnly = await prisma.teacherPricingTier.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TeacherPricingTierCreateManyAndReturnArgs>(args?: SelectSubset<T, TeacherPricingTierCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TeacherPricingTier.
+     * @param {TeacherPricingTierDeleteArgs} args - Arguments to delete one TeacherPricingTier.
+     * @example
+     * // Delete one TeacherPricingTier
+     * const TeacherPricingTier = await prisma.teacherPricingTier.delete({
+     *   where: {
+     *     // ... filter to delete one TeacherPricingTier
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TeacherPricingTierDeleteArgs>(args: SelectSubset<T, TeacherPricingTierDeleteArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TeacherPricingTier.
+     * @param {TeacherPricingTierUpdateArgs} args - Arguments to update one TeacherPricingTier.
+     * @example
+     * // Update one TeacherPricingTier
+     * const teacherPricingTier = await prisma.teacherPricingTier.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TeacherPricingTierUpdateArgs>(args: SelectSubset<T, TeacherPricingTierUpdateArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TeacherPricingTiers.
+     * @param {TeacherPricingTierDeleteManyArgs} args - Arguments to filter TeacherPricingTiers to delete.
+     * @example
+     * // Delete a few TeacherPricingTiers
+     * const { count } = await prisma.teacherPricingTier.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TeacherPricingTierDeleteManyArgs>(args?: SelectSubset<T, TeacherPricingTierDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TeacherPricingTiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeacherPricingTierUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TeacherPricingTiers
+     * const teacherPricingTier = await prisma.teacherPricingTier.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TeacherPricingTierUpdateManyArgs>(args: SelectSubset<T, TeacherPricingTierUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TeacherPricingTiers and returns the data updated in the database.
+     * @param {TeacherPricingTierUpdateManyAndReturnArgs} args - Arguments to update many TeacherPricingTiers.
+     * @example
+     * // Update many TeacherPricingTiers
+     * const teacherPricingTier = await prisma.teacherPricingTier.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TeacherPricingTiers and only return the `id`
+     * const teacherPricingTierWithIdOnly = await prisma.teacherPricingTier.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TeacherPricingTierUpdateManyAndReturnArgs>(args: SelectSubset<T, TeacherPricingTierUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TeacherPricingTier.
+     * @param {TeacherPricingTierUpsertArgs} args - Arguments to update or create a TeacherPricingTier.
+     * @example
+     * // Update or create a TeacherPricingTier
+     * const teacherPricingTier = await prisma.teacherPricingTier.upsert({
+     *   create: {
+     *     // ... data to create a TeacherPricingTier
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TeacherPricingTier we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TeacherPricingTierUpsertArgs>(args: SelectSubset<T, TeacherPricingTierUpsertArgs<ExtArgs>>): Prisma__TeacherPricingTierClient<$Result.GetResult<Prisma.$TeacherPricingTierPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TeacherPricingTiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeacherPricingTierCountArgs} args - Arguments to filter TeacherPricingTiers to count.
+     * @example
+     * // Count the number of TeacherPricingTiers
+     * const count = await prisma.teacherPricingTier.count({
+     *   where: {
+     *     // ... the filter for the TeacherPricingTiers we want to count
+     *   }
+     * })
+    **/
+    count<T extends TeacherPricingTierCountArgs>(
+      args?: Subset<T, TeacherPricingTierCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TeacherPricingTierCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TeacherPricingTier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeacherPricingTierAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TeacherPricingTierAggregateArgs>(args: Subset<T, TeacherPricingTierAggregateArgs>): Prisma.PrismaPromise<GetTeacherPricingTierAggregateType<T>>
+
+    /**
+     * Group by TeacherPricingTier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeacherPricingTierGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TeacherPricingTierGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TeacherPricingTierGroupByArgs['orderBy'] }
+        : { orderBy?: TeacherPricingTierGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TeacherPricingTierGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTeacherPricingTierGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TeacherPricingTier model
+   */
+  readonly fields: TeacherPricingTierFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TeacherPricingTier.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TeacherPricingTierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    teachers<T extends TeacherPricingTier$teachersArgs<ExtArgs> = {}>(args?: Subset<T, TeacherPricingTier$teachersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeacherPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TeacherPricingTier model
+   */
+  interface TeacherPricingTierFieldRefs {
+    readonly id: FieldRef<"TeacherPricingTier", 'String'>
+    readonly value: FieldRef<"TeacherPricingTier", 'String'>
+    readonly status: FieldRef<"TeacherPricingTier", 'SharedStatus'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TeacherPricingTier findUnique
+   */
+  export type TeacherPricingTierFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * Filter, which TeacherPricingTier to fetch.
+     */
+    where: TeacherPricingTierWhereUniqueInput
+  }
+
+  /**
+   * TeacherPricingTier findUniqueOrThrow
+   */
+  export type TeacherPricingTierFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * Filter, which TeacherPricingTier to fetch.
+     */
+    where: TeacherPricingTierWhereUniqueInput
+  }
+
+  /**
+   * TeacherPricingTier findFirst
+   */
+  export type TeacherPricingTierFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * Filter, which TeacherPricingTier to fetch.
+     */
+    where?: TeacherPricingTierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeacherPricingTiers to fetch.
+     */
+    orderBy?: TeacherPricingTierOrderByWithRelationInput | TeacherPricingTierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TeacherPricingTiers.
+     */
+    cursor?: TeacherPricingTierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeacherPricingTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeacherPricingTiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeacherPricingTiers.
+     */
+    distinct?: TeacherPricingTierScalarFieldEnum | TeacherPricingTierScalarFieldEnum[]
+  }
+
+  /**
+   * TeacherPricingTier findFirstOrThrow
+   */
+  export type TeacherPricingTierFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * Filter, which TeacherPricingTier to fetch.
+     */
+    where?: TeacherPricingTierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeacherPricingTiers to fetch.
+     */
+    orderBy?: TeacherPricingTierOrderByWithRelationInput | TeacherPricingTierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TeacherPricingTiers.
+     */
+    cursor?: TeacherPricingTierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeacherPricingTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeacherPricingTiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeacherPricingTiers.
+     */
+    distinct?: TeacherPricingTierScalarFieldEnum | TeacherPricingTierScalarFieldEnum[]
+  }
+
+  /**
+   * TeacherPricingTier findMany
+   */
+  export type TeacherPricingTierFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * Filter, which TeacherPricingTiers to fetch.
+     */
+    where?: TeacherPricingTierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeacherPricingTiers to fetch.
+     */
+    orderBy?: TeacherPricingTierOrderByWithRelationInput | TeacherPricingTierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TeacherPricingTiers.
+     */
+    cursor?: TeacherPricingTierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeacherPricingTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeacherPricingTiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeacherPricingTiers.
+     */
+    distinct?: TeacherPricingTierScalarFieldEnum | TeacherPricingTierScalarFieldEnum[]
+  }
+
+  /**
+   * TeacherPricingTier create
+   */
+  export type TeacherPricingTierCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TeacherPricingTier.
+     */
+    data: XOR<TeacherPricingTierCreateInput, TeacherPricingTierUncheckedCreateInput>
+  }
+
+  /**
+   * TeacherPricingTier createMany
+   */
+  export type TeacherPricingTierCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TeacherPricingTiers.
+     */
+    data: TeacherPricingTierCreateManyInput | TeacherPricingTierCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TeacherPricingTier createManyAndReturn
+   */
+  export type TeacherPricingTierCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * The data used to create many TeacherPricingTiers.
+     */
+    data: TeacherPricingTierCreateManyInput | TeacherPricingTierCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TeacherPricingTier update
+   */
+  export type TeacherPricingTierUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TeacherPricingTier.
+     */
+    data: XOR<TeacherPricingTierUpdateInput, TeacherPricingTierUncheckedUpdateInput>
+    /**
+     * Choose, which TeacherPricingTier to update.
+     */
+    where: TeacherPricingTierWhereUniqueInput
+  }
+
+  /**
+   * TeacherPricingTier updateMany
+   */
+  export type TeacherPricingTierUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TeacherPricingTiers.
+     */
+    data: XOR<TeacherPricingTierUpdateManyMutationInput, TeacherPricingTierUncheckedUpdateManyInput>
+    /**
+     * Filter which TeacherPricingTiers to update
+     */
+    where?: TeacherPricingTierWhereInput
+    /**
+     * Limit how many TeacherPricingTiers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TeacherPricingTier updateManyAndReturn
+   */
+  export type TeacherPricingTierUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * The data used to update TeacherPricingTiers.
+     */
+    data: XOR<TeacherPricingTierUpdateManyMutationInput, TeacherPricingTierUncheckedUpdateManyInput>
+    /**
+     * Filter which TeacherPricingTiers to update
+     */
+    where?: TeacherPricingTierWhereInput
+    /**
+     * Limit how many TeacherPricingTiers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TeacherPricingTier upsert
+   */
+  export type TeacherPricingTierUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TeacherPricingTier to update in case it exists.
+     */
+    where: TeacherPricingTierWhereUniqueInput
+    /**
+     * In case the TeacherPricingTier found by the `where` argument doesn't exist, create a new TeacherPricingTier with this data.
+     */
+    create: XOR<TeacherPricingTierCreateInput, TeacherPricingTierUncheckedCreateInput>
+    /**
+     * In case the TeacherPricingTier was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TeacherPricingTierUpdateInput, TeacherPricingTierUncheckedUpdateInput>
+  }
+
+  /**
+   * TeacherPricingTier delete
+   */
+  export type TeacherPricingTierDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+    /**
+     * Filter which TeacherPricingTier to delete.
+     */
+    where: TeacherPricingTierWhereUniqueInput
+  }
+
+  /**
+   * TeacherPricingTier deleteMany
+   */
+  export type TeacherPricingTierDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TeacherPricingTiers to delete
+     */
+    where?: TeacherPricingTierWhereInput
+    /**
+     * Limit how many TeacherPricingTiers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TeacherPricingTier.teachers
+   */
+  export type TeacherPricingTier$teachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Teacher
+     */
+    select?: TeacherSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Teacher
+     */
+    omit?: TeacherOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    where?: TeacherWhereInput
+    orderBy?: TeacherOrderByWithRelationInput | TeacherOrderByWithRelationInput[]
+    cursor?: TeacherWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TeacherScalarFieldEnum | TeacherScalarFieldEnum[]
+  }
+
+  /**
+   * TeacherPricingTier without action
+   */
+  export type TeacherPricingTierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherPricingTier
+     */
+    select?: TeacherPricingTierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeacherPricingTier
+     */
+    omit?: TeacherPricingTierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherPricingTierInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9255,8 +10453,8 @@ export namespace Prisma {
     id: 'id',
     avatar: 'avatar',
     biUrl: 'biUrl',
-    priceTier: 'priceTier',
     status: 'status',
+    pricingTierId: 'pricingTierId',
     userId: 'userId'
   };
 
@@ -9297,6 +10495,15 @@ export namespace Prisma {
   };
 
   export type ZoneScalarFieldEnum = (typeof ZoneScalarFieldEnum)[keyof typeof ZoneScalarFieldEnum]
+
+
+  export const TeacherPricingTierScalarFieldEnum: {
+    id: 'id',
+    value: 'value',
+    status: 'status'
+  };
+
+  export type TeacherPricingTierScalarFieldEnum = (typeof TeacherPricingTierScalarFieldEnum)[keyof typeof TeacherPricingTierScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9568,13 +10775,14 @@ export namespace Prisma {
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    priceTier?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
+    pricingTierId?: StringNullableFilter<"Teacher"> | string | null
     userId?: StringFilter<"Teacher"> | string
     subjects?: SubjectListRelationFilter
     weekDays?: WeekDayListRelationFilter
     zones?: ZoneListRelationFilter
     gradeLevels?: GradeLevelListRelationFilter
+    priceTier?: XOR<TeacherPricingTierNullableScalarRelationFilter, TeacherPricingTierWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -9582,13 +10790,14 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrderInput | SortOrder
-    priceTier?: SortOrderInput | SortOrder
     status?: SortOrder
+    pricingTierId?: SortOrderInput | SortOrder
     userId?: SortOrder
     subjects?: SubjectOrderByRelationAggregateInput
     weekDays?: WeekDayOrderByRelationAggregateInput
     zones?: ZoneOrderByRelationAggregateInput
     gradeLevels?: GradeLevelOrderByRelationAggregateInput
+    priceTier?: TeacherPricingTierOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
 
@@ -9600,12 +10809,13 @@ export namespace Prisma {
     NOT?: TeacherWhereInput | TeacherWhereInput[]
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    priceTier?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
+    pricingTierId?: StringNullableFilter<"Teacher"> | string | null
     subjects?: SubjectListRelationFilter
     weekDays?: WeekDayListRelationFilter
     zones?: ZoneListRelationFilter
     gradeLevels?: GradeLevelListRelationFilter
+    priceTier?: XOR<TeacherPricingTierNullableScalarRelationFilter, TeacherPricingTierWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
@@ -9613,8 +10823,8 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrderInput | SortOrder
-    priceTier?: SortOrderInput | SortOrder
     status?: SortOrder
+    pricingTierId?: SortOrderInput | SortOrder
     userId?: SortOrder
     _count?: TeacherCountOrderByAggregateInput
     _max?: TeacherMaxOrderByAggregateInput
@@ -9628,8 +10838,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Teacher"> | string
     avatar?: StringWithAggregatesFilter<"Teacher"> | string
     biUrl?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
-    priceTier?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusWithAggregatesFilter<"Teacher"> | $Enums.TeacherStatus
+    pricingTierId?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     userId?: StringWithAggregatesFilter<"Teacher"> | string
   }
 
@@ -9813,6 +11023,51 @@ export namespace Prisma {
     status?: EnumSharedStatusWithAggregatesFilter<"Zone"> | $Enums.SharedStatus
   }
 
+  export type TeacherPricingTierWhereInput = {
+    AND?: TeacherPricingTierWhereInput | TeacherPricingTierWhereInput[]
+    OR?: TeacherPricingTierWhereInput[]
+    NOT?: TeacherPricingTierWhereInput | TeacherPricingTierWhereInput[]
+    id?: StringFilter<"TeacherPricingTier"> | string
+    value?: StringFilter<"TeacherPricingTier"> | string
+    status?: EnumSharedStatusFilter<"TeacherPricingTier"> | $Enums.SharedStatus
+    teachers?: TeacherListRelationFilter
+  }
+
+  export type TeacherPricingTierOrderByWithRelationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    status?: SortOrder
+    teachers?: TeacherOrderByRelationAggregateInput
+  }
+
+  export type TeacherPricingTierWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TeacherPricingTierWhereInput | TeacherPricingTierWhereInput[]
+    OR?: TeacherPricingTierWhereInput[]
+    NOT?: TeacherPricingTierWhereInput | TeacherPricingTierWhereInput[]
+    value?: StringFilter<"TeacherPricingTier"> | string
+    status?: EnumSharedStatusFilter<"TeacherPricingTier"> | $Enums.SharedStatus
+    teachers?: TeacherListRelationFilter
+  }, "id">
+
+  export type TeacherPricingTierOrderByWithAggregationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    status?: SortOrder
+    _count?: TeacherPricingTierCountOrderByAggregateInput
+    _max?: TeacherPricingTierMaxOrderByAggregateInput
+    _min?: TeacherPricingTierMinOrderByAggregateInput
+  }
+
+  export type TeacherPricingTierScalarWhereWithAggregatesInput = {
+    AND?: TeacherPricingTierScalarWhereWithAggregatesInput | TeacherPricingTierScalarWhereWithAggregatesInput[]
+    OR?: TeacherPricingTierScalarWhereWithAggregatesInput[]
+    NOT?: TeacherPricingTierScalarWhereWithAggregatesInput | TeacherPricingTierScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TeacherPricingTier"> | string
+    value?: StringWithAggregatesFilter<"TeacherPricingTier"> | string
+    status?: EnumSharedStatusWithAggregatesFilter<"TeacherPricingTier"> | $Enums.SharedStatus
+  }
+
   export type UserCreateInput = {
     id: string
     name: string
@@ -9943,12 +11198,12 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
+    priceTier?: TeacherPricingTierCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -9956,8 +11211,8 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
+    pricingTierId?: string | null
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
@@ -9969,12 +11224,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
+    priceTier?: TeacherPricingTierUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -9982,8 +11237,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
@@ -9995,8 +11250,8 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
+    pricingTierId?: string | null
     userId: string
   }
 
@@ -10004,7 +11259,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
   }
 
@@ -10012,8 +11266,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -10198,6 +11452,52 @@ export namespace Prisma {
   export type ZoneUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
+  }
+
+  export type TeacherPricingTierCreateInput = {
+    id: string
+    value: string
+    status: $Enums.SharedStatus
+    teachers?: TeacherCreateNestedManyWithoutPriceTierInput
+  }
+
+  export type TeacherPricingTierUncheckedCreateInput = {
+    id: string
+    value: string
+    status: $Enums.SharedStatus
+    teachers?: TeacherUncheckedCreateNestedManyWithoutPriceTierInput
+  }
+
+  export type TeacherPricingTierUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
+    teachers?: TeacherUpdateManyWithoutPriceTierNestedInput
+  }
+
+  export type TeacherPricingTierUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
+    teachers?: TeacherUncheckedUpdateManyWithoutPriceTierNestedInput
+  }
+
+  export type TeacherPricingTierCreateManyInput = {
+    id: string
+    value: string
+    status: $Enums.SharedStatus
+  }
+
+  export type TeacherPricingTierUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
+  }
+
+  export type TeacherPricingTierUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
@@ -10445,6 +11745,11 @@ export namespace Prisma {
     none?: GradeLevelWhereInput
   }
 
+  export type TeacherPricingTierNullableScalarRelationFilter = {
+    is?: TeacherPricingTierWhereInput | null
+    isNot?: TeacherPricingTierWhereInput | null
+  }
+
   export type SubjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -10465,8 +11770,8 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrder
-    priceTier?: SortOrder
     status?: SortOrder
+    pricingTierId?: SortOrder
     userId?: SortOrder
   }
 
@@ -10474,8 +11779,8 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrder
-    priceTier?: SortOrder
     status?: SortOrder
+    pricingTierId?: SortOrder
     userId?: SortOrder
   }
 
@@ -10483,8 +11788,8 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrder
-    priceTier?: SortOrder
     status?: SortOrder
+    pricingTierId?: SortOrder
     userId?: SortOrder
   }
 
@@ -10594,6 +11899,24 @@ export namespace Prisma {
   export type ZoneMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    status?: SortOrder
+  }
+
+  export type TeacherPricingTierCountOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    status?: SortOrder
+  }
+
+  export type TeacherPricingTierMaxOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    status?: SortOrder
+  }
+
+  export type TeacherPricingTierMinOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
     status?: SortOrder
   }
 
@@ -10723,6 +12046,12 @@ export namespace Prisma {
     connect?: GradeLevelWhereUniqueInput | GradeLevelWhereUniqueInput[]
   }
 
+  export type TeacherPricingTierCreateNestedOneWithoutTeachersInput = {
+    create?: XOR<TeacherPricingTierCreateWithoutTeachersInput, TeacherPricingTierUncheckedCreateWithoutTeachersInput>
+    connectOrCreate?: TeacherPricingTierCreateOrConnectWithoutTeachersInput
+    connect?: TeacherPricingTierWhereUniqueInput
+  }
+
   export type UserCreateNestedOneWithoutTeacherProfileInput = {
     create?: XOR<UserCreateWithoutTeacherProfileInput, UserUncheckedCreateWithoutTeacherProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutTeacherProfileInput
@@ -10807,6 +12136,16 @@ export namespace Prisma {
     update?: GradeLevelUpdateWithWhereUniqueWithoutTeachersInput | GradeLevelUpdateWithWhereUniqueWithoutTeachersInput[]
     updateMany?: GradeLevelUpdateManyWithWhereWithoutTeachersInput | GradeLevelUpdateManyWithWhereWithoutTeachersInput[]
     deleteMany?: GradeLevelScalarWhereInput | GradeLevelScalarWhereInput[]
+  }
+
+  export type TeacherPricingTierUpdateOneWithoutTeachersNestedInput = {
+    create?: XOR<TeacherPricingTierCreateWithoutTeachersInput, TeacherPricingTierUncheckedCreateWithoutTeachersInput>
+    connectOrCreate?: TeacherPricingTierCreateOrConnectWithoutTeachersInput
+    upsert?: TeacherPricingTierUpsertWithoutTeachersInput
+    disconnect?: TeacherPricingTierWhereInput | boolean
+    delete?: TeacherPricingTierWhereInput | boolean
+    connect?: TeacherPricingTierWhereUniqueInput
+    update?: XOR<XOR<TeacherPricingTierUpdateToOneWithWhereWithoutTeachersInput, TeacherPricingTierUpdateWithoutTeachersInput>, TeacherPricingTierUncheckedUpdateWithoutTeachersInput>
   }
 
   export type UserUpdateOneRequiredWithoutTeacherProfileNestedInput = {
@@ -11025,6 +12364,48 @@ export namespace Prisma {
     deleteMany?: TeacherScalarWhereInput | TeacherScalarWhereInput[]
   }
 
+  export type TeacherCreateNestedManyWithoutPriceTierInput = {
+    create?: XOR<TeacherCreateWithoutPriceTierInput, TeacherUncheckedCreateWithoutPriceTierInput> | TeacherCreateWithoutPriceTierInput[] | TeacherUncheckedCreateWithoutPriceTierInput[]
+    connectOrCreate?: TeacherCreateOrConnectWithoutPriceTierInput | TeacherCreateOrConnectWithoutPriceTierInput[]
+    createMany?: TeacherCreateManyPriceTierInputEnvelope
+    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+  }
+
+  export type TeacherUncheckedCreateNestedManyWithoutPriceTierInput = {
+    create?: XOR<TeacherCreateWithoutPriceTierInput, TeacherUncheckedCreateWithoutPriceTierInput> | TeacherCreateWithoutPriceTierInput[] | TeacherUncheckedCreateWithoutPriceTierInput[]
+    connectOrCreate?: TeacherCreateOrConnectWithoutPriceTierInput | TeacherCreateOrConnectWithoutPriceTierInput[]
+    createMany?: TeacherCreateManyPriceTierInputEnvelope
+    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+  }
+
+  export type TeacherUpdateManyWithoutPriceTierNestedInput = {
+    create?: XOR<TeacherCreateWithoutPriceTierInput, TeacherUncheckedCreateWithoutPriceTierInput> | TeacherCreateWithoutPriceTierInput[] | TeacherUncheckedCreateWithoutPriceTierInput[]
+    connectOrCreate?: TeacherCreateOrConnectWithoutPriceTierInput | TeacherCreateOrConnectWithoutPriceTierInput[]
+    upsert?: TeacherUpsertWithWhereUniqueWithoutPriceTierInput | TeacherUpsertWithWhereUniqueWithoutPriceTierInput[]
+    createMany?: TeacherCreateManyPriceTierInputEnvelope
+    set?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    disconnect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    delete?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    update?: TeacherUpdateWithWhereUniqueWithoutPriceTierInput | TeacherUpdateWithWhereUniqueWithoutPriceTierInput[]
+    updateMany?: TeacherUpdateManyWithWhereWithoutPriceTierInput | TeacherUpdateManyWithWhereWithoutPriceTierInput[]
+    deleteMany?: TeacherScalarWhereInput | TeacherScalarWhereInput[]
+  }
+
+  export type TeacherUncheckedUpdateManyWithoutPriceTierNestedInput = {
+    create?: XOR<TeacherCreateWithoutPriceTierInput, TeacherUncheckedCreateWithoutPriceTierInput> | TeacherCreateWithoutPriceTierInput[] | TeacherUncheckedCreateWithoutPriceTierInput[]
+    connectOrCreate?: TeacherCreateOrConnectWithoutPriceTierInput | TeacherCreateOrConnectWithoutPriceTierInput[]
+    upsert?: TeacherUpsertWithWhereUniqueWithoutPriceTierInput | TeacherUpsertWithWhereUniqueWithoutPriceTierInput[]
+    createMany?: TeacherCreateManyPriceTierInputEnvelope
+    set?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    disconnect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    delete?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
+    update?: TeacherUpdateWithWhereUniqueWithoutPriceTierInput | TeacherUpdateWithWhereUniqueWithoutPriceTierInput[]
+    updateMany?: TeacherUpdateManyWithWhereWithoutPriceTierInput | TeacherUpdateManyWithWhereWithoutPriceTierInput[]
+    deleteMany?: TeacherScalarWhereInput | TeacherScalarWhereInput[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11223,20 +12604,20 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
+    priceTier?: TeacherPricingTierCreateNestedOneWithoutTeachersInput
   }
 
   export type TeacherUncheckedCreateWithoutUserInput = {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
+    pricingTierId?: string | null
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
     zones?: ZoneUncheckedCreateNestedManyWithoutTeachersInput
@@ -11276,20 +12657,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
+    priceTier?: TeacherPricingTierUpdateOneWithoutTeachersNestedInput
   }
 
   export type TeacherUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUncheckedUpdateManyWithoutTeachersNestedInput
@@ -11451,6 +12832,23 @@ export namespace Prisma {
     create: XOR<GradeLevelCreateWithoutTeachersInput, GradeLevelUncheckedCreateWithoutTeachersInput>
   }
 
+  export type TeacherPricingTierCreateWithoutTeachersInput = {
+    id: string
+    value: string
+    status: $Enums.SharedStatus
+  }
+
+  export type TeacherPricingTierUncheckedCreateWithoutTeachersInput = {
+    id: string
+    value: string
+    status: $Enums.SharedStatus
+  }
+
+  export type TeacherPricingTierCreateOrConnectWithoutTeachersInput = {
+    where: TeacherPricingTierWhereUniqueInput
+    create: XOR<TeacherPricingTierCreateWithoutTeachersInput, TeacherPricingTierUncheckedCreateWithoutTeachersInput>
+  }
+
   export type UserCreateWithoutTeacherProfileInput = {
     id: string
     name: string
@@ -11582,6 +12980,29 @@ export namespace Prisma {
     status?: EnumSharedStatusFilter<"GradeLevel"> | $Enums.SharedStatus
   }
 
+  export type TeacherPricingTierUpsertWithoutTeachersInput = {
+    update: XOR<TeacherPricingTierUpdateWithoutTeachersInput, TeacherPricingTierUncheckedUpdateWithoutTeachersInput>
+    create: XOR<TeacherPricingTierCreateWithoutTeachersInput, TeacherPricingTierUncheckedCreateWithoutTeachersInput>
+    where?: TeacherPricingTierWhereInput
+  }
+
+  export type TeacherPricingTierUpdateToOneWithWhereWithoutTeachersInput = {
+    where?: TeacherPricingTierWhereInput
+    data: XOR<TeacherPricingTierUpdateWithoutTeachersInput, TeacherPricingTierUncheckedUpdateWithoutTeachersInput>
+  }
+
+  export type TeacherPricingTierUpdateWithoutTeachersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
+  }
+
+  export type TeacherPricingTierUncheckedUpdateWithoutTeachersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
+  }
+
   export type UserUpsertWithoutTeacherProfileInput = {
     update: XOR<UserUpdateWithoutTeacherProfileInput, UserUncheckedUpdateWithoutTeacherProfileInput>
     create: XOR<UserCreateWithoutTeacherProfileInput, UserUncheckedCreateWithoutTeacherProfileInput>
@@ -11623,11 +13044,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
+    priceTier?: TeacherPricingTierCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -11635,8 +13056,8 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
+    pricingTierId?: string | null
     userId: string
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
     zones?: ZoneUncheckedCreateNestedManyWithoutTeachersInput
@@ -11671,8 +13092,8 @@ export namespace Prisma {
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    priceTier?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
+    pricingTierId?: StringNullableFilter<"Teacher"> | string | null
     userId?: StringFilter<"Teacher"> | string
   }
 
@@ -11680,11 +13101,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
+    priceTier?: TeacherPricingTierCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -11692,8 +13113,8 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
+    pricingTierId?: string | null
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
     zones?: ZoneUncheckedCreateNestedManyWithoutTeachersInput
@@ -11725,11 +13146,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
+    priceTier?: TeacherPricingTierCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -11737,8 +13158,8 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
+    pricingTierId?: string | null
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
@@ -11770,11 +13191,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
+    priceTier?: TeacherPricingTierCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -11782,8 +13203,8 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: string | null
     status?: $Enums.TeacherStatus
+    pricingTierId?: string | null
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
@@ -11809,6 +13230,56 @@ export namespace Prisma {
   export type TeacherUpdateManyWithWhereWithoutZonesInput = {
     where: TeacherScalarWhereInput
     data: XOR<TeacherUpdateManyMutationInput, TeacherUncheckedUpdateManyWithoutZonesInput>
+  }
+
+  export type TeacherCreateWithoutPriceTierInput = {
+    id: string
+    avatar: string
+    biUrl?: string | null
+    status?: $Enums.TeacherStatus
+    subjects?: SubjectCreateNestedManyWithoutTeachersInput
+    weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
+    zones?: ZoneCreateNestedManyWithoutTeachersInput
+    gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
+    user: UserCreateNestedOneWithoutTeacherProfileInput
+  }
+
+  export type TeacherUncheckedCreateWithoutPriceTierInput = {
+    id: string
+    avatar: string
+    biUrl?: string | null
+    status?: $Enums.TeacherStatus
+    userId: string
+    subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
+    weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
+    zones?: ZoneUncheckedCreateNestedManyWithoutTeachersInput
+    gradeLevels?: GradeLevelUncheckedCreateNestedManyWithoutTeachersInput
+  }
+
+  export type TeacherCreateOrConnectWithoutPriceTierInput = {
+    where: TeacherWhereUniqueInput
+    create: XOR<TeacherCreateWithoutPriceTierInput, TeacherUncheckedCreateWithoutPriceTierInput>
+  }
+
+  export type TeacherCreateManyPriceTierInputEnvelope = {
+    data: TeacherCreateManyPriceTierInput | TeacherCreateManyPriceTierInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TeacherUpsertWithWhereUniqueWithoutPriceTierInput = {
+    where: TeacherWhereUniqueInput
+    update: XOR<TeacherUpdateWithoutPriceTierInput, TeacherUncheckedUpdateWithoutPriceTierInput>
+    create: XOR<TeacherCreateWithoutPriceTierInput, TeacherUncheckedCreateWithoutPriceTierInput>
+  }
+
+  export type TeacherUpdateWithWhereUniqueWithoutPriceTierInput = {
+    where: TeacherWhereUniqueInput
+    data: XOR<TeacherUpdateWithoutPriceTierInput, TeacherUncheckedUpdateWithoutPriceTierInput>
+  }
+
+  export type TeacherUpdateManyWithWhereWithoutPriceTierInput = {
+    where: TeacherScalarWhereInput
+    data: XOR<TeacherUpdateManyMutationInput, TeacherUncheckedUpdateManyWithoutPriceTierInput>
   }
 
   export type SubjectUpdateWithoutTeachersInput = {
@@ -11887,11 +13358,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
+    priceTier?: TeacherPricingTierUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -11899,8 +13370,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUncheckedUpdateManyWithoutTeachersNestedInput
@@ -11911,8 +13382,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -11920,11 +13391,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
+    priceTier?: TeacherPricingTierUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -11932,8 +13403,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUncheckedUpdateManyWithoutTeachersNestedInput
@@ -11944,8 +13415,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -11953,11 +13424,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
+    priceTier?: TeacherPricingTierUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -11965,8 +13436,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
@@ -11977,8 +13448,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -11986,11 +13457,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
+    priceTier?: TeacherPricingTierUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -11998,8 +13469,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
@@ -12010,7 +13481,47 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    pricingTierId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TeacherCreateManyPriceTierInput = {
+    id: string
+    avatar: string
+    biUrl?: string | null
+    status?: $Enums.TeacherStatus
+    userId: string
+  }
+
+  export type TeacherUpdateWithoutPriceTierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    subjects?: SubjectUpdateManyWithoutTeachersNestedInput
+    weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
+    zones?: ZoneUpdateManyWithoutTeachersNestedInput
+    gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
+    user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
+  }
+
+  export type TeacherUncheckedUpdateWithoutPriceTierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
+    userId?: StringFieldUpdateOperationsInput | string
+    subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
+    weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
+    zones?: ZoneUncheckedUpdateManyWithoutTeachersNestedInput
+    gradeLevels?: GradeLevelUncheckedUpdateManyWithoutTeachersNestedInput
+  }
+
+  export type TeacherUncheckedUpdateManyWithoutPriceTierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }

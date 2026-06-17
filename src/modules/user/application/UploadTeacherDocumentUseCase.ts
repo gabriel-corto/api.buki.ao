@@ -30,6 +30,9 @@ export class UploadTeacherDocumentUseCase {
     const avatarUrl = await this.storageService.publicUpload(input.avatar);
     teacher.updateAvatar(avatarUrl);
 
+    const biUrl = await this.storageService.privateUpload(input.bi);
+    teacher.updateBiUrl(biUrl);
+
     await this.teacherRepository.save(teacher);
 
     return {

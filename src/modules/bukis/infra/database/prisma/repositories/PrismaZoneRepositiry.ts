@@ -3,12 +3,12 @@ import { Injectable } from '@nestjs/common';
 import { Zone } from '@/modules/bukis/domain/zone/Zone';
 import { ZoneRepository } from '@/modules/bukis/domain/zone/ZoneRepository';
 
-import { PrismaClient } from 'prisma/generated';
 import { PrismaZoneMapper } from '../mappers/PrismaZoneMapper';
+import { PrismaService } from '@/shared/infra/database/prisma/prisma.service';
 
 @Injectable()
 export class PrismaZoneRepository implements ZoneRepository {
-  constructor(private readonly prisma: PrismaClient) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async save(zone: Zone): Promise<void> {
     await this.prisma.zone.upsert({

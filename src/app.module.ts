@@ -27,6 +27,13 @@ import { PrismaTeacherRepository } from './modules/user/infra/database/prisma/re
 import { CustomerRepository } from './modules/user/domain/CustomerRepository';
 import { TeacherRepository } from './modules/user/domain/TeacherRepository';
 
+import { GradeLevelRepository } from './modules/bukis/domain/grade-level/GradeLevelRepository';
+import { SubjectRepository } from './modules/bukis/domain/subject/SubjectRepository';
+import { WeekDayRepository } from './modules/bukis/domain/weekday/WeekDayRepository';
+import { PrismaGradeLevelRepository } from './modules/bukis/infra/database/prisma/repositories/PrismaGradeLevelRepository';
+import { PrismaSubjectRepository } from './modules/bukis/infra/database/prisma/repositories/PrismaSubjectRepository';
+import { PrismaWeekdayRepository } from './modules/bukis/infra/database/prisma/repositories/PrismaWeekdayRepository';
+
 import { JsGeneratorOtpService } from './modules/auth/infra/JsGeneratorOtpService';
 import { OtpService } from './modules/auth/domain/OtpService';
 import { JwtTokenService } from './modules/auth/infra/JwtTokenService';
@@ -34,6 +41,10 @@ import { TokenService } from './modules/auth/domain/TokenService';
 import { TwilioSmsProvider } from './shared/infra/sms/TwilioSmsProvider';
 import { StorageService } from './shared/domain/StorageService';
 import { CloudinaryStorageService } from './shared/infra/storage/CloudinaryStorageService';
+import { TeacherPricingTierRepository } from './modules/bukis/domain/teacher-pricing-tier/TeacherPricingTierRepository';
+import { PrismaTeacherPricingTierRepository } from './modules/bukis/infra/database/prisma/repositories/PrismaTeacherPricingTierRepository';
+import { ZoneRepository } from './modules/bukis/domain/zone/ZoneRepository';
+import { PrismaZoneRepository } from './modules/bukis/infra/database/prisma/repositories/PrismaZoneRepositiry';
 
 @Module({
   imports: [
@@ -86,6 +97,26 @@ import { CloudinaryStorageService } from './shared/infra/storage/CloudinaryStora
     {
       provide: TeacherRepository,
       useClass: PrismaTeacherRepository,
+    },
+    {
+      provide: GradeLevelRepository,
+      useClass: PrismaGradeLevelRepository,
+    },
+    {
+      provide: SubjectRepository,
+      useClass: PrismaSubjectRepository,
+    },
+    {
+      provide: WeekDayRepository,
+      useClass: PrismaWeekdayRepository,
+    },
+    {
+      provide: TeacherPricingTierRepository,
+      useClass: PrismaTeacherPricingTierRepository,
+    },
+    {
+      provide: ZoneRepository,
+      useClass: PrismaZoneRepository,
     },
     {
       provide: APP_GUARD,
