@@ -1,26 +1,27 @@
-import { Injectable } from '@nestjs/common';
-
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
-
-import { WeekDay } from '../domain/weekday/WeekDay';
 import { WeekDayRepository } from '../domain/weekday/WeekDayRepository';
 
 @Injectable()
 export class DeactivateWeekDayUseCase {
-  constructor(private readonly weekDayRepository: WeekDayRepository) {}
+  constructor(private readonly weekdayRepository: WeekDayRepository) {}
 
-  async execute(id: string): Promise<WeekDay> {
-    const weekDay = await this.weekDayRepository.findById(id);
+  async execute(id: string) {
+    const weekday = await this.weekdayRepository.findById(id);
 
-    if (!weekDay) {
-      throw new Error('WeekDay not found');
+    if (!weekday) {
+      throw new NotFoundException('Dia da semana não encontrada.');
     }
 
-    if (weekDay.getStatus() === SharedStatus.INACTIVE) {
-      throw new Error('WeekDay is already inactive');
+    if (weekday.getStatus() === SharedStatus.INACTIVE) {
+      throw new BadRequestException('Este Dia da semana já está inativa.');
     }
 
-    weekDay.deactivate();
-    return this.weekDayRepository.save(weekDay);
+    weekday.deactivate();
+    await this.weekdayRepository.save(weekday);
   }
 }

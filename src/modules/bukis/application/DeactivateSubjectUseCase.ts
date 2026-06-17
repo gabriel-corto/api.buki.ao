@@ -1,26 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 import { SharedStatus } from '@/shared/domain/SharedStatus';
 
-import { Subject } from '../domain/subject/Subject';
 import { SubjectRepository } from '../domain/subject/SubjectRepository';
 
 @Injectable()
 export class DeactivateSubjectUseCase {
   constructor(private readonly subjectRepository: SubjectRepository) {}
 
-  async execute(id: string): Promise<Subject> {
+  async execute(id: string) {
     const subject = await this.subjectRepository.findById(id);
 
     if (!subject) {
-      throw new Error('Subject not found');
+      throw new NotFoundException('Disciplina não encontrada.');
     }
 
     if (subject.getStatus() === SharedStatus.INACTIVE) {
-      throw new Error('Subject is already inactive');
+      throw new BadRequestException('Disciplina já está inativa.');
     }
 
     subject.deactivate();
-    return this.subjectRepository.save(subject);
+    await this.subjectRepository.save(subject);
   }
 }

@@ -1,24 +1,23 @@
 import { SharedStatus } from '@/shared/domain/SharedStatus';
-import { GradeLevelName } from './GradeLevelName';
 
 export class GradeLevel {
   private readonly id: string;
-  private name: GradeLevelName;
+  private name: string;
   private status: SharedStatus;
 
-  private constructor(id: string, name: GradeLevelName, status: SharedStatus) {
+  private constructor(id: string, name: string, status: SharedStatus) {
     this.id = id;
     this.name = name;
     this.status = status;
   }
 
-  public static create(name: GradeLevelName): GradeLevel {
+  public static create(name: string): GradeLevel {
     return new GradeLevel(crypto.randomUUID(), name, SharedStatus.ACTIVE);
   }
 
   public static restore(
     id: string,
-    name: GradeLevelName,
+    name: string,
     status: SharedStatus,
   ): GradeLevel {
     return new GradeLevel(id, name, status);
@@ -28,7 +27,7 @@ export class GradeLevel {
     return this.id;
   }
 
-  public getName(): GradeLevelName {
+  public getName(): string {
     return this.name;
   }
 
@@ -36,7 +35,7 @@ export class GradeLevel {
     return this.status;
   }
 
-  public setName(name: GradeLevelName): void {
+  public setName(name: string): void {
     this.name = name;
   }
 

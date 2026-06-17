@@ -8,7 +8,7 @@ export const generateTeacherId = () => {
     random += alphabet[randomIndex];
   }
 
-  return `${prefix}-${random}`;
+  return `${prefix.toLowerCase()}-${random.toLowerCase()}`;
 };
 
 export const generateBukiId = () => {
@@ -21,5 +21,5 @@ export const generateBukiId = () => {
     random += alphabet[randomIndex];
   }
 
-  return `${prefix}-${random}`;
+  return `${prefix.toLowerCase()}-${random.toLowerCase()}`;
 };

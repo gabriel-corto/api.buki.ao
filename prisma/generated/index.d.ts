@@ -95,69 +95,6 @@ export const TeacherStatus: {
 
 export type TeacherStatus = (typeof TeacherStatus)[keyof typeof TeacherStatus]
 
-
-export const SubjectName: {
-  MATHEMATICS: 'MATHEMATICS',
-  PHYSICS: 'PHYSICS',
-  CHEMISTRY: 'CHEMISTRY',
-  BIOLOGY: 'BIOLOGY',
-  HISTORY: 'HISTORY',
-  GEOGRAPHY: 'GEOGRAPHY',
-  PORTUGUESE: 'PORTUGUESE',
-  ENGLISH: 'ENGLISH',
-  FRENCH: 'FRENCH',
-  PHILOSOPHY: 'PHILOSOPHY',
-  SOCIOLOGY: 'SOCIOLOGY',
-  ECONOMICS: 'ECONOMICS',
-  LAW: 'LAW',
-  PSYCHOLOGY: 'PSYCHOLOGY',
-  COMPUTER_SCIENCE: 'COMPUTER_SCIENCE',
-  DESCRIPTIVE_GEOMETRY: 'DESCRIPTIVE_GEOMETRY',
-  VISUAL_ARTS: 'VISUAL_ARTS',
-  MUSIC: 'MUSIC',
-  ANTHROPOLOGY: 'ANTHROPOLOGY',
-  LITERATURE: 'LITERATURE',
-  PROGRAMMING: 'PROGRAMMING'
-};
-
-export type SubjectName = (typeof SubjectName)[keyof typeof SubjectName]
-
-
-export const WeekDayName: {
-  MONDAY: 'MONDAY',
-  TUESDAY: 'TUESDAY',
-  WEDNESDAY: 'WEDNESDAY',
-  THURSDAY: 'THURSDAY',
-  FRIDAY: 'FRIDAY',
-  SATURDAY: 'SATURDAY',
-  SUNDAY: 'SUNDAY'
-};
-
-export type WeekDayName = (typeof WeekDayName)[keyof typeof WeekDayName]
-
-
-export const GradeLevelName: {
-  PRIMARY: 'PRIMARY',
-  CYCLE_1: 'CYCLE_1',
-  CYCLE_2: 'CYCLE_2',
-  UNIVERSITY: 'UNIVERSITY'
-};
-
-export type GradeLevelName = (typeof GradeLevelName)[keyof typeof GradeLevelName]
-
-
-export const PriceTier: {
-  TIER_10K_30K: 'TIER_10K_30K',
-  TIER_30K_60K: 'TIER_30K_60K',
-  TIER_60K_90K: 'TIER_60K_90K',
-  TIER_90K_120K: 'TIER_90K_120K',
-  TIER_120K_150K: 'TIER_120K_150K',
-  TIER_150K_180K: 'TIER_150K_180K',
-  TIER_180K_200K: 'TIER_180K_200K'
-};
-
-export type PriceTier = (typeof PriceTier)[keyof typeof PriceTier]
-
 }
 
 export type UserRole = $Enums.UserRole
@@ -179,22 +116,6 @@ export const SharedStatus: typeof $Enums.SharedStatus
 export type TeacherStatus = $Enums.TeacherStatus
 
 export const TeacherStatus: typeof $Enums.TeacherStatus
-
-export type SubjectName = $Enums.SubjectName
-
-export const SubjectName: typeof $Enums.SubjectName
-
-export type WeekDayName = $Enums.WeekDayName
-
-export const WeekDayName: typeof $Enums.WeekDayName
-
-export type GradeLevelName = $Enums.GradeLevelName
-
-export const GradeLevelName: typeof $Enums.GradeLevelName
-
-export type PriceTier = $Enums.PriceTier
-
-export const PriceTier: typeof $Enums.PriceTier
 
 /**
  * ##  Prisma Client ʲˢ
@@ -3921,7 +3842,7 @@ export namespace Prisma {
     id: string | null
     avatar: string | null
     biUrl: string | null
-    priceTier: $Enums.PriceTier | null
+    priceTier: string | null
     status: $Enums.TeacherStatus | null
     userId: string | null
   }
@@ -3930,7 +3851,7 @@ export namespace Prisma {
     id: string | null
     avatar: string | null
     biUrl: string | null
-    priceTier: $Enums.PriceTier | null
+    priceTier: string | null
     status: $Enums.TeacherStatus | null
     userId: string | null
   }
@@ -4050,7 +3971,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl: string | null
-    priceTier: $Enums.PriceTier | null
+    priceTier: string | null
     status: $Enums.TeacherStatus
     userId: string
     _count: TeacherCountAggregateOutputType | null
@@ -4145,7 +4066,7 @@ export namespace Prisma {
       id: string
       avatar: string
       biUrl: string | null
-      priceTier: $Enums.PriceTier | null
+      priceTier: string | null
       status: $Enums.TeacherStatus
       userId: string
     }, ExtArgs["result"]["teacher"]>
@@ -4579,7 +4500,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Teacher", 'String'>
     readonly avatar: FieldRef<"Teacher", 'String'>
     readonly biUrl: FieldRef<"Teacher", 'String'>
-    readonly priceTier: FieldRef<"Teacher", 'PriceTier'>
+    readonly priceTier: FieldRef<"Teacher", 'String'>
     readonly status: FieldRef<"Teacher", 'TeacherStatus'>
     readonly userId: FieldRef<"Teacher", 'String'>
   }
@@ -5109,13 +5030,13 @@ export namespace Prisma {
 
   export type SubjectMinAggregateOutputType = {
     id: string | null
-    name: $Enums.SubjectName | null
+    name: string | null
     status: $Enums.SharedStatus | null
   }
 
   export type SubjectMaxAggregateOutputType = {
     id: string | null
-    name: $Enums.SubjectName | null
+    name: string | null
     status: $Enums.SharedStatus | null
   }
 
@@ -5220,7 +5141,7 @@ export namespace Prisma {
 
   export type SubjectGroupByOutputType = {
     id: string
-    name: $Enums.SubjectName
+    name: string
     status: $Enums.SharedStatus
     _count: SubjectCountAggregateOutputType | null
     _min: SubjectMinAggregateOutputType | null
@@ -5282,7 +5203,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: $Enums.SubjectName
+      name: string
       status: $Enums.SharedStatus
     }, ExtArgs["result"]["subject"]>
     composites: {}
@@ -5709,7 +5630,7 @@ export namespace Prisma {
    */
   interface SubjectFieldRefs {
     readonly id: FieldRef<"Subject", 'String'>
-    readonly name: FieldRef<"Subject", 'SubjectName'>
+    readonly name: FieldRef<"Subject", 'String'>
     readonly status: FieldRef<"Subject", 'SharedStatus'>
   }
     
@@ -6158,13 +6079,13 @@ export namespace Prisma {
 
   export type WeekDayMinAggregateOutputType = {
     id: string | null
-    name: $Enums.WeekDayName | null
+    name: string | null
     status: $Enums.SharedStatus | null
   }
 
   export type WeekDayMaxAggregateOutputType = {
     id: string | null
-    name: $Enums.WeekDayName | null
+    name: string | null
     status: $Enums.SharedStatus | null
   }
 
@@ -6269,7 +6190,7 @@ export namespace Prisma {
 
   export type WeekDayGroupByOutputType = {
     id: string
-    name: $Enums.WeekDayName
+    name: string
     status: $Enums.SharedStatus
     _count: WeekDayCountAggregateOutputType | null
     _min: WeekDayMinAggregateOutputType | null
@@ -6331,7 +6252,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: $Enums.WeekDayName
+      name: string
       status: $Enums.SharedStatus
     }, ExtArgs["result"]["weekDay"]>
     composites: {}
@@ -6758,7 +6679,7 @@ export namespace Prisma {
    */
   interface WeekDayFieldRefs {
     readonly id: FieldRef<"WeekDay", 'String'>
-    readonly name: FieldRef<"WeekDay", 'WeekDayName'>
+    readonly name: FieldRef<"WeekDay", 'String'>
     readonly status: FieldRef<"WeekDay", 'SharedStatus'>
   }
     
@@ -7207,13 +7128,13 @@ export namespace Prisma {
 
   export type GradeLevelMinAggregateOutputType = {
     id: string | null
-    name: $Enums.GradeLevelName | null
+    name: string | null
     status: $Enums.SharedStatus | null
   }
 
   export type GradeLevelMaxAggregateOutputType = {
     id: string | null
-    name: $Enums.GradeLevelName | null
+    name: string | null
     status: $Enums.SharedStatus | null
   }
 
@@ -7318,7 +7239,7 @@ export namespace Prisma {
 
   export type GradeLevelGroupByOutputType = {
     id: string
-    name: $Enums.GradeLevelName
+    name: string
     status: $Enums.SharedStatus
     _count: GradeLevelCountAggregateOutputType | null
     _min: GradeLevelMinAggregateOutputType | null
@@ -7380,7 +7301,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: $Enums.GradeLevelName
+      name: string
       status: $Enums.SharedStatus
     }, ExtArgs["result"]["gradeLevel"]>
     composites: {}
@@ -7807,7 +7728,7 @@ export namespace Prisma {
    */
   interface GradeLevelFieldRefs {
     readonly id: FieldRef<"GradeLevel", 'String'>
-    readonly name: FieldRef<"GradeLevel", 'GradeLevelName'>
+    readonly name: FieldRef<"GradeLevel", 'String'>
     readonly status: FieldRef<"GradeLevel", 'SharedStatus'>
   }
     
@@ -9478,20 +9399,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'PriceTier'
-   */
-  export type EnumPriceTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriceTier'>
-    
-
-
-  /**
-   * Reference to a field of type 'PriceTier[]'
-   */
-  export type ListEnumPriceTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriceTier[]'>
-    
-
-
-  /**
    * Reference to a field of type 'TeacherStatus'
    */
   export type EnumTeacherStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TeacherStatus'>
@@ -9506,20 +9413,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'SubjectName'
-   */
-  export type EnumSubjectNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubjectName'>
-    
-
-
-  /**
-   * Reference to a field of type 'SubjectName[]'
-   */
-  export type ListEnumSubjectNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubjectName[]'>
-    
-
-
-  /**
    * Reference to a field of type 'SharedStatus'
    */
   export type EnumSharedStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SharedStatus'>
@@ -9530,34 +9423,6 @@ export namespace Prisma {
    * Reference to a field of type 'SharedStatus[]'
    */
   export type ListEnumSharedStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SharedStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'WeekDayName'
-   */
-  export type EnumWeekDayNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WeekDayName'>
-    
-
-
-  /**
-   * Reference to a field of type 'WeekDayName[]'
-   */
-  export type ListEnumWeekDayNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WeekDayName[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'GradeLevelName'
-   */
-  export type EnumGradeLevelNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GradeLevelName'>
-    
-
-
-  /**
-   * Reference to a field of type 'GradeLevelName[]'
-   */
-  export type ListEnumGradeLevelNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GradeLevelName[]'>
     
 
 
@@ -9703,7 +9568,7 @@ export namespace Prisma {
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    priceTier?: EnumPriceTierNullableFilter<"Teacher"> | $Enums.PriceTier | null
+    priceTier?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringFilter<"Teacher"> | string
     subjects?: SubjectListRelationFilter
@@ -9735,7 +9600,7 @@ export namespace Prisma {
     NOT?: TeacherWhereInput | TeacherWhereInput[]
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    priceTier?: EnumPriceTierNullableFilter<"Teacher"> | $Enums.PriceTier | null
+    priceTier?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     subjects?: SubjectListRelationFilter
     weekDays?: WeekDayListRelationFilter
@@ -9763,7 +9628,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Teacher"> | string
     avatar?: StringWithAggregatesFilter<"Teacher"> | string
     biUrl?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
-    priceTier?: EnumPriceTierNullableWithAggregatesFilter<"Teacher"> | $Enums.PriceTier | null
+    priceTier?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusWithAggregatesFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringWithAggregatesFilter<"Teacher"> | string
   }
@@ -9773,7 +9638,7 @@ export namespace Prisma {
     OR?: SubjectWhereInput[]
     NOT?: SubjectWhereInput | SubjectWhereInput[]
     id?: StringFilter<"Subject"> | string
-    name?: EnumSubjectNameFilter<"Subject"> | $Enums.SubjectName
+    name?: StringFilter<"Subject"> | string
     status?: EnumSharedStatusFilter<"Subject"> | $Enums.SharedStatus
     teachers?: TeacherListRelationFilter
   }
@@ -9790,7 +9655,7 @@ export namespace Prisma {
     AND?: SubjectWhereInput | SubjectWhereInput[]
     OR?: SubjectWhereInput[]
     NOT?: SubjectWhereInput | SubjectWhereInput[]
-    name?: EnumSubjectNameFilter<"Subject"> | $Enums.SubjectName
+    name?: StringFilter<"Subject"> | string
     status?: EnumSharedStatusFilter<"Subject"> | $Enums.SharedStatus
     teachers?: TeacherListRelationFilter
   }, "id">
@@ -9809,7 +9674,7 @@ export namespace Prisma {
     OR?: SubjectScalarWhereWithAggregatesInput[]
     NOT?: SubjectScalarWhereWithAggregatesInput | SubjectScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Subject"> | string
-    name?: EnumSubjectNameWithAggregatesFilter<"Subject"> | $Enums.SubjectName
+    name?: StringWithAggregatesFilter<"Subject"> | string
     status?: EnumSharedStatusWithAggregatesFilter<"Subject"> | $Enums.SharedStatus
   }
 
@@ -9818,7 +9683,7 @@ export namespace Prisma {
     OR?: WeekDayWhereInput[]
     NOT?: WeekDayWhereInput | WeekDayWhereInput[]
     id?: StringFilter<"WeekDay"> | string
-    name?: EnumWeekDayNameFilter<"WeekDay"> | $Enums.WeekDayName
+    name?: StringFilter<"WeekDay"> | string
     status?: EnumSharedStatusFilter<"WeekDay"> | $Enums.SharedStatus
     teachers?: TeacherListRelationFilter
   }
@@ -9835,7 +9700,7 @@ export namespace Prisma {
     AND?: WeekDayWhereInput | WeekDayWhereInput[]
     OR?: WeekDayWhereInput[]
     NOT?: WeekDayWhereInput | WeekDayWhereInput[]
-    name?: EnumWeekDayNameFilter<"WeekDay"> | $Enums.WeekDayName
+    name?: StringFilter<"WeekDay"> | string
     status?: EnumSharedStatusFilter<"WeekDay"> | $Enums.SharedStatus
     teachers?: TeacherListRelationFilter
   }, "id">
@@ -9854,7 +9719,7 @@ export namespace Prisma {
     OR?: WeekDayScalarWhereWithAggregatesInput[]
     NOT?: WeekDayScalarWhereWithAggregatesInput | WeekDayScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"WeekDay"> | string
-    name?: EnumWeekDayNameWithAggregatesFilter<"WeekDay"> | $Enums.WeekDayName
+    name?: StringWithAggregatesFilter<"WeekDay"> | string
     status?: EnumSharedStatusWithAggregatesFilter<"WeekDay"> | $Enums.SharedStatus
   }
 
@@ -9863,7 +9728,7 @@ export namespace Prisma {
     OR?: GradeLevelWhereInput[]
     NOT?: GradeLevelWhereInput | GradeLevelWhereInput[]
     id?: StringFilter<"GradeLevel"> | string
-    name?: EnumGradeLevelNameFilter<"GradeLevel"> | $Enums.GradeLevelName
+    name?: StringFilter<"GradeLevel"> | string
     status?: EnumSharedStatusFilter<"GradeLevel"> | $Enums.SharedStatus
     teachers?: TeacherListRelationFilter
   }
@@ -9880,7 +9745,7 @@ export namespace Prisma {
     AND?: GradeLevelWhereInput | GradeLevelWhereInput[]
     OR?: GradeLevelWhereInput[]
     NOT?: GradeLevelWhereInput | GradeLevelWhereInput[]
-    name?: EnumGradeLevelNameFilter<"GradeLevel"> | $Enums.GradeLevelName
+    name?: StringFilter<"GradeLevel"> | string
     status?: EnumSharedStatusFilter<"GradeLevel"> | $Enums.SharedStatus
     teachers?: TeacherListRelationFilter
   }, "id">
@@ -9899,7 +9764,7 @@ export namespace Prisma {
     OR?: GradeLevelScalarWhereWithAggregatesInput[]
     NOT?: GradeLevelScalarWhereWithAggregatesInput | GradeLevelScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"GradeLevel"> | string
-    name?: EnumGradeLevelNameWithAggregatesFilter<"GradeLevel"> | $Enums.GradeLevelName
+    name?: StringWithAggregatesFilter<"GradeLevel"> | string
     status?: EnumSharedStatusWithAggregatesFilter<"GradeLevel"> | $Enums.SharedStatus
   }
 
@@ -10078,7 +9943,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -10091,7 +9956,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -10104,7 +9969,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -10117,7 +9982,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -10130,7 +9995,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     userId: string
   }
@@ -10139,7 +10004,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
   }
 
@@ -10147,146 +10012,146 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubjectCreateInput = {
     id: string
-    name: $Enums.SubjectName
+    name: string
     status?: $Enums.SharedStatus
     teachers?: TeacherCreateNestedManyWithoutSubjectsInput
   }
 
   export type SubjectUncheckedCreateInput = {
     id: string
-    name: $Enums.SubjectName
+    name: string
     status?: $Enums.SharedStatus
     teachers?: TeacherUncheckedCreateNestedManyWithoutSubjectsInput
   }
 
   export type SubjectUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumSubjectNameFieldUpdateOperationsInput | $Enums.SubjectName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
     teachers?: TeacherUpdateManyWithoutSubjectsNestedInput
   }
 
   export type SubjectUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumSubjectNameFieldUpdateOperationsInput | $Enums.SubjectName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
     teachers?: TeacherUncheckedUpdateManyWithoutSubjectsNestedInput
   }
 
   export type SubjectCreateManyInput = {
     id: string
-    name: $Enums.SubjectName
+    name: string
     status?: $Enums.SharedStatus
   }
 
   export type SubjectUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumSubjectNameFieldUpdateOperationsInput | $Enums.SubjectName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type SubjectUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumSubjectNameFieldUpdateOperationsInput | $Enums.SubjectName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type WeekDayCreateInput = {
     id: string
-    name: $Enums.WeekDayName
+    name: string
     status?: $Enums.SharedStatus
     teachers?: TeacherCreateNestedManyWithoutWeekDaysInput
   }
 
   export type WeekDayUncheckedCreateInput = {
     id: string
-    name: $Enums.WeekDayName
+    name: string
     status?: $Enums.SharedStatus
     teachers?: TeacherUncheckedCreateNestedManyWithoutWeekDaysInput
   }
 
   export type WeekDayUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumWeekDayNameFieldUpdateOperationsInput | $Enums.WeekDayName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
     teachers?: TeacherUpdateManyWithoutWeekDaysNestedInput
   }
 
   export type WeekDayUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumWeekDayNameFieldUpdateOperationsInput | $Enums.WeekDayName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
     teachers?: TeacherUncheckedUpdateManyWithoutWeekDaysNestedInput
   }
 
   export type WeekDayCreateManyInput = {
     id: string
-    name: $Enums.WeekDayName
+    name: string
     status?: $Enums.SharedStatus
   }
 
   export type WeekDayUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumWeekDayNameFieldUpdateOperationsInput | $Enums.WeekDayName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type WeekDayUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumWeekDayNameFieldUpdateOperationsInput | $Enums.WeekDayName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type GradeLevelCreateInput = {
     id: string
-    name: $Enums.GradeLevelName
+    name: string
     status?: $Enums.SharedStatus
     teachers?: TeacherCreateNestedManyWithoutGradeLevelsInput
   }
 
   export type GradeLevelUncheckedCreateInput = {
     id: string
-    name: $Enums.GradeLevelName
+    name: string
     status?: $Enums.SharedStatus
     teachers?: TeacherUncheckedCreateNestedManyWithoutGradeLevelsInput
   }
 
   export type GradeLevelUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumGradeLevelNameFieldUpdateOperationsInput | $Enums.GradeLevelName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
     teachers?: TeacherUpdateManyWithoutGradeLevelsNestedInput
   }
 
   export type GradeLevelUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumGradeLevelNameFieldUpdateOperationsInput | $Enums.GradeLevelName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
     teachers?: TeacherUncheckedUpdateManyWithoutGradeLevelsNestedInput
   }
 
   export type GradeLevelCreateManyInput = {
     id: string
-    name: $Enums.GradeLevelName
+    name: string
     status?: $Enums.SharedStatus
   }
 
   export type GradeLevelUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumGradeLevelNameFieldUpdateOperationsInput | $Enums.GradeLevelName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type GradeLevelUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumGradeLevelNameFieldUpdateOperationsInput | $Enums.GradeLevelName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
@@ -10549,13 +10414,6 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
-  export type EnumPriceTierNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
-    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumPriceTierNullableFilter<$PrismaModel> | $Enums.PriceTier | null
-  }
-
   export type EnumTeacherStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.TeacherStatus | EnumTeacherStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TeacherStatus[] | ListEnumTeacherStatusFieldRefInput<$PrismaModel>
@@ -10630,16 +10488,6 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
-  export type EnumPriceTierNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
-    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumPriceTierNullableWithAggregatesFilter<$PrismaModel> | $Enums.PriceTier | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumPriceTierNullableFilter<$PrismaModel>
-    _max?: NestedEnumPriceTierNullableFilter<$PrismaModel>
-  }
-
   export type EnumTeacherStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TeacherStatus | EnumTeacherStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TeacherStatus[] | ListEnumTeacherStatusFieldRefInput<$PrismaModel>
@@ -10648,13 +10496,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTeacherStatusFilter<$PrismaModel>
     _max?: NestedEnumTeacherStatusFilter<$PrismaModel>
-  }
-
-  export type EnumSubjectNameFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubjectName | EnumSubjectNameFieldRefInput<$PrismaModel>
-    in?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubjectNameFilter<$PrismaModel> | $Enums.SubjectName
   }
 
   export type EnumSharedStatusFilter<$PrismaModel = never> = {
@@ -10692,16 +10533,6 @@ export namespace Prisma {
     status?: SortOrder
   }
 
-  export type EnumSubjectNameWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubjectName | EnumSubjectNameFieldRefInput<$PrismaModel>
-    in?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubjectNameWithAggregatesFilter<$PrismaModel> | $Enums.SubjectName
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSubjectNameFilter<$PrismaModel>
-    _max?: NestedEnumSubjectNameFilter<$PrismaModel>
-  }
-
   export type EnumSharedStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.SharedStatus | EnumSharedStatusFieldRefInput<$PrismaModel>
     in?: $Enums.SharedStatus[] | ListEnumSharedStatusFieldRefInput<$PrismaModel>
@@ -10710,13 +10541,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSharedStatusFilter<$PrismaModel>
     _max?: NestedEnumSharedStatusFilter<$PrismaModel>
-  }
-
-  export type EnumWeekDayNameFilter<$PrismaModel = never> = {
-    equals?: $Enums.WeekDayName | EnumWeekDayNameFieldRefInput<$PrismaModel>
-    in?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumWeekDayNameFilter<$PrismaModel> | $Enums.WeekDayName
   }
 
   export type WeekDayCountOrderByAggregateInput = {
@@ -10737,23 +10561,6 @@ export namespace Prisma {
     status?: SortOrder
   }
 
-  export type EnumWeekDayNameWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.WeekDayName | EnumWeekDayNameFieldRefInput<$PrismaModel>
-    in?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumWeekDayNameWithAggregatesFilter<$PrismaModel> | $Enums.WeekDayName
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumWeekDayNameFilter<$PrismaModel>
-    _max?: NestedEnumWeekDayNameFilter<$PrismaModel>
-  }
-
-  export type EnumGradeLevelNameFilter<$PrismaModel = never> = {
-    equals?: $Enums.GradeLevelName | EnumGradeLevelNameFieldRefInput<$PrismaModel>
-    in?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumGradeLevelNameFilter<$PrismaModel> | $Enums.GradeLevelName
-  }
-
   export type GradeLevelCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -10770,16 +10577,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     status?: SortOrder
-  }
-
-  export type EnumGradeLevelNameWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.GradeLevelName | EnumGradeLevelNameFieldRefInput<$PrismaModel>
-    in?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumGradeLevelNameWithAggregatesFilter<$PrismaModel> | $Enums.GradeLevelName
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumGradeLevelNameFilter<$PrismaModel>
-    _max?: NestedEnumGradeLevelNameFilter<$PrismaModel>
   }
 
   export type ZoneCountOrderByAggregateInput = {
@@ -10956,10 +10753,6 @@ export namespace Prisma {
     connect?: GradeLevelWhereUniqueInput | GradeLevelWhereUniqueInput[]
   }
 
-  export type NullableEnumPriceTierFieldUpdateOperationsInput = {
-    set?: $Enums.PriceTier | null
-  }
-
   export type EnumTeacherStatusFieldUpdateOperationsInput = {
     set?: $Enums.TeacherStatus
   }
@@ -11088,10 +10881,6 @@ export namespace Prisma {
     connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
   }
 
-  export type EnumSubjectNameFieldUpdateOperationsInput = {
-    set?: $Enums.SubjectName
-  }
-
   export type EnumSharedStatusFieldUpdateOperationsInput = {
     set?: $Enums.SharedStatus
   }
@@ -11134,10 +10923,6 @@ export namespace Prisma {
     connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
   }
 
-  export type EnumWeekDayNameFieldUpdateOperationsInput = {
-    set?: $Enums.WeekDayName
-  }
-
   export type TeacherUpdateManyWithoutWeekDaysNestedInput = {
     create?: XOR<TeacherCreateWithoutWeekDaysInput, TeacherUncheckedCreateWithoutWeekDaysInput> | TeacherCreateWithoutWeekDaysInput[] | TeacherUncheckedCreateWithoutWeekDaysInput[]
     connectOrCreate?: TeacherCreateOrConnectWithoutWeekDaysInput | TeacherCreateOrConnectWithoutWeekDaysInput[]
@@ -11174,10 +10959,6 @@ export namespace Prisma {
     create?: XOR<TeacherCreateWithoutGradeLevelsInput, TeacherUncheckedCreateWithoutGradeLevelsInput> | TeacherCreateWithoutGradeLevelsInput[] | TeacherUncheckedCreateWithoutGradeLevelsInput[]
     connectOrCreate?: TeacherCreateOrConnectWithoutGradeLevelsInput | TeacherCreateOrConnectWithoutGradeLevelsInput[]
     connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-  }
-
-  export type EnumGradeLevelNameFieldUpdateOperationsInput = {
-    set?: $Enums.GradeLevelName
   }
 
   export type TeacherUpdateManyWithoutGradeLevelsNestedInput = {
@@ -11404,28 +11185,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedEnumPriceTierNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
-    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumPriceTierNullableFilter<$PrismaModel> | $Enums.PriceTier | null
-  }
-
   export type NestedEnumTeacherStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.TeacherStatus | EnumTeacherStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TeacherStatus[] | ListEnumTeacherStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.TeacherStatus[] | ListEnumTeacherStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumTeacherStatusFilter<$PrismaModel> | $Enums.TeacherStatus
-  }
-
-  export type NestedEnumPriceTierNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
-    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumPriceTierNullableWithAggregatesFilter<$PrismaModel> | $Enums.PriceTier | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumPriceTierNullableFilter<$PrismaModel>
-    _max?: NestedEnumPriceTierNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumTeacherStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -11438,28 +11202,11 @@ export namespace Prisma {
     _max?: NestedEnumTeacherStatusFilter<$PrismaModel>
   }
 
-  export type NestedEnumSubjectNameFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubjectName | EnumSubjectNameFieldRefInput<$PrismaModel>
-    in?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubjectNameFilter<$PrismaModel> | $Enums.SubjectName
-  }
-
   export type NestedEnumSharedStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.SharedStatus | EnumSharedStatusFieldRefInput<$PrismaModel>
     in?: $Enums.SharedStatus[] | ListEnumSharedStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.SharedStatus[] | ListEnumSharedStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumSharedStatusFilter<$PrismaModel> | $Enums.SharedStatus
-  }
-
-  export type NestedEnumSubjectNameWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SubjectName | EnumSubjectNameFieldRefInput<$PrismaModel>
-    in?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SubjectName[] | ListEnumSubjectNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumSubjectNameWithAggregatesFilter<$PrismaModel> | $Enums.SubjectName
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSubjectNameFilter<$PrismaModel>
-    _max?: NestedEnumSubjectNameFilter<$PrismaModel>
   }
 
   export type NestedEnumSharedStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -11472,45 +11219,11 @@ export namespace Prisma {
     _max?: NestedEnumSharedStatusFilter<$PrismaModel>
   }
 
-  export type NestedEnumWeekDayNameFilter<$PrismaModel = never> = {
-    equals?: $Enums.WeekDayName | EnumWeekDayNameFieldRefInput<$PrismaModel>
-    in?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumWeekDayNameFilter<$PrismaModel> | $Enums.WeekDayName
-  }
-
-  export type NestedEnumWeekDayNameWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.WeekDayName | EnumWeekDayNameFieldRefInput<$PrismaModel>
-    in?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WeekDayName[] | ListEnumWeekDayNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumWeekDayNameWithAggregatesFilter<$PrismaModel> | $Enums.WeekDayName
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumWeekDayNameFilter<$PrismaModel>
-    _max?: NestedEnumWeekDayNameFilter<$PrismaModel>
-  }
-
-  export type NestedEnumGradeLevelNameFilter<$PrismaModel = never> = {
-    equals?: $Enums.GradeLevelName | EnumGradeLevelNameFieldRefInput<$PrismaModel>
-    in?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumGradeLevelNameFilter<$PrismaModel> | $Enums.GradeLevelName
-  }
-
-  export type NestedEnumGradeLevelNameWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.GradeLevelName | EnumGradeLevelNameFieldRefInput<$PrismaModel>
-    in?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    notIn?: $Enums.GradeLevelName[] | ListEnumGradeLevelNameFieldRefInput<$PrismaModel>
-    not?: NestedEnumGradeLevelNameWithAggregatesFilter<$PrismaModel> | $Enums.GradeLevelName
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumGradeLevelNameFilter<$PrismaModel>
-    _max?: NestedEnumGradeLevelNameFilter<$PrismaModel>
-  }
-
   export type TeacherCreateWithoutUserInput = {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -11522,7 +11235,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
@@ -11563,7 +11276,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -11575,7 +11288,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
@@ -11672,13 +11385,13 @@ export namespace Prisma {
 
   export type SubjectCreateWithoutTeachersInput = {
     id: string
-    name: $Enums.SubjectName
+    name: string
     status?: $Enums.SharedStatus
   }
 
   export type SubjectUncheckedCreateWithoutTeachersInput = {
     id: string
-    name: $Enums.SubjectName
+    name: string
     status?: $Enums.SharedStatus
   }
 
@@ -11689,13 +11402,13 @@ export namespace Prisma {
 
   export type WeekDayCreateWithoutTeachersInput = {
     id: string
-    name: $Enums.WeekDayName
+    name: string
     status?: $Enums.SharedStatus
   }
 
   export type WeekDayUncheckedCreateWithoutTeachersInput = {
     id: string
-    name: $Enums.WeekDayName
+    name: string
     status?: $Enums.SharedStatus
   }
 
@@ -11723,13 +11436,13 @@ export namespace Prisma {
 
   export type GradeLevelCreateWithoutTeachersInput = {
     id: string
-    name: $Enums.GradeLevelName
+    name: string
     status?: $Enums.SharedStatus
   }
 
   export type GradeLevelUncheckedCreateWithoutTeachersInput = {
     id: string
-    name: $Enums.GradeLevelName
+    name: string
     status?: $Enums.SharedStatus
   }
 
@@ -11790,7 +11503,7 @@ export namespace Prisma {
     OR?: SubjectScalarWhereInput[]
     NOT?: SubjectScalarWhereInput | SubjectScalarWhereInput[]
     id?: StringFilter<"Subject"> | string
-    name?: EnumSubjectNameFilter<"Subject"> | $Enums.SubjectName
+    name?: StringFilter<"Subject"> | string
     status?: EnumSharedStatusFilter<"Subject"> | $Enums.SharedStatus
   }
 
@@ -11815,7 +11528,7 @@ export namespace Prisma {
     OR?: WeekDayScalarWhereInput[]
     NOT?: WeekDayScalarWhereInput | WeekDayScalarWhereInput[]
     id?: StringFilter<"WeekDay"> | string
-    name?: EnumWeekDayNameFilter<"WeekDay"> | $Enums.WeekDayName
+    name?: StringFilter<"WeekDay"> | string
     status?: EnumSharedStatusFilter<"WeekDay"> | $Enums.SharedStatus
   }
 
@@ -11865,7 +11578,7 @@ export namespace Prisma {
     OR?: GradeLevelScalarWhereInput[]
     NOT?: GradeLevelScalarWhereInput | GradeLevelScalarWhereInput[]
     id?: StringFilter<"GradeLevel"> | string
-    name?: EnumGradeLevelNameFilter<"GradeLevel"> | $Enums.GradeLevelName
+    name?: StringFilter<"GradeLevel"> | string
     status?: EnumSharedStatusFilter<"GradeLevel"> | $Enums.SharedStatus
   }
 
@@ -11910,7 +11623,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
@@ -11922,7 +11635,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     userId: string
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
@@ -11958,7 +11671,7 @@ export namespace Prisma {
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    priceTier?: EnumPriceTierNullableFilter<"Teacher"> | $Enums.PriceTier | null
+    priceTier?: StringNullableFilter<"Teacher"> | string | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringFilter<"Teacher"> | string
   }
@@ -11967,7 +11680,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
@@ -11979,7 +11692,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -12012,7 +11725,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -12024,7 +11737,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -12057,7 +11770,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
@@ -12069,7 +11782,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    priceTier?: $Enums.PriceTier | null
+    priceTier?: string | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -12100,37 +11813,37 @@ export namespace Prisma {
 
   export type SubjectUpdateWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumSubjectNameFieldUpdateOperationsInput | $Enums.SubjectName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type SubjectUncheckedUpdateWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumSubjectNameFieldUpdateOperationsInput | $Enums.SubjectName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type SubjectUncheckedUpdateManyWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumSubjectNameFieldUpdateOperationsInput | $Enums.SubjectName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type WeekDayUpdateWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumWeekDayNameFieldUpdateOperationsInput | $Enums.WeekDayName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type WeekDayUncheckedUpdateWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumWeekDayNameFieldUpdateOperationsInput | $Enums.WeekDayName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type WeekDayUncheckedUpdateManyWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumWeekDayNameFieldUpdateOperationsInput | $Enums.WeekDayName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
@@ -12154,19 +11867,19 @@ export namespace Prisma {
 
   export type GradeLevelUpdateWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumGradeLevelNameFieldUpdateOperationsInput | $Enums.GradeLevelName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type GradeLevelUncheckedUpdateWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumGradeLevelNameFieldUpdateOperationsInput | $Enums.GradeLevelName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
   export type GradeLevelUncheckedUpdateManyWithoutTeachersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: EnumGradeLevelNameFieldUpdateOperationsInput | $Enums.GradeLevelName
+    name?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
@@ -12174,7 +11887,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
@@ -12186,7 +11899,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
@@ -12198,7 +11911,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -12207,7 +11920,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
@@ -12219,7 +11932,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -12231,7 +11944,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -12240,7 +11953,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -12252,7 +11965,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -12264,7 +11977,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -12273,7 +11986,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
@@ -12285,7 +11998,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -12297,7 +12010,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
+    priceTier?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }

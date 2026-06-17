@@ -1,21 +1,20 @@
 import { SharedStatus } from '@/shared/domain/SharedStatus';
-import { SubjectName } from './SubjectName';
 
 export class Subject {
   private readonly id: string;
-  private name: SubjectName;
+  private name: string;
   private status: SharedStatus;
 
-  private constructor(id: string, name: SubjectName, status: SharedStatus) {
+  private constructor(id: string, name: string, status: SharedStatus) {
     this.id = id;
     this.name = name;
     this.status = status;
   }
 
-  public static create(name: SubjectName): Subject {
+  public static create(name: string): Subject {
     return new Subject(crypto.randomUUID(), name, SharedStatus.ACTIVE);
   }
-  public static restore(id: string, name: SubjectName, status: SharedStatus) {
+  public static restore(id: string, name: string, status: SharedStatus) {
     return new Subject(id, name, status);
   }
 
@@ -30,7 +29,7 @@ export class Subject {
   public getStatus(): SharedStatus {
     return this.status;
   }
-  public setName(name: SubjectName): void {
+  public setName(name: string): void {
     this.name = name;
   }
   public activate(): void {

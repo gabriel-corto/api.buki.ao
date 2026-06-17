@@ -201,66 +201,15 @@ exports.UserStatus = exports.$Enums.UserStatus = {
   BLOCKED: 'BLOCKED'
 };
 
-exports.PriceTier = exports.$Enums.PriceTier = {
-  TIER_10K_30K: 'TIER_10K_30K',
-  TIER_30K_60K: 'TIER_30K_60K',
-  TIER_60K_90K: 'TIER_60K_90K',
-  TIER_90K_120K: 'TIER_90K_120K',
-  TIER_120K_150K: 'TIER_120K_150K',
-  TIER_150K_180K: 'TIER_150K_180K',
-  TIER_180K_200K: 'TIER_180K_200K'
-};
-
 exports.TeacherStatus = exports.$Enums.TeacherStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED'
 };
 
-exports.SubjectName = exports.$Enums.SubjectName = {
-  MATHEMATICS: 'MATHEMATICS',
-  PHYSICS: 'PHYSICS',
-  CHEMISTRY: 'CHEMISTRY',
-  BIOLOGY: 'BIOLOGY',
-  HISTORY: 'HISTORY',
-  GEOGRAPHY: 'GEOGRAPHY',
-  PORTUGUESE: 'PORTUGUESE',
-  ENGLISH: 'ENGLISH',
-  FRENCH: 'FRENCH',
-  PHILOSOPHY: 'PHILOSOPHY',
-  SOCIOLOGY: 'SOCIOLOGY',
-  ECONOMICS: 'ECONOMICS',
-  LAW: 'LAW',
-  PSYCHOLOGY: 'PSYCHOLOGY',
-  COMPUTER_SCIENCE: 'COMPUTER_SCIENCE',
-  DESCRIPTIVE_GEOMETRY: 'DESCRIPTIVE_GEOMETRY',
-  VISUAL_ARTS: 'VISUAL_ARTS',
-  MUSIC: 'MUSIC',
-  ANTHROPOLOGY: 'ANTHROPOLOGY',
-  LITERATURE: 'LITERATURE',
-  PROGRAMMING: 'PROGRAMMING'
-};
-
 exports.SharedStatus = exports.$Enums.SharedStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE'
-};
-
-exports.WeekDayName = exports.$Enums.WeekDayName = {
-  MONDAY: 'MONDAY',
-  TUESDAY: 'TUESDAY',
-  WEDNESDAY: 'WEDNESDAY',
-  THURSDAY: 'THURSDAY',
-  FRIDAY: 'FRIDAY',
-  SATURDAY: 'SATURDAY',
-  SUNDAY: 'SUNDAY'
-};
-
-exports.GradeLevelName = exports.$Enums.GradeLevelName = {
-  PRIMARY: 'PRIMARY',
-  CYCLE_1: 'CYCLE_1',
-  CYCLE_2: 'CYCLE_2',
-  UNIVERSITY: 'UNIVERSITY'
 };
 
 exports.Prisma.ModelName = {

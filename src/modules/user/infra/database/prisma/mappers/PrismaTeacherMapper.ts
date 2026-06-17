@@ -13,10 +13,6 @@ import { WeekDay } from '@/modules/bukis/domain/weekday/WeekDay';
 import { Zone } from '@/modules/bukis/domain/zone/Zone';
 import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
 import { TeacherProfileStatus } from '@/modules/user/domain/TeacherProfileStatus';
-import { SubjectName } from '@/modules/bukis/domain/subject/SubjectName';
-import { WeekDayName } from '@/modules/bukis/domain/weekday/WeekDayName';
-import { GradeLevelName } from '@/modules/bukis/domain/grade-level/GradeLevelName';
-import { PriceTier } from '@/modules/bukis/domain/PriceTier';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
 
 export type PrismaTeacherWithRelations = PrismaTeacher & {
@@ -34,22 +30,18 @@ export class PrismaTeacherMapper {
       raw.avatar,
       raw.biUrl as string,
       raw.subjects.map((s) =>
-        Subject.restore(s.id, s.name as SubjectName, s.status as SharedStatus),
+        Subject.restore(s.id, s.name, s.status as SharedStatus),
       ),
       raw.weekDays.map((w) =>
-        WeekDay.restore(w.id, w.name as WeekDayName, w.status as SharedStatus),
+        WeekDay.restore(w.id, w.name, w.status as SharedStatus),
       ),
       raw.zones.map((z) =>
         Zone.restore(z.id, z.name, z.status as SharedStatus),
       ),
       raw.gradeLevels.map((g) =>
-        GradeLevel.restore(
-          g.id,
-          g.name as GradeLevelName,
-          g.status as SharedStatus,
-        ),
+        GradeLevel.restore(g.id, g.name, g.status as SharedStatus),
       ),
-      raw.priceTier as PriceTier,
+      raw.priceTier,
       raw.status as TeacherProfileStatus,
     );
   }
@@ -60,7 +52,7 @@ export class PrismaTeacherMapper {
       avatar: teacher.getAvatar(),
       biUrl: teacher.getBiUrl(),
       status: teacher.getStatus(),
-      priceTier: teacher.getPriceTier() as PriceTier,
+      priceTier: teacher.getPriceTier(),
       user: {
         connect: {
           id: teacher.getUserId(),

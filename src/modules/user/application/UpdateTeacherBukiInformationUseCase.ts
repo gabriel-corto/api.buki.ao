@@ -1,4 +1,4 @@
-import { NotAcceptableException, NotFoundException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 
 import { UserRepository } from '@/shared/domain/user/UserRepository';
 import { TeacherRepository } from '../domain/TeacherRepository';
@@ -12,9 +12,8 @@ import { UpdateTeacherBukiInformationUseCaseInput } from './UpdateTeacherBukiInf
 
 export class UpdateTeacherBukiInformationUseCase {
   constructor(
-    private userRepository: UserRepository,
+    private readonly userRepository: UserRepository,
     private readonly teacherRepository: TeacherRepository,
-
     private readonly gradeLevelRepository: GradeLevelRepository,
     private readonly subjectRepository: SubjectRepository,
     private readonly weekDayRepository: WeekDayRepository,
@@ -24,12 +23,12 @@ export class UpdateTeacherBukiInformationUseCase {
   async execute(input: UpdateTeacherBukiInformationUseCaseInput) {
     const user = await this.userRepository.findById(input.userId);
     if (!user) {
-      throw new NotAcceptableException('Usuário não encontrado.');
+      throw new NotFoundException('Usuário não encontrado.');
     }
 
     const teacher = await this.teacherRepository.findByUserId(input.userId);
     if (!teacher) {
-      throw new NotAcceptableException('Professor não encontrado.');
+      throw new NotFoundException('Professor não encontrado.');
     }
 
     input.subjects.forEach(async (subjectId) => {

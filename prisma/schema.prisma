@@ -63,7 +63,7 @@ model Teacher {
   zones       Zone[]
   gradeLevels GradeLevel[]
 
-  priceTier PriceTier?
+  priceTier String?
   status    TeacherStatus @default(PENDING)
 
   userId String @unique
@@ -80,70 +80,29 @@ enum TeacherStatus {
 
 model Subject {
   id       String       @id
-  name     SubjectName
+  name     String
   status   SharedStatus @default(ACTIVE)
   teachers Teacher[]
 
   @@map("subjects")
 }
 
-enum SubjectName {
-  MATHEMATICS
-  PHYSICS
-  CHEMISTRY
-  BIOLOGY
-  HISTORY
-  GEOGRAPHY
-  PORTUGUESE
-  ENGLISH
-  FRENCH
-  PHILOSOPHY
-  SOCIOLOGY
-  ECONOMICS
-  LAW
-  PSYCHOLOGY
-  COMPUTER_SCIENCE
-  DESCRIPTIVE_GEOMETRY
-  VISUAL_ARTS
-  MUSIC
-  ANTHROPOLOGY
-  LITERATURE
-  PROGRAMMING
-}
-
 model WeekDay {
   id       String       @id
-  name     WeekDayName
+  name     String
   status   SharedStatus @default(ACTIVE)
   teachers Teacher[]
 
   @@map("weekdays")
 }
 
-enum WeekDayName {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
-  SUNDAY
-}
-
 model GradeLevel {
-  id       String         @id
-  name     GradeLevelName
-  status   SharedStatus   @default(ACTIVE)
+  id       String       @id
+  name     String
+  status   SharedStatus @default(ACTIVE)
   teachers Teacher[]
 
   @@map("gradelevels")
-}
-
-enum GradeLevelName {
-  PRIMARY
-  CYCLE_1
-  CYCLE_2
-  UNIVERSITY
 }
 
 model Zone {
@@ -153,14 +112,4 @@ model Zone {
   teachers Teacher[]
 
   @@map("zones")
-}
-
-enum PriceTier {
-  TIER_10K_30K
-  TIER_30K_60K
-  TIER_60K_90K
-  TIER_90K_120K
-  TIER_120K_150K
-  TIER_150K_180K
-  TIER_180K_200K
 }
