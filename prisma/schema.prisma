@@ -63,9 +63,8 @@ model Teacher {
   zones       Zone[]
   gradeLevels GradeLevel[]
 
-  pricePolicyId String?
-  pricePolicy   PricePolicy?  @relation(fields: [pricePolicyId], references: [id])
-  status        TeacherStatus @default(PENDING)
+  priceTier PriceTier?
+  status    TeacherStatus @default(PENDING)
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
@@ -156,11 +155,12 @@ model Zone {
   @@map("zones")
 }
 
-model PricePolicy {
-  id       String       @id
-  value    String
-  status   SharedStatus @default(ACTIVE)
-  teachers Teacher[]
-
-  @@map("pricepolicy")
+enum PriceTier {
+  TIER_10K_30K
+  TIER_30K_60K
+  TIER_60K_90K
+  TIER_90K_120K
+  TIER_120K_150K
+  TIER_150K_180K
+  TIER_180K_200K
 }

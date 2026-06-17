@@ -141,7 +141,7 @@ exports.Prisma.TeacherScalarFieldEnum = {
   id: 'id',
   avatar: 'avatar',
   biUrl: 'biUrl',
-  pricePolicyId: 'pricePolicyId',
+  priceTier: 'priceTier',
   status: 'status',
   userId: 'userId'
 };
@@ -167,12 +167,6 @@ exports.Prisma.GradeLevelScalarFieldEnum = {
 exports.Prisma.ZoneScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  status: 'status'
-};
-
-exports.Prisma.PricePolicyScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
   status: 'status'
 };
 
@@ -205,6 +199,16 @@ exports.UserStatus = exports.$Enums.UserStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
   BLOCKED: 'BLOCKED'
+};
+
+exports.PriceTier = exports.$Enums.PriceTier = {
+  TIER_10K_30K: 'TIER_10K_30K',
+  TIER_30K_60K: 'TIER_30K_60K',
+  TIER_60K_90K: 'TIER_60K_90K',
+  TIER_90K_120K: 'TIER_90K_120K',
+  TIER_120K_150K: 'TIER_120K_150K',
+  TIER_150K_180K: 'TIER_150K_180K',
+  TIER_180K_200K: 'TIER_180K_200K'
 };
 
 exports.TeacherStatus = exports.$Enums.TeacherStatus = {
@@ -266,8 +270,7 @@ exports.Prisma.ModelName = {
   Subject: 'Subject',
   WeekDay: 'WeekDay',
   GradeLevel: 'GradeLevel',
-  Zone: 'Zone',
-  PricePolicy: 'PricePolicy'
+  Zone: 'Zone'
 };
 
 /**

@@ -9,8 +9,14 @@ export class PrismaTeacherRepository implements TeacherRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async save(teacher: Teacher): Promise<void> {
-    await this.prisma.teacher.create({
-      data: PrismaTeacherMapper.toPrisma(teacher),
+    const prismaData = PrismaTeacherMapper.toPrisma(teacher);
+
+    await this.prisma.teacher.upsert({
+      where: {
+        userId: teacher.getUserId(),
+      },
+      update: prismaData,
+      create: prismaData,
     });
   }
 
@@ -21,7 +27,6 @@ export class PrismaTeacherRepository implements TeacherRepository {
         weekDays: true,
         zones: true,
         gradeLevels: true,
-        pricePolicy: true,
       },
     });
     return teachers.map((teacher) => PrismaTeacherMapper.toDomain(teacher));
@@ -35,7 +40,6 @@ export class PrismaTeacherRepository implements TeacherRepository {
         weekDays: true,
         zones: true,
         gradeLevels: true,
-        pricePolicy: true,
       },
     });
     return teacher ? PrismaTeacherMapper.toDomain(teacher) : null;
@@ -49,7 +53,6 @@ export class PrismaTeacherRepository implements TeacherRepository {
         weekDays: true,
         zones: true,
         gradeLevels: true,
-        pricePolicy: true,
       },
     });
     return teacher ? PrismaTeacherMapper.toDomain(teacher) : null;

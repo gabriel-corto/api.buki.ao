@@ -48,11 +48,6 @@ export type GradeLevel = $Result.DefaultSelection<Prisma.$GradeLevelPayload>
  * 
  */
 export type Zone = $Result.DefaultSelection<Prisma.$ZonePayload>
-/**
- * Model PricePolicy
- * 
- */
-export type PricePolicy = $Result.DefaultSelection<Prisma.$PricePolicyPayload>
 
 /**
  * Enums
@@ -150,6 +145,19 @@ export const GradeLevelName: {
 
 export type GradeLevelName = (typeof GradeLevelName)[keyof typeof GradeLevelName]
 
+
+export const PriceTier: {
+  TIER_10K_30K: 'TIER_10K_30K',
+  TIER_30K_60K: 'TIER_30K_60K',
+  TIER_60K_90K: 'TIER_60K_90K',
+  TIER_90K_120K: 'TIER_90K_120K',
+  TIER_120K_150K: 'TIER_120K_150K',
+  TIER_150K_180K: 'TIER_150K_180K',
+  TIER_180K_200K: 'TIER_180K_200K'
+};
+
+export type PriceTier = (typeof PriceTier)[keyof typeof PriceTier]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -183,6 +191,10 @@ export const WeekDayName: typeof $Enums.WeekDayName
 export type GradeLevelName = $Enums.GradeLevelName
 
 export const GradeLevelName: typeof $Enums.GradeLevelName
+
+export type PriceTier = $Enums.PriceTier
+
+export const PriceTier: typeof $Enums.PriceTier
 
 /**
  * ##  Prisma Client ʲˢ
@@ -374,16 +386,6 @@ export class PrismaClient<
     * ```
     */
   get zone(): Prisma.ZoneDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.pricePolicy`: Exposes CRUD operations for the **PricePolicy** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PricePolicies
-    * const pricePolicies = await prisma.pricePolicy.findMany()
-    * ```
-    */
-  get pricePolicy(): Prisma.PricePolicyDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -824,8 +826,7 @@ export namespace Prisma {
     Subject: 'Subject',
     WeekDay: 'WeekDay',
     GradeLevel: 'GradeLevel',
-    Zone: 'Zone',
-    PricePolicy: 'PricePolicy'
+    Zone: 'Zone'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -841,7 +842,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "customer" | "teacher" | "subject" | "weekDay" | "gradeLevel" | "zone" | "pricePolicy"
+      modelProps: "user" | "customer" | "teacher" | "subject" | "weekDay" | "gradeLevel" | "zone"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1363,80 +1364,6 @@ export namespace Prisma {
           }
         }
       }
-      PricePolicy: {
-        payload: Prisma.$PricePolicyPayload<ExtArgs>
-        fields: Prisma.PricePolicyFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PricePolicyFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PricePolicyFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>
-          }
-          findFirst: {
-            args: Prisma.PricePolicyFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PricePolicyFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>
-          }
-          findMany: {
-            args: Prisma.PricePolicyFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>[]
-          }
-          create: {
-            args: Prisma.PricePolicyCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>
-          }
-          createMany: {
-            args: Prisma.PricePolicyCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PricePolicyCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>[]
-          }
-          delete: {
-            args: Prisma.PricePolicyDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>
-          }
-          update: {
-            args: Prisma.PricePolicyUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>
-          }
-          deleteMany: {
-            args: Prisma.PricePolicyDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PricePolicyUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PricePolicyUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>[]
-          }
-          upsert: {
-            args: Prisma.PricePolicyUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PricePolicyPayload>
-          }
-          aggregate: {
-            args: Prisma.PricePolicyAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePricePolicy>
-          }
-          groupBy: {
-            args: Prisma.PricePolicyGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PricePolicyGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PricePolicyCountArgs<ExtArgs>
-            result: $Utils.Optional<PricePolicyCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1552,7 +1479,6 @@ export namespace Prisma {
     weekDay?: WeekDayOmit
     gradeLevel?: GradeLevelOmit
     zone?: ZoneOmit
-    pricePolicy?: PricePolicyOmit
   }
 
   /* Types for Logging */
@@ -1806,37 +1732,6 @@ export namespace Prisma {
    * ZoneCountOutputType without action
    */
   export type ZoneCountOutputTypeCountTeachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TeacherWhereInput
-  }
-
-
-  /**
-   * Count Type PricePolicyCountOutputType
-   */
-
-  export type PricePolicyCountOutputType = {
-    teachers: number
-  }
-
-  export type PricePolicyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    teachers?: boolean | PricePolicyCountOutputTypeCountTeachersArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * PricePolicyCountOutputType without action
-   */
-  export type PricePolicyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicyCountOutputType
-     */
-    select?: PricePolicyCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * PricePolicyCountOutputType without action
-   */
-  export type PricePolicyCountOutputTypeCountTeachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TeacherWhereInput
   }
 
@@ -4026,7 +3921,7 @@ export namespace Prisma {
     id: string | null
     avatar: string | null
     biUrl: string | null
-    pricePolicyId: string | null
+    priceTier: $Enums.PriceTier | null
     status: $Enums.TeacherStatus | null
     userId: string | null
   }
@@ -4035,7 +3930,7 @@ export namespace Prisma {
     id: string | null
     avatar: string | null
     biUrl: string | null
-    pricePolicyId: string | null
+    priceTier: $Enums.PriceTier | null
     status: $Enums.TeacherStatus | null
     userId: string | null
   }
@@ -4044,7 +3939,7 @@ export namespace Prisma {
     id: number
     avatar: number
     biUrl: number
-    pricePolicyId: number
+    priceTier: number
     status: number
     userId: number
     _all: number
@@ -4055,7 +3950,7 @@ export namespace Prisma {
     id?: true
     avatar?: true
     biUrl?: true
-    pricePolicyId?: true
+    priceTier?: true
     status?: true
     userId?: true
   }
@@ -4064,7 +3959,7 @@ export namespace Prisma {
     id?: true
     avatar?: true
     biUrl?: true
-    pricePolicyId?: true
+    priceTier?: true
     status?: true
     userId?: true
   }
@@ -4073,7 +3968,7 @@ export namespace Prisma {
     id?: true
     avatar?: true
     biUrl?: true
-    pricePolicyId?: true
+    priceTier?: true
     status?: true
     userId?: true
     _all?: true
@@ -4155,7 +4050,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl: string | null
-    pricePolicyId: string | null
+    priceTier: $Enums.PriceTier | null
     status: $Enums.TeacherStatus
     userId: string
     _count: TeacherCountAggregateOutputType | null
@@ -4181,14 +4076,13 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    pricePolicyId?: boolean
+    priceTier?: boolean
     status?: boolean
     userId?: boolean
     subjects?: boolean | Teacher$subjectsArgs<ExtArgs>
     weekDays?: boolean | Teacher$weekDaysArgs<ExtArgs>
     zones?: boolean | Teacher$zonesArgs<ExtArgs>
     gradeLevels?: boolean | Teacher$gradeLevelsArgs<ExtArgs>
-    pricePolicy?: boolean | Teacher$pricePolicyArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
@@ -4197,10 +4091,9 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    pricePolicyId?: boolean
+    priceTier?: boolean
     status?: boolean
     userId?: boolean
-    pricePolicy?: boolean | Teacher$pricePolicyArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
 
@@ -4208,10 +4101,9 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    pricePolicyId?: boolean
+    priceTier?: boolean
     status?: boolean
     userId?: boolean
-    pricePolicy?: boolean | Teacher$pricePolicyArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
 
@@ -4219,27 +4111,24 @@ export namespace Prisma {
     id?: boolean
     avatar?: boolean
     biUrl?: boolean
-    pricePolicyId?: boolean
+    priceTier?: boolean
     status?: boolean
     userId?: boolean
   }
 
-  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "avatar" | "biUrl" | "pricePolicyId" | "status" | "userId", ExtArgs["result"]["teacher"]>
+  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "avatar" | "biUrl" | "priceTier" | "status" | "userId", ExtArgs["result"]["teacher"]>
   export type TeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subjects?: boolean | Teacher$subjectsArgs<ExtArgs>
     weekDays?: boolean | Teacher$weekDaysArgs<ExtArgs>
     zones?: boolean | Teacher$zonesArgs<ExtArgs>
     gradeLevels?: boolean | Teacher$gradeLevelsArgs<ExtArgs>
-    pricePolicy?: boolean | Teacher$pricePolicyArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeacherIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pricePolicy?: boolean | Teacher$pricePolicyArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type TeacherIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pricePolicy?: boolean | Teacher$pricePolicyArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
@@ -4250,14 +4139,13 @@ export namespace Prisma {
       weekDays: Prisma.$WeekDayPayload<ExtArgs>[]
       zones: Prisma.$ZonePayload<ExtArgs>[]
       gradeLevels: Prisma.$GradeLevelPayload<ExtArgs>[]
-      pricePolicy: Prisma.$PricePolicyPayload<ExtArgs> | null
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       avatar: string
       biUrl: string | null
-      pricePolicyId: string | null
+      priceTier: $Enums.PriceTier | null
       status: $Enums.TeacherStatus
       userId: string
     }, ExtArgs["result"]["teacher"]>
@@ -4658,7 +4546,6 @@ export namespace Prisma {
     weekDays<T extends Teacher$weekDaysArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$weekDaysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeekDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     zones<T extends Teacher$zonesArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$zonesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ZonePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gradeLevels<T extends Teacher$gradeLevelsArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$gradeLevelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GradeLevelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    pricePolicy<T extends Teacher$pricePolicyArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$pricePolicyArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4692,7 +4579,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Teacher", 'String'>
     readonly avatar: FieldRef<"Teacher", 'String'>
     readonly biUrl: FieldRef<"Teacher", 'String'>
-    readonly pricePolicyId: FieldRef<"Teacher", 'String'>
+    readonly priceTier: FieldRef<"Teacher", 'PriceTier'>
     readonly status: FieldRef<"Teacher", 'TeacherStatus'>
     readonly userId: FieldRef<"Teacher", 'String'>
   }
@@ -5189,25 +5076,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: GradeLevelScalarFieldEnum | GradeLevelScalarFieldEnum[]
-  }
-
-  /**
-   * Teacher.pricePolicy
-   */
-  export type Teacher$pricePolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    where?: PricePolicyWhereInput
   }
 
   /**
@@ -9426,1055 +9294,6 @@ export namespace Prisma {
 
 
   /**
-   * Model PricePolicy
-   */
-
-  export type AggregatePricePolicy = {
-    _count: PricePolicyCountAggregateOutputType | null
-    _min: PricePolicyMinAggregateOutputType | null
-    _max: PricePolicyMaxAggregateOutputType | null
-  }
-
-  export type PricePolicyMinAggregateOutputType = {
-    id: string | null
-    value: string | null
-    status: $Enums.SharedStatus | null
-  }
-
-  export type PricePolicyMaxAggregateOutputType = {
-    id: string | null
-    value: string | null
-    status: $Enums.SharedStatus | null
-  }
-
-  export type PricePolicyCountAggregateOutputType = {
-    id: number
-    value: number
-    status: number
-    _all: number
-  }
-
-
-  export type PricePolicyMinAggregateInputType = {
-    id?: true
-    value?: true
-    status?: true
-  }
-
-  export type PricePolicyMaxAggregateInputType = {
-    id?: true
-    value?: true
-    status?: true
-  }
-
-  export type PricePolicyCountAggregateInputType = {
-    id?: true
-    value?: true
-    status?: true
-    _all?: true
-  }
-
-  export type PricePolicyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PricePolicy to aggregate.
-     */
-    where?: PricePolicyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PricePolicies to fetch.
-     */
-    orderBy?: PricePolicyOrderByWithRelationInput | PricePolicyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PricePolicyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PricePolicies from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PricePolicies.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PricePolicies
-    **/
-    _count?: true | PricePolicyCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PricePolicyMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PricePolicyMaxAggregateInputType
-  }
-
-  export type GetPricePolicyAggregateType<T extends PricePolicyAggregateArgs> = {
-        [P in keyof T & keyof AggregatePricePolicy]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePricePolicy[P]>
-      : GetScalarType<T[P], AggregatePricePolicy[P]>
-  }
-
-
-
-
-  export type PricePolicyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PricePolicyWhereInput
-    orderBy?: PricePolicyOrderByWithAggregationInput | PricePolicyOrderByWithAggregationInput[]
-    by: PricePolicyScalarFieldEnum[] | PricePolicyScalarFieldEnum
-    having?: PricePolicyScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PricePolicyCountAggregateInputType | true
-    _min?: PricePolicyMinAggregateInputType
-    _max?: PricePolicyMaxAggregateInputType
-  }
-
-  export type PricePolicyGroupByOutputType = {
-    id: string
-    value: string
-    status: $Enums.SharedStatus
-    _count: PricePolicyCountAggregateOutputType | null
-    _min: PricePolicyMinAggregateOutputType | null
-    _max: PricePolicyMaxAggregateOutputType | null
-  }
-
-  type GetPricePolicyGroupByPayload<T extends PricePolicyGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PricePolicyGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PricePolicyGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PricePolicyGroupByOutputType[P]>
-            : GetScalarType<T[P], PricePolicyGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PricePolicySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    value?: boolean
-    status?: boolean
-    teachers?: boolean | PricePolicy$teachersArgs<ExtArgs>
-    _count?: boolean | PricePolicyCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pricePolicy"]>
-
-  export type PricePolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    value?: boolean
-    status?: boolean
-  }, ExtArgs["result"]["pricePolicy"]>
-
-  export type PricePolicySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    value?: boolean
-    status?: boolean
-  }, ExtArgs["result"]["pricePolicy"]>
-
-  export type PricePolicySelectScalar = {
-    id?: boolean
-    value?: boolean
-    status?: boolean
-  }
-
-  export type PricePolicyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "value" | "status", ExtArgs["result"]["pricePolicy"]>
-  export type PricePolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    teachers?: boolean | PricePolicy$teachersArgs<ExtArgs>
-    _count?: boolean | PricePolicyCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type PricePolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type PricePolicyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $PricePolicyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PricePolicy"
-    objects: {
-      teachers: Prisma.$TeacherPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      value: string
-      status: $Enums.SharedStatus
-    }, ExtArgs["result"]["pricePolicy"]>
-    composites: {}
-  }
-
-  type PricePolicyGetPayload<S extends boolean | null | undefined | PricePolicyDefaultArgs> = $Result.GetResult<Prisma.$PricePolicyPayload, S>
-
-  type PricePolicyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PricePolicyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PricePolicyCountAggregateInputType | true
-    }
-
-  export interface PricePolicyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PricePolicy'], meta: { name: 'PricePolicy' } }
-    /**
-     * Find zero or one PricePolicy that matches the filter.
-     * @param {PricePolicyFindUniqueArgs} args - Arguments to find a PricePolicy
-     * @example
-     * // Get one PricePolicy
-     * const pricePolicy = await prisma.pricePolicy.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PricePolicyFindUniqueArgs>(args: SelectSubset<T, PricePolicyFindUniqueArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one PricePolicy that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PricePolicyFindUniqueOrThrowArgs} args - Arguments to find a PricePolicy
-     * @example
-     * // Get one PricePolicy
-     * const pricePolicy = await prisma.pricePolicy.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PricePolicyFindUniqueOrThrowArgs>(args: SelectSubset<T, PricePolicyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PricePolicy that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PricePolicyFindFirstArgs} args - Arguments to find a PricePolicy
-     * @example
-     * // Get one PricePolicy
-     * const pricePolicy = await prisma.pricePolicy.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PricePolicyFindFirstArgs>(args?: SelectSubset<T, PricePolicyFindFirstArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PricePolicy that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PricePolicyFindFirstOrThrowArgs} args - Arguments to find a PricePolicy
-     * @example
-     * // Get one PricePolicy
-     * const pricePolicy = await prisma.pricePolicy.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PricePolicyFindFirstOrThrowArgs>(args?: SelectSubset<T, PricePolicyFindFirstOrThrowArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more PricePolicies that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PricePolicyFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PricePolicies
-     * const pricePolicies = await prisma.pricePolicy.findMany()
-     * 
-     * // Get first 10 PricePolicies
-     * const pricePolicies = await prisma.pricePolicy.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const pricePolicyWithIdOnly = await prisma.pricePolicy.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PricePolicyFindManyArgs>(args?: SelectSubset<T, PricePolicyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a PricePolicy.
-     * @param {PricePolicyCreateArgs} args - Arguments to create a PricePolicy.
-     * @example
-     * // Create one PricePolicy
-     * const PricePolicy = await prisma.pricePolicy.create({
-     *   data: {
-     *     // ... data to create a PricePolicy
-     *   }
-     * })
-     * 
-     */
-    create<T extends PricePolicyCreateArgs>(args: SelectSubset<T, PricePolicyCreateArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many PricePolicies.
-     * @param {PricePolicyCreateManyArgs} args - Arguments to create many PricePolicies.
-     * @example
-     * // Create many PricePolicies
-     * const pricePolicy = await prisma.pricePolicy.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PricePolicyCreateManyArgs>(args?: SelectSubset<T, PricePolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PricePolicies and returns the data saved in the database.
-     * @param {PricePolicyCreateManyAndReturnArgs} args - Arguments to create many PricePolicies.
-     * @example
-     * // Create many PricePolicies
-     * const pricePolicy = await prisma.pricePolicy.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PricePolicies and only return the `id`
-     * const pricePolicyWithIdOnly = await prisma.pricePolicy.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PricePolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, PricePolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a PricePolicy.
-     * @param {PricePolicyDeleteArgs} args - Arguments to delete one PricePolicy.
-     * @example
-     * // Delete one PricePolicy
-     * const PricePolicy = await prisma.pricePolicy.delete({
-     *   where: {
-     *     // ... filter to delete one PricePolicy
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PricePolicyDeleteArgs>(args: SelectSubset<T, PricePolicyDeleteArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one PricePolicy.
-     * @param {PricePolicyUpdateArgs} args - Arguments to update one PricePolicy.
-     * @example
-     * // Update one PricePolicy
-     * const pricePolicy = await prisma.pricePolicy.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PricePolicyUpdateArgs>(args: SelectSubset<T, PricePolicyUpdateArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more PricePolicies.
-     * @param {PricePolicyDeleteManyArgs} args - Arguments to filter PricePolicies to delete.
-     * @example
-     * // Delete a few PricePolicies
-     * const { count } = await prisma.pricePolicy.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PricePolicyDeleteManyArgs>(args?: SelectSubset<T, PricePolicyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PricePolicies.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PricePolicyUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PricePolicies
-     * const pricePolicy = await prisma.pricePolicy.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PricePolicyUpdateManyArgs>(args: SelectSubset<T, PricePolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PricePolicies and returns the data updated in the database.
-     * @param {PricePolicyUpdateManyAndReturnArgs} args - Arguments to update many PricePolicies.
-     * @example
-     * // Update many PricePolicies
-     * const pricePolicy = await prisma.pricePolicy.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more PricePolicies and only return the `id`
-     * const pricePolicyWithIdOnly = await prisma.pricePolicy.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PricePolicyUpdateManyAndReturnArgs>(args: SelectSubset<T, PricePolicyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one PricePolicy.
-     * @param {PricePolicyUpsertArgs} args - Arguments to update or create a PricePolicy.
-     * @example
-     * // Update or create a PricePolicy
-     * const pricePolicy = await prisma.pricePolicy.upsert({
-     *   create: {
-     *     // ... data to create a PricePolicy
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PricePolicy we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PricePolicyUpsertArgs>(args: SelectSubset<T, PricePolicyUpsertArgs<ExtArgs>>): Prisma__PricePolicyClient<$Result.GetResult<Prisma.$PricePolicyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of PricePolicies.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PricePolicyCountArgs} args - Arguments to filter PricePolicies to count.
-     * @example
-     * // Count the number of PricePolicies
-     * const count = await prisma.pricePolicy.count({
-     *   where: {
-     *     // ... the filter for the PricePolicies we want to count
-     *   }
-     * })
-    **/
-    count<T extends PricePolicyCountArgs>(
-      args?: Subset<T, PricePolicyCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PricePolicyCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PricePolicy.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PricePolicyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PricePolicyAggregateArgs>(args: Subset<T, PricePolicyAggregateArgs>): Prisma.PrismaPromise<GetPricePolicyAggregateType<T>>
-
-    /**
-     * Group by PricePolicy.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PricePolicyGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PricePolicyGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PricePolicyGroupByArgs['orderBy'] }
-        : { orderBy?: PricePolicyGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PricePolicyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPricePolicyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PricePolicy model
-   */
-  readonly fields: PricePolicyFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PricePolicy.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PricePolicyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    teachers<T extends PricePolicy$teachersArgs<ExtArgs> = {}>(args?: Subset<T, PricePolicy$teachersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeacherPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PricePolicy model
-   */
-  interface PricePolicyFieldRefs {
-    readonly id: FieldRef<"PricePolicy", 'String'>
-    readonly value: FieldRef<"PricePolicy", 'String'>
-    readonly status: FieldRef<"PricePolicy", 'SharedStatus'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PricePolicy findUnique
-   */
-  export type PricePolicyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * Filter, which PricePolicy to fetch.
-     */
-    where: PricePolicyWhereUniqueInput
-  }
-
-  /**
-   * PricePolicy findUniqueOrThrow
-   */
-  export type PricePolicyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * Filter, which PricePolicy to fetch.
-     */
-    where: PricePolicyWhereUniqueInput
-  }
-
-  /**
-   * PricePolicy findFirst
-   */
-  export type PricePolicyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * Filter, which PricePolicy to fetch.
-     */
-    where?: PricePolicyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PricePolicies to fetch.
-     */
-    orderBy?: PricePolicyOrderByWithRelationInput | PricePolicyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PricePolicies.
-     */
-    cursor?: PricePolicyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PricePolicies from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PricePolicies.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PricePolicies.
-     */
-    distinct?: PricePolicyScalarFieldEnum | PricePolicyScalarFieldEnum[]
-  }
-
-  /**
-   * PricePolicy findFirstOrThrow
-   */
-  export type PricePolicyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * Filter, which PricePolicy to fetch.
-     */
-    where?: PricePolicyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PricePolicies to fetch.
-     */
-    orderBy?: PricePolicyOrderByWithRelationInput | PricePolicyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PricePolicies.
-     */
-    cursor?: PricePolicyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PricePolicies from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PricePolicies.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PricePolicies.
-     */
-    distinct?: PricePolicyScalarFieldEnum | PricePolicyScalarFieldEnum[]
-  }
-
-  /**
-   * PricePolicy findMany
-   */
-  export type PricePolicyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * Filter, which PricePolicies to fetch.
-     */
-    where?: PricePolicyWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PricePolicies to fetch.
-     */
-    orderBy?: PricePolicyOrderByWithRelationInput | PricePolicyOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PricePolicies.
-     */
-    cursor?: PricePolicyWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PricePolicies from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PricePolicies.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PricePolicies.
-     */
-    distinct?: PricePolicyScalarFieldEnum | PricePolicyScalarFieldEnum[]
-  }
-
-  /**
-   * PricePolicy create
-   */
-  export type PricePolicyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PricePolicy.
-     */
-    data: XOR<PricePolicyCreateInput, PricePolicyUncheckedCreateInput>
-  }
-
-  /**
-   * PricePolicy createMany
-   */
-  export type PricePolicyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PricePolicies.
-     */
-    data: PricePolicyCreateManyInput | PricePolicyCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PricePolicy createManyAndReturn
-   */
-  export type PricePolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * The data used to create many PricePolicies.
-     */
-    data: PricePolicyCreateManyInput | PricePolicyCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PricePolicy update
-   */
-  export type PricePolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PricePolicy.
-     */
-    data: XOR<PricePolicyUpdateInput, PricePolicyUncheckedUpdateInput>
-    /**
-     * Choose, which PricePolicy to update.
-     */
-    where: PricePolicyWhereUniqueInput
-  }
-
-  /**
-   * PricePolicy updateMany
-   */
-  export type PricePolicyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PricePolicies.
-     */
-    data: XOR<PricePolicyUpdateManyMutationInput, PricePolicyUncheckedUpdateManyInput>
-    /**
-     * Filter which PricePolicies to update
-     */
-    where?: PricePolicyWhereInput
-    /**
-     * Limit how many PricePolicies to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PricePolicy updateManyAndReturn
-   */
-  export type PricePolicyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * The data used to update PricePolicies.
-     */
-    data: XOR<PricePolicyUpdateManyMutationInput, PricePolicyUncheckedUpdateManyInput>
-    /**
-     * Filter which PricePolicies to update
-     */
-    where?: PricePolicyWhereInput
-    /**
-     * Limit how many PricePolicies to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PricePolicy upsert
-   */
-  export type PricePolicyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PricePolicy to update in case it exists.
-     */
-    where: PricePolicyWhereUniqueInput
-    /**
-     * In case the PricePolicy found by the `where` argument doesn't exist, create a new PricePolicy with this data.
-     */
-    create: XOR<PricePolicyCreateInput, PricePolicyUncheckedCreateInput>
-    /**
-     * In case the PricePolicy was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PricePolicyUpdateInput, PricePolicyUncheckedUpdateInput>
-  }
-
-  /**
-   * PricePolicy delete
-   */
-  export type PricePolicyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-    /**
-     * Filter which PricePolicy to delete.
-     */
-    where: PricePolicyWhereUniqueInput
-  }
-
-  /**
-   * PricePolicy deleteMany
-   */
-  export type PricePolicyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PricePolicies to delete
-     */
-    where?: PricePolicyWhereInput
-    /**
-     * Limit how many PricePolicies to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * PricePolicy.teachers
-   */
-  export type PricePolicy$teachersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Teacher
-     */
-    select?: TeacherSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Teacher
-     */
-    omit?: TeacherOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TeacherInclude<ExtArgs> | null
-    where?: TeacherWhereInput
-    orderBy?: TeacherOrderByWithRelationInput | TeacherOrderByWithRelationInput[]
-    cursor?: TeacherWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TeacherScalarFieldEnum | TeacherScalarFieldEnum[]
-  }
-
-  /**
-   * PricePolicy without action
-   */
-  export type PricePolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PricePolicy
-     */
-    select?: PricePolicySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PricePolicy
-     */
-    omit?: PricePolicyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PricePolicyInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -10515,7 +9334,7 @@ export namespace Prisma {
     id: 'id',
     avatar: 'avatar',
     biUrl: 'biUrl',
-    pricePolicyId: 'pricePolicyId',
+    priceTier: 'priceTier',
     status: 'status',
     userId: 'userId'
   };
@@ -10557,15 +9376,6 @@ export namespace Prisma {
   };
 
   export type ZoneScalarFieldEnum = (typeof ZoneScalarFieldEnum)[keyof typeof ZoneScalarFieldEnum]
-
-
-  export const PricePolicyScalarFieldEnum: {
-    id: 'id',
-    value: 'value',
-    status: 'status'
-  };
-
-  export type PricePolicyScalarFieldEnum = (typeof PricePolicyScalarFieldEnum)[keyof typeof PricePolicyScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10664,6 +9474,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PriceTier'
+   */
+  export type EnumPriceTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriceTier'>
+    
+
+
+  /**
+   * Reference to a field of type 'PriceTier[]'
+   */
+  export type ListEnumPriceTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriceTier[]'>
     
 
 
@@ -10879,14 +9703,13 @@ export namespace Prisma {
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    pricePolicyId?: StringNullableFilter<"Teacher"> | string | null
+    priceTier?: EnumPriceTierNullableFilter<"Teacher"> | $Enums.PriceTier | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringFilter<"Teacher"> | string
     subjects?: SubjectListRelationFilter
     weekDays?: WeekDayListRelationFilter
     zones?: ZoneListRelationFilter
     gradeLevels?: GradeLevelListRelationFilter
-    pricePolicy?: XOR<PricePolicyNullableScalarRelationFilter, PricePolicyWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -10894,14 +9717,13 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrderInput | SortOrder
-    pricePolicyId?: SortOrderInput | SortOrder
+    priceTier?: SortOrderInput | SortOrder
     status?: SortOrder
     userId?: SortOrder
     subjects?: SubjectOrderByRelationAggregateInput
     weekDays?: WeekDayOrderByRelationAggregateInput
     zones?: ZoneOrderByRelationAggregateInput
     gradeLevels?: GradeLevelOrderByRelationAggregateInput
-    pricePolicy?: PricePolicyOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
 
@@ -10913,13 +9735,12 @@ export namespace Prisma {
     NOT?: TeacherWhereInput | TeacherWhereInput[]
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    pricePolicyId?: StringNullableFilter<"Teacher"> | string | null
+    priceTier?: EnumPriceTierNullableFilter<"Teacher"> | $Enums.PriceTier | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     subjects?: SubjectListRelationFilter
     weekDays?: WeekDayListRelationFilter
     zones?: ZoneListRelationFilter
     gradeLevels?: GradeLevelListRelationFilter
-    pricePolicy?: XOR<PricePolicyNullableScalarRelationFilter, PricePolicyWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
@@ -10927,7 +9748,7 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrderInput | SortOrder
-    pricePolicyId?: SortOrderInput | SortOrder
+    priceTier?: SortOrderInput | SortOrder
     status?: SortOrder
     userId?: SortOrder
     _count?: TeacherCountOrderByAggregateInput
@@ -10942,7 +9763,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Teacher"> | string
     avatar?: StringWithAggregatesFilter<"Teacher"> | string
     biUrl?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
-    pricePolicyId?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
+    priceTier?: EnumPriceTierNullableWithAggregatesFilter<"Teacher"> | $Enums.PriceTier | null
     status?: EnumTeacherStatusWithAggregatesFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringWithAggregatesFilter<"Teacher"> | string
   }
@@ -11127,51 +9948,6 @@ export namespace Prisma {
     status?: EnumSharedStatusWithAggregatesFilter<"Zone"> | $Enums.SharedStatus
   }
 
-  export type PricePolicyWhereInput = {
-    AND?: PricePolicyWhereInput | PricePolicyWhereInput[]
-    OR?: PricePolicyWhereInput[]
-    NOT?: PricePolicyWhereInput | PricePolicyWhereInput[]
-    id?: StringFilter<"PricePolicy"> | string
-    value?: StringFilter<"PricePolicy"> | string
-    status?: EnumSharedStatusFilter<"PricePolicy"> | $Enums.SharedStatus
-    teachers?: TeacherListRelationFilter
-  }
-
-  export type PricePolicyOrderByWithRelationInput = {
-    id?: SortOrder
-    value?: SortOrder
-    status?: SortOrder
-    teachers?: TeacherOrderByRelationAggregateInput
-  }
-
-  export type PricePolicyWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: PricePolicyWhereInput | PricePolicyWhereInput[]
-    OR?: PricePolicyWhereInput[]
-    NOT?: PricePolicyWhereInput | PricePolicyWhereInput[]
-    value?: StringFilter<"PricePolicy"> | string
-    status?: EnumSharedStatusFilter<"PricePolicy"> | $Enums.SharedStatus
-    teachers?: TeacherListRelationFilter
-  }, "id">
-
-  export type PricePolicyOrderByWithAggregationInput = {
-    id?: SortOrder
-    value?: SortOrder
-    status?: SortOrder
-    _count?: PricePolicyCountOrderByAggregateInput
-    _max?: PricePolicyMaxOrderByAggregateInput
-    _min?: PricePolicyMinOrderByAggregateInput
-  }
-
-  export type PricePolicyScalarWhereWithAggregatesInput = {
-    AND?: PricePolicyScalarWhereWithAggregatesInput | PricePolicyScalarWhereWithAggregatesInput[]
-    OR?: PricePolicyScalarWhereWithAggregatesInput[]
-    NOT?: PricePolicyScalarWhereWithAggregatesInput | PricePolicyScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PricePolicy"> | string
-    value?: StringWithAggregatesFilter<"PricePolicy"> | string
-    status?: EnumSharedStatusWithAggregatesFilter<"PricePolicy"> | $Enums.SharedStatus
-  }
-
   export type UserCreateInput = {
     id: string
     name: string
@@ -11302,12 +10078,12 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
-    pricePolicy?: PricePolicyCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -11315,7 +10091,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    pricePolicyId?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -11328,12 +10104,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
-    pricePolicy?: PricePolicyUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -11341,7 +10117,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -11354,7 +10130,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    pricePolicyId?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     userId: string
   }
@@ -11363,6 +10139,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
   }
 
@@ -11370,7 +10147,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -11556,52 +10333,6 @@ export namespace Prisma {
   export type ZoneUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
-  }
-
-  export type PricePolicyCreateInput = {
-    id: string
-    value: string
-    status?: $Enums.SharedStatus
-    teachers?: TeacherCreateNestedManyWithoutPricePolicyInput
-  }
-
-  export type PricePolicyUncheckedCreateInput = {
-    id: string
-    value: string
-    status?: $Enums.SharedStatus
-    teachers?: TeacherUncheckedCreateNestedManyWithoutPricePolicyInput
-  }
-
-  export type PricePolicyUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: StringFieldUpdateOperationsInput | string
-    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
-    teachers?: TeacherUpdateManyWithoutPricePolicyNestedInput
-  }
-
-  export type PricePolicyUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: StringFieldUpdateOperationsInput | string
-    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
-    teachers?: TeacherUncheckedUpdateManyWithoutPricePolicyNestedInput
-  }
-
-  export type PricePolicyCreateManyInput = {
-    id: string
-    value: string
-    status?: $Enums.SharedStatus
-  }
-
-  export type PricePolicyUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: StringFieldUpdateOperationsInput | string
-    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
-  }
-
-  export type PricePolicyUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: StringFieldUpdateOperationsInput | string
     status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
   }
 
@@ -11818,6 +10549,13 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type EnumPriceTierNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPriceTierNullableFilter<$PrismaModel> | $Enums.PriceTier | null
+  }
+
   export type EnumTeacherStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.TeacherStatus | EnumTeacherStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TeacherStatus[] | ListEnumTeacherStatusFieldRefInput<$PrismaModel>
@@ -11849,11 +10587,6 @@ export namespace Prisma {
     none?: GradeLevelWhereInput
   }
 
-  export type PricePolicyNullableScalarRelationFilter = {
-    is?: PricePolicyWhereInput | null
-    isNot?: PricePolicyWhereInput | null
-  }
-
   export type SubjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -11874,7 +10607,7 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrder
-    pricePolicyId?: SortOrder
+    priceTier?: SortOrder
     status?: SortOrder
     userId?: SortOrder
   }
@@ -11883,7 +10616,7 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrder
-    pricePolicyId?: SortOrder
+    priceTier?: SortOrder
     status?: SortOrder
     userId?: SortOrder
   }
@@ -11892,9 +10625,19 @@ export namespace Prisma {
     id?: SortOrder
     avatar?: SortOrder
     biUrl?: SortOrder
-    pricePolicyId?: SortOrder
+    priceTier?: SortOrder
     status?: SortOrder
     userId?: SortOrder
+  }
+
+  export type EnumPriceTierNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPriceTierNullableWithAggregatesFilter<$PrismaModel> | $Enums.PriceTier | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumPriceTierNullableFilter<$PrismaModel>
+    _max?: NestedEnumPriceTierNullableFilter<$PrismaModel>
   }
 
   export type EnumTeacherStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -12057,24 +10800,6 @@ export namespace Prisma {
     status?: SortOrder
   }
 
-  export type PricePolicyCountOrderByAggregateInput = {
-    id?: SortOrder
-    value?: SortOrder
-    status?: SortOrder
-  }
-
-  export type PricePolicyMaxOrderByAggregateInput = {
-    id?: SortOrder
-    value?: SortOrder
-    status?: SortOrder
-  }
-
-  export type PricePolicyMinOrderByAggregateInput = {
-    id?: SortOrder
-    value?: SortOrder
-    status?: SortOrder
-  }
-
   export type TeacherCreateNestedOneWithoutUserInput = {
     create?: XOR<TeacherCreateWithoutUserInput, TeacherUncheckedCreateWithoutUserInput>
     connectOrCreate?: TeacherCreateOrConnectWithoutUserInput
@@ -12201,12 +10926,6 @@ export namespace Prisma {
     connect?: GradeLevelWhereUniqueInput | GradeLevelWhereUniqueInput[]
   }
 
-  export type PricePolicyCreateNestedOneWithoutTeachersInput = {
-    create?: XOR<PricePolicyCreateWithoutTeachersInput, PricePolicyUncheckedCreateWithoutTeachersInput>
-    connectOrCreate?: PricePolicyCreateOrConnectWithoutTeachersInput
-    connect?: PricePolicyWhereUniqueInput
-  }
-
   export type UserCreateNestedOneWithoutTeacherProfileInput = {
     create?: XOR<UserCreateWithoutTeacherProfileInput, UserUncheckedCreateWithoutTeacherProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutTeacherProfileInput
@@ -12235,6 +10954,10 @@ export namespace Prisma {
     create?: XOR<GradeLevelCreateWithoutTeachersInput, GradeLevelUncheckedCreateWithoutTeachersInput> | GradeLevelCreateWithoutTeachersInput[] | GradeLevelUncheckedCreateWithoutTeachersInput[]
     connectOrCreate?: GradeLevelCreateOrConnectWithoutTeachersInput | GradeLevelCreateOrConnectWithoutTeachersInput[]
     connect?: GradeLevelWhereUniqueInput | GradeLevelWhereUniqueInput[]
+  }
+
+  export type NullableEnumPriceTierFieldUpdateOperationsInput = {
+    set?: $Enums.PriceTier | null
   }
 
   export type EnumTeacherStatusFieldUpdateOperationsInput = {
@@ -12291,16 +11014,6 @@ export namespace Prisma {
     update?: GradeLevelUpdateWithWhereUniqueWithoutTeachersInput | GradeLevelUpdateWithWhereUniqueWithoutTeachersInput[]
     updateMany?: GradeLevelUpdateManyWithWhereWithoutTeachersInput | GradeLevelUpdateManyWithWhereWithoutTeachersInput[]
     deleteMany?: GradeLevelScalarWhereInput | GradeLevelScalarWhereInput[]
-  }
-
-  export type PricePolicyUpdateOneWithoutTeachersNestedInput = {
-    create?: XOR<PricePolicyCreateWithoutTeachersInput, PricePolicyUncheckedCreateWithoutTeachersInput>
-    connectOrCreate?: PricePolicyCreateOrConnectWithoutTeachersInput
-    upsert?: PricePolicyUpsertWithoutTeachersInput
-    disconnect?: PricePolicyWhereInput | boolean
-    delete?: PricePolicyWhereInput | boolean
-    connect?: PricePolicyWhereUniqueInput
-    update?: XOR<XOR<PricePolicyUpdateToOneWithWhereWithoutTeachersInput, PricePolicyUpdateWithoutTeachersInput>, PricePolicyUncheckedUpdateWithoutTeachersInput>
   }
 
   export type UserUpdateOneRequiredWithoutTeacherProfileNestedInput = {
@@ -12531,48 +11244,6 @@ export namespace Prisma {
     deleteMany?: TeacherScalarWhereInput | TeacherScalarWhereInput[]
   }
 
-  export type TeacherCreateNestedManyWithoutPricePolicyInput = {
-    create?: XOR<TeacherCreateWithoutPricePolicyInput, TeacherUncheckedCreateWithoutPricePolicyInput> | TeacherCreateWithoutPricePolicyInput[] | TeacherUncheckedCreateWithoutPricePolicyInput[]
-    connectOrCreate?: TeacherCreateOrConnectWithoutPricePolicyInput | TeacherCreateOrConnectWithoutPricePolicyInput[]
-    createMany?: TeacherCreateManyPricePolicyInputEnvelope
-    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-  }
-
-  export type TeacherUncheckedCreateNestedManyWithoutPricePolicyInput = {
-    create?: XOR<TeacherCreateWithoutPricePolicyInput, TeacherUncheckedCreateWithoutPricePolicyInput> | TeacherCreateWithoutPricePolicyInput[] | TeacherUncheckedCreateWithoutPricePolicyInput[]
-    connectOrCreate?: TeacherCreateOrConnectWithoutPricePolicyInput | TeacherCreateOrConnectWithoutPricePolicyInput[]
-    createMany?: TeacherCreateManyPricePolicyInputEnvelope
-    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-  }
-
-  export type TeacherUpdateManyWithoutPricePolicyNestedInput = {
-    create?: XOR<TeacherCreateWithoutPricePolicyInput, TeacherUncheckedCreateWithoutPricePolicyInput> | TeacherCreateWithoutPricePolicyInput[] | TeacherUncheckedCreateWithoutPricePolicyInput[]
-    connectOrCreate?: TeacherCreateOrConnectWithoutPricePolicyInput | TeacherCreateOrConnectWithoutPricePolicyInput[]
-    upsert?: TeacherUpsertWithWhereUniqueWithoutPricePolicyInput | TeacherUpsertWithWhereUniqueWithoutPricePolicyInput[]
-    createMany?: TeacherCreateManyPricePolicyInputEnvelope
-    set?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    disconnect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    delete?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    update?: TeacherUpdateWithWhereUniqueWithoutPricePolicyInput | TeacherUpdateWithWhereUniqueWithoutPricePolicyInput[]
-    updateMany?: TeacherUpdateManyWithWhereWithoutPricePolicyInput | TeacherUpdateManyWithWhereWithoutPricePolicyInput[]
-    deleteMany?: TeacherScalarWhereInput | TeacherScalarWhereInput[]
-  }
-
-  export type TeacherUncheckedUpdateManyWithoutPricePolicyNestedInput = {
-    create?: XOR<TeacherCreateWithoutPricePolicyInput, TeacherUncheckedCreateWithoutPricePolicyInput> | TeacherCreateWithoutPricePolicyInput[] | TeacherUncheckedCreateWithoutPricePolicyInput[]
-    connectOrCreate?: TeacherCreateOrConnectWithoutPricePolicyInput | TeacherCreateOrConnectWithoutPricePolicyInput[]
-    upsert?: TeacherUpsertWithWhereUniqueWithoutPricePolicyInput | TeacherUpsertWithWhereUniqueWithoutPricePolicyInput[]
-    createMany?: TeacherCreateManyPricePolicyInputEnvelope
-    set?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    disconnect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    delete?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    connect?: TeacherWhereUniqueInput | TeacherWhereUniqueInput[]
-    update?: TeacherUpdateWithWhereUniqueWithoutPricePolicyInput | TeacherUpdateWithWhereUniqueWithoutPricePolicyInput[]
-    updateMany?: TeacherUpdateManyWithWhereWithoutPricePolicyInput | TeacherUpdateManyWithWhereWithoutPricePolicyInput[]
-    deleteMany?: TeacherScalarWhereInput | TeacherScalarWhereInput[]
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12733,11 +11404,28 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumPriceTierNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPriceTierNullableFilter<$PrismaModel> | $Enums.PriceTier | null
+  }
+
   export type NestedEnumTeacherStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.TeacherStatus | EnumTeacherStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TeacherStatus[] | ListEnumTeacherStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.TeacherStatus[] | ListEnumTeacherStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumTeacherStatusFilter<$PrismaModel> | $Enums.TeacherStatus
+  }
+
+  export type NestedEnumPriceTierNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PriceTier | EnumPriceTierFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PriceTier[] | ListEnumPriceTierFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPriceTierNullableWithAggregatesFilter<$PrismaModel> | $Enums.PriceTier | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumPriceTierNullableFilter<$PrismaModel>
+    _max?: NestedEnumPriceTierNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumTeacherStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -12822,19 +11510,19 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
-    pricePolicy?: PricePolicyCreateNestedOneWithoutTeachersInput
   }
 
   export type TeacherUncheckedCreateWithoutUserInput = {
     id: string
     avatar: string
     biUrl?: string | null
-    pricePolicyId?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
@@ -12875,19 +11563,19 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
-    pricePolicy?: PricePolicyUpdateOneWithoutTeachersNestedInput
   }
 
   export type TeacherUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
@@ -13050,23 +11738,6 @@ export namespace Prisma {
     create: XOR<GradeLevelCreateWithoutTeachersInput, GradeLevelUncheckedCreateWithoutTeachersInput>
   }
 
-  export type PricePolicyCreateWithoutTeachersInput = {
-    id: string
-    value: string
-    status?: $Enums.SharedStatus
-  }
-
-  export type PricePolicyUncheckedCreateWithoutTeachersInput = {
-    id: string
-    value: string
-    status?: $Enums.SharedStatus
-  }
-
-  export type PricePolicyCreateOrConnectWithoutTeachersInput = {
-    where: PricePolicyWhereUniqueInput
-    create: XOR<PricePolicyCreateWithoutTeachersInput, PricePolicyUncheckedCreateWithoutTeachersInput>
-  }
-
   export type UserCreateWithoutTeacherProfileInput = {
     id: string
     name: string
@@ -13198,29 +11869,6 @@ export namespace Prisma {
     status?: EnumSharedStatusFilter<"GradeLevel"> | $Enums.SharedStatus
   }
 
-  export type PricePolicyUpsertWithoutTeachersInput = {
-    update: XOR<PricePolicyUpdateWithoutTeachersInput, PricePolicyUncheckedUpdateWithoutTeachersInput>
-    create: XOR<PricePolicyCreateWithoutTeachersInput, PricePolicyUncheckedCreateWithoutTeachersInput>
-    where?: PricePolicyWhereInput
-  }
-
-  export type PricePolicyUpdateToOneWithWhereWithoutTeachersInput = {
-    where?: PricePolicyWhereInput
-    data: XOR<PricePolicyUpdateWithoutTeachersInput, PricePolicyUncheckedUpdateWithoutTeachersInput>
-  }
-
-  export type PricePolicyUpdateWithoutTeachersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: StringFieldUpdateOperationsInput | string
-    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
-  }
-
-  export type PricePolicyUncheckedUpdateWithoutTeachersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value?: StringFieldUpdateOperationsInput | string
-    status?: EnumSharedStatusFieldUpdateOperationsInput | $Enums.SharedStatus
-  }
-
   export type UserUpsertWithoutTeacherProfileInput = {
     update: XOR<UserUpdateWithoutTeacherProfileInput, UserUncheckedUpdateWithoutTeacherProfileInput>
     create: XOR<UserCreateWithoutTeacherProfileInput, UserUncheckedCreateWithoutTeacherProfileInput>
@@ -13262,11 +11910,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
-    pricePolicy?: PricePolicyCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -13274,7 +11922,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    pricePolicyId?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     userId: string
     weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
@@ -13310,7 +11958,7 @@ export namespace Prisma {
     id?: StringFilter<"Teacher"> | string
     avatar?: StringFilter<"Teacher"> | string
     biUrl?: StringNullableFilter<"Teacher"> | string | null
-    pricePolicyId?: StringNullableFilter<"Teacher"> | string | null
+    priceTier?: EnumPriceTierNullableFilter<"Teacher"> | $Enums.PriceTier | null
     status?: EnumTeacherStatusFilter<"Teacher"> | $Enums.TeacherStatus
     userId?: StringFilter<"Teacher"> | string
   }
@@ -13319,11 +11967,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
-    pricePolicy?: PricePolicyCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -13331,7 +11979,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    pricePolicyId?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -13364,11 +12012,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     zones?: ZoneCreateNestedManyWithoutTeachersInput
-    pricePolicy?: PricePolicyCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -13376,7 +12024,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    pricePolicyId?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -13409,11 +12057,11 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     subjects?: SubjectCreateNestedManyWithoutTeachersInput
     weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
     gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
-    pricePolicy?: PricePolicyCreateNestedOneWithoutTeachersInput
     user: UserCreateNestedOneWithoutTeacherProfileInput
   }
 
@@ -13421,7 +12069,7 @@ export namespace Prisma {
     id: string
     avatar: string
     biUrl?: string | null
-    pricePolicyId?: string | null
+    priceTier?: $Enums.PriceTier | null
     status?: $Enums.TeacherStatus
     userId: string
     subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
@@ -13448,56 +12096,6 @@ export namespace Prisma {
   export type TeacherUpdateManyWithWhereWithoutZonesInput = {
     where: TeacherScalarWhereInput
     data: XOR<TeacherUpdateManyMutationInput, TeacherUncheckedUpdateManyWithoutZonesInput>
-  }
-
-  export type TeacherCreateWithoutPricePolicyInput = {
-    id: string
-    avatar: string
-    biUrl?: string | null
-    status?: $Enums.TeacherStatus
-    subjects?: SubjectCreateNestedManyWithoutTeachersInput
-    weekDays?: WeekDayCreateNestedManyWithoutTeachersInput
-    zones?: ZoneCreateNestedManyWithoutTeachersInput
-    gradeLevels?: GradeLevelCreateNestedManyWithoutTeachersInput
-    user: UserCreateNestedOneWithoutTeacherProfileInput
-  }
-
-  export type TeacherUncheckedCreateWithoutPricePolicyInput = {
-    id: string
-    avatar: string
-    biUrl?: string | null
-    status?: $Enums.TeacherStatus
-    userId: string
-    subjects?: SubjectUncheckedCreateNestedManyWithoutTeachersInput
-    weekDays?: WeekDayUncheckedCreateNestedManyWithoutTeachersInput
-    zones?: ZoneUncheckedCreateNestedManyWithoutTeachersInput
-    gradeLevels?: GradeLevelUncheckedCreateNestedManyWithoutTeachersInput
-  }
-
-  export type TeacherCreateOrConnectWithoutPricePolicyInput = {
-    where: TeacherWhereUniqueInput
-    create: XOR<TeacherCreateWithoutPricePolicyInput, TeacherUncheckedCreateWithoutPricePolicyInput>
-  }
-
-  export type TeacherCreateManyPricePolicyInputEnvelope = {
-    data: TeacherCreateManyPricePolicyInput | TeacherCreateManyPricePolicyInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TeacherUpsertWithWhereUniqueWithoutPricePolicyInput = {
-    where: TeacherWhereUniqueInput
-    update: XOR<TeacherUpdateWithoutPricePolicyInput, TeacherUncheckedUpdateWithoutPricePolicyInput>
-    create: XOR<TeacherCreateWithoutPricePolicyInput, TeacherUncheckedCreateWithoutPricePolicyInput>
-  }
-
-  export type TeacherUpdateWithWhereUniqueWithoutPricePolicyInput = {
-    where: TeacherWhereUniqueInput
-    data: XOR<TeacherUpdateWithoutPricePolicyInput, TeacherUncheckedUpdateWithoutPricePolicyInput>
-  }
-
-  export type TeacherUpdateManyWithWhereWithoutPricePolicyInput = {
-    where: TeacherScalarWhereInput
-    data: XOR<TeacherUpdateManyMutationInput, TeacherUncheckedUpdateManyWithoutPricePolicyInput>
   }
 
   export type SubjectUpdateWithoutTeachersInput = {
@@ -13576,11 +12174,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
-    pricePolicy?: PricePolicyUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -13588,7 +12186,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
@@ -13600,7 +12198,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -13609,11 +12207,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
-    pricePolicy?: PricePolicyUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -13621,7 +12219,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -13633,7 +12231,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -13642,11 +12240,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     zones?: ZoneUpdateManyWithoutTeachersNestedInput
-    pricePolicy?: PricePolicyUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -13654,7 +12252,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -13666,7 +12264,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -13675,11 +12273,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     subjects?: SubjectUpdateManyWithoutTeachersNestedInput
     weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
     gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
-    pricePolicy?: PricePolicyUpdateOneWithoutTeachersNestedInput
     user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
   }
 
@@ -13687,7 +12285,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
     subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
@@ -13699,47 +12297,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    pricePolicyId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TeacherCreateManyPricePolicyInput = {
-    id: string
-    avatar: string
-    biUrl?: string | null
-    status?: $Enums.TeacherStatus
-    userId: string
-  }
-
-  export type TeacherUpdateWithoutPricePolicyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
-    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
-    subjects?: SubjectUpdateManyWithoutTeachersNestedInput
-    weekDays?: WeekDayUpdateManyWithoutTeachersNestedInput
-    zones?: ZoneUpdateManyWithoutTeachersNestedInput
-    gradeLevels?: GradeLevelUpdateManyWithoutTeachersNestedInput
-    user?: UserUpdateOneRequiredWithoutTeacherProfileNestedInput
-  }
-
-  export type TeacherUncheckedUpdateWithoutPricePolicyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
-    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
-    userId?: StringFieldUpdateOperationsInput | string
-    subjects?: SubjectUncheckedUpdateManyWithoutTeachersNestedInput
-    weekDays?: WeekDayUncheckedUpdateManyWithoutTeachersNestedInput
-    zones?: ZoneUncheckedUpdateManyWithoutTeachersNestedInput
-    gradeLevels?: GradeLevelUncheckedUpdateManyWithoutTeachersNestedInput
-  }
-
-  export type TeacherUncheckedUpdateManyWithoutPricePolicyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
-    biUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    priceTier?: NullableEnumPriceTierFieldUpdateOperationsInput | $Enums.PriceTier | null
     status?: EnumTeacherStatusFieldUpdateOperationsInput | $Enums.TeacherStatus
     userId?: StringFieldUpdateOperationsInput | string
   }

@@ -3,10 +3,9 @@ import { Subject } from '@/modules/bukis/domain/subject/Subject';
 
 import { WeekDay } from '@/modules/bukis/domain/weekday/WeekDay';
 import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
-import { PricePolicy } from '@/modules/bukis/domain/price/PricePolicy';
 
 import { TeacherProfileStatus } from './TeacherProfileStatus';
-import { PriceTier } from '@/modules/bukis/domain/price/PriceTier';
+import { PriceTier } from '@/modules/bukis/domain/PriceTier';
 import { generateTeacherId } from '@/shared/helpers/GenerateBukiIDs';
 
 export class Teacher {
@@ -18,7 +17,7 @@ export class Teacher {
   private weekDays: WeekDay[];
   private lessonZones: Zone[];
   private gradeLevels: GradeLevel[];
-  private pricePolicy: PricePolicy;
+  private priceTier: PriceTier | null;
   private status: TeacherProfileStatus;
 
   private constructor(
@@ -30,7 +29,7 @@ export class Teacher {
     weekDays: WeekDay[],
     lessonZones: Zone[],
     gradeLevels: GradeLevel[],
-    pricePolicy: PricePolicy,
+    priceTier: PriceTier | null,
     status: TeacherProfileStatus,
   ) {
     this.id = id;
@@ -41,7 +40,7 @@ export class Teacher {
     this.weekDays = weekDays;
     this.lessonZones = lessonZones;
     this.gradeLevels = gradeLevels;
-    this.pricePolicy = pricePolicy;
+    this.priceTier = priceTier;
     this.status = status;
   }
 
@@ -55,7 +54,7 @@ export class Teacher {
       [],
       [],
       [],
-      PricePolicy.create(PriceTier['0K']),
+      null,
       TeacherProfileStatus.PENDING,
     );
   }
@@ -69,7 +68,7 @@ export class Teacher {
     weekDays: WeekDay[],
     lessonZones: Zone[],
     gradeLevels: GradeLevel[],
-    pricePolicy: PricePolicy,
+    priceTier: PriceTier | null,
     status: TeacherProfileStatus,
   ): Teacher {
     return new Teacher(
@@ -81,7 +80,7 @@ export class Teacher {
       weekDays,
       lessonZones,
       gradeLevels,
-      pricePolicy,
+      priceTier,
       status,
     );
   }
@@ -118,8 +117,8 @@ export class Teacher {
     return this.gradeLevels;
   }
 
-  public getPricePolicy(): PricePolicy {
-    return this.pricePolicy;
+  public getPriceTier(): PriceTier | null {
+    return this.priceTier;
   }
 
   public getStatus(): TeacherProfileStatus {
@@ -150,8 +149,8 @@ export class Teacher {
     this.gradeLevels = gradeLevels;
   }
 
-  public updatePricePolicy(pricePolicy: PricePolicy): void {
-    this.pricePolicy = pricePolicy;
+  public updatePriceTier(priceTier: PriceTier): void {
+    this.priceTier = priceTier;
   }
 
   public approve(): void {

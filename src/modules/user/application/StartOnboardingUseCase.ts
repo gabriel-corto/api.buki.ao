@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { User } from '@/shared/domain/user/User';
@@ -24,6 +24,12 @@ export class StartOnBoardingUseCase {
   ) {}
 
   async execute(input: StartOnboardingUseCaseInput) {
+    const existingUser = await this.userRepository.findByPhone(input.phone);
+
+    if (existingUser) {
+      throw new ConflictException();
+    }
+
     if (input.accountType === UserAccountType.CUSTOMER) {
       const user = User.create(
         input.name,

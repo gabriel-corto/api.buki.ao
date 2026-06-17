@@ -4,11 +4,11 @@ import {
   Patch,
   Post,
   Put,
-  UploadedFile,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
 import { StartOnBoardingUseCase } from '../../application/StartOnboardingUseCase';
 import { UploadTeacherDocumentUseCase } from '../../application/UploadTeacherDocumentUseCase';
@@ -63,16 +63,24 @@ export class UserController {
   @Patch('/profile/teacher-document')
   @SkipAuth()
   @UseGuards(OnboardingGuard)
-  @UseInterceptors(FileInterceptor('avatar'))
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'avatar', maxCount: 1 },
+      { name: 'bi', maxCount: 1 },
+    ]),
+  )
   async uploadTeacherAvatar(
     @CurrentUser() user: OnboardingTokenPayload,
-    @UploadedFile('avatar') avatar: Express.Multer.File,
-    @UploadedFile('bi') bi: Express.Multer.File,
+    @UploadedFiles()
+    files: { avatar?: Express.Multer.File[]; bi?: Express.Multer.File[] },
   ): Promise<ApiDataResponse> {
+    const avatar = files.avatar?.[0];
+    const bi = files.bi?.[0];
+
     const { avatarUrl } = await this.uploadTeacherDocumentUseCase.execute({
       userId: user.userId as string,
-      avatar,
-      bi,
+      avatar: avatar as Express.Multer.File,
+      bi: bi as Express.Multer.File,
     });
 
     return {

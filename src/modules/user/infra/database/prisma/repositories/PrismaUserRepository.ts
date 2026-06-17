@@ -11,8 +11,12 @@ export class PrismaUserRepository implements UserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async save(user: User): Promise<void> {
-    await this.prisma.user.create({
-      data: PrismaUserMapper.toPrisma(user),
+    await this.prisma.user.upsert({
+      where: {
+        id: user.getId(),
+      },
+      update: PrismaUserMapper.toPrisma(user),
+      create: PrismaUserMapper.toPrisma(user),
     });
   }
 
@@ -22,14 +26,14 @@ export class PrismaUserRepository implements UserRepository {
   }
 
   async findById(id: string): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.user.findFirst({
       where: { id },
     });
     return user ? PrismaUserMapper.toDomain(user) : null;
   }
 
   async findByPhone(phone: string): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.user.findFirst({
       where: { phone },
     });
     return user ? PrismaUserMapper.toDomain(user) : null;

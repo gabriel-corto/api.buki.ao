@@ -12,8 +12,12 @@ export class PrismaCustomerRepository implements CustomerRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async save(customer: Customer): Promise<void> {
-    await this.prisma.customer.create({
-      data: PrismaCustomerMapper.toPrisma(customer),
+    await this.prisma.customer.upsert({
+      where: {
+        userId: customer.getUserId(),
+      },
+      update: PrismaCustomerMapper.toPrisma(customer),
+      create: PrismaCustomerMapper.toPrisma(customer),
     });
   }
 

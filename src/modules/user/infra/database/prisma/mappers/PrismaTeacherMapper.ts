@@ -4,7 +4,7 @@ import {
   WeekDay as PrismaWeekDay,
   Zone as PrismaZone,
   GradeLevel as PrismaGradeLevel,
-  PricePolicy as PrismaPricePolicy,
+  Prisma,
 } from 'prisma/generated';
 
 import { Teacher } from '@/modules/user/domain/Teacher';
@@ -12,12 +12,11 @@ import { Subject } from '@/modules/bukis/domain/subject/Subject';
 import { WeekDay } from '@/modules/bukis/domain/weekday/WeekDay';
 import { Zone } from '@/modules/bukis/domain/zone/Zone';
 import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
-import { PricePolicy } from '@/modules/bukis/domain/price/PricePolicy';
 import { TeacherProfileStatus } from '@/modules/user/domain/TeacherProfileStatus';
 import { SubjectName } from '@/modules/bukis/domain/subject/SubjectName';
 import { WeekDayName } from '@/modules/bukis/domain/weekday/WeekDayName';
 import { GradeLevelName } from '@/modules/bukis/domain/grade-level/GradeLevelName';
-import { PriceTier } from '@/modules/bukis/domain/price/PriceTier';
+import { PriceTier } from '@/modules/bukis/domain/PriceTier';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
 
 export type PrismaTeacherWithRelations = PrismaTeacher & {
@@ -25,7 +24,6 @@ export type PrismaTeacherWithRelations = PrismaTeacher & {
   weekDays: PrismaWeekDay[];
   zones: PrismaZone[];
   gradeLevels: PrismaGradeLevel[];
-  pricePolicy: PrismaPricePolicy | null;
 };
 
 export class PrismaTeacherMapper {
@@ -51,24 +49,23 @@ export class PrismaTeacherMapper {
           g.status as SharedStatus,
         ),
       ),
-      raw.pricePolicy
-        ? PricePolicy.restore(
-            raw.pricePolicy.id,
-            raw.pricePolicy.value as PriceTier,
-            raw.pricePolicy.status as SharedStatus,
-          )
-        : (null as any),
+      raw.priceTier as PriceTier,
       raw.status as TeacherProfileStatus,
     );
   }
 
-  static toPrisma(teacher: Teacher): any {
+  static toPrisma(teacher: Teacher): Prisma.TeacherCreateInput {
     return {
       id: teacher.getId(),
-      userId: teacher.getUserId(),
       avatar: teacher.getAvatar(),
+      biUrl: teacher.getBiUrl(),
       status: teacher.getStatus(),
-      pricePolicyId: teacher.getPricePolicy()?.getId(),
+      priceTier: teacher.getPriceTier() as PriceTier,
+      user: {
+        connect: {
+          id: teacher.getUserId(),
+        },
+      },
     };
   }
 }
