@@ -27,4 +27,9 @@ export class PrismaCustomerRepository implements CustomerRepository {
     });
     return customer ? PrismaCustomerMapper.toDomain(customer) : null;
   }
+
+  async findAll(): Promise<Customer[]> {
+    const customers = await this.prisma.customer.findMany();
+    return customers.map((customer) => PrismaCustomerMapper.toDomain(customer));
+  }
 }

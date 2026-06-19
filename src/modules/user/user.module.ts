@@ -9,10 +9,14 @@ import { PrismaCustomerRepository } from './infra/database/prisma/repositories/P
 import { TeacherRepository } from './domain/teacher/TeacherRepository';
 import { PrismaTeacherRepository } from './infra/database/prisma/repositories/PrismaTeacherRepository';
 
-import { StartOnBoardingUseCase } from './application/StartOnboardingUseCase';
-import { UploadTeacherDocumentUseCase } from './application/UploadTeacherDocumentUseCase';
-import { UpdateTeacherBukiInformationUseCase } from './application/UpdateTeacherBukiInformationUseCase';
-import { UpdateTeacherPricingTierUseCase } from './application/UpdateTeacherPricingTierUseCase';
+import { StartOnBoardingUseCase } from './application/onboarding/StartOnboardingUseCase';
+import { UploadTeacherDocumentUseCase } from './application/onboarding/UploadTeacherDocumentUseCase';
+import { UpdateTeacherBukiInformationUseCase } from './application/onboarding/UpdateTeacherBukiInformationUseCase';
+import { UpdateTeacherPricingTierUseCase } from './application/onboarding/UpdateTeacherPricingTierUseCase';
+import { ListTeachersUseCase } from './application/teacher/ListTeachersUseCase';
+import { ApproveTeacherUseCase } from './application/teacher/ApproveTeacherUseCase';
+import { ReproveTeacherUseCase } from './application/teacher/ReproveTeacherUseCase';
+import { ListCustomersUseCase } from './application/customer/ListCustomersUseCase';
 
 import { StorageService } from '@/shared/domain/StorageService';
 import { CloudinaryStorageService } from '@/shared/infra/storage/CloudinaryStorageService';
@@ -25,6 +29,10 @@ import { CloudinaryStorageService } from '@/shared/infra/storage/CloudinaryStora
     UploadTeacherDocumentUseCase,
     UpdateTeacherBukiInformationUseCase,
     UpdateTeacherPricingTierUseCase,
+    ListTeachersUseCase,
+    ApproveTeacherUseCase,
+    ReproveTeacherUseCase,
+    ListCustomersUseCase,
     {
       provide: UserRepository,
       useClass: PrismaUserRepository,

@@ -21,6 +21,13 @@ export class InMemoryCustomerRepository implements CustomerRepository {
     );
     if (index !== -1) {
       this.customers[index] = customer;
+    } else {
+      this.customers.push(customer);
     }
+  }
+
+  async findAll(): Promise<Customer[]> {
+    await Promise.resolve();
+    return this.customers;
   }
 }

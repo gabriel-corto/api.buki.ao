@@ -17,30 +17,35 @@ import { ActivateSubjectUseCase } from './application/subjects/ActivateSubjectUs
 import { DeactivateSubjectUseCase } from './application/subjects/DeactivateSubjectUseCase';
 import { DeleteSubjectUseCase } from './application/subjects/DeleteSubjectUseCase';
 import { UpdateSubjectUseCase } from './application/subjects/UpdateSubjectUseCase';
+import { ListSubjectsUseCase } from './application/subjects/ListSubjectsUseCase';
 
 import { CreateZoneUseCase } from './application/zones/CreateZoneUseCase';
 import { ActivateZoneUseCase } from './application/zones/ActivateZoneUseCase';
 import { DeactivateZoneUseCase } from './application/zones/DeactivateZoneUseCase';
 import { DeleteZoneUseCase } from './application/zones/DeleteZoneUseCase';
 import { UpdateZoneUseCase } from './application/zones/UpdateZoneUseCase';
+import { ListZonesUseCase } from './application/zones/ListZonesUseCase';
 
 import { CreateGradeLevelUseCase } from './application/grade-level/CreateGradeLevelUseCase';
 import { ActivateGradeLevelUseCase } from './application/grade-level/ActivateGradeLevelUseCase';
 import { DeactivateGradeLevelUseCase } from './application/grade-level/DeactivateGradeLevelUseCase';
 import { DeleteGradeLevelUseCase } from './application/grade-level/DeleteGradeLevelUseCase';
 import { UpdateGradeLevelUseCase } from './application/grade-level/UpdateGradeLevelUseCase';
+import { ListGradeLevelsUseCase } from './application/grade-level/ListGradeLevelsUseCase';
 
 import { CreateWeekdayUseCase } from './application/lesson-days/CreateWeekdayUseCase';
 import { ActivateWeekDayUseCase } from './application/lesson-days/ActivateWeekDayUseCase';
 import { DeactivateWeekDayUseCase } from './application/lesson-days/DeactivateWeekDayUseCase';
 import { DeleteWeekDayUseCase } from './application/lesson-days/DeleteWeekDayUseCase';
 import { UpdateWeekDayUseCase } from './application/lesson-days/UpdateWeekDayUseCase';
+import { ListWeekDaysUseCase } from './application/lesson-days/ListWeekDaysUseCase';
 
 import { CreateTeacherPricingTierUseCase } from './application/teacher-pricing-tier/CreateTeacherPricingTierUseCase';
 import { ActivateTeacherPricingTierUseCase } from './application/teacher-pricing-tier/ActivateTeacherPricingTierUseCase';
 import { DeactivateTeacherPricingTierUseCase } from './application/teacher-pricing-tier/DeactivateTeacherPricingTierUseCase';
 import { DeleteTeacherPricingTierUseCase } from './application/teacher-pricing-tier/DeleteTeacherPricingTierUseCase';
 import { UpdateBukiPricingTierUseCase } from './application/teacher-pricing-tier/UpdateTeacherPricingTierUseCase';
+import { ListTeacherPricingTiersUseCase } from './application/teacher-pricing-tier/ListTeacherPricingTiersUseCase';
 
 @Module({
   controllers: [BukiController],
@@ -74,6 +79,12 @@ import { UpdateBukiPricingTierUseCase } from './application/teacher-pricing-tier
     DeactivateTeacherPricingTierUseCase,
     DeleteTeacherPricingTierUseCase,
     UpdateBukiPricingTierUseCase,
+
+    ListSubjectsUseCase,
+    ListZonesUseCase,
+    ListGradeLevelsUseCase,
+    ListWeekDaysUseCase,
+    ListTeacherPricingTiersUseCase,
 
     {
       provide: SubjectRepository,

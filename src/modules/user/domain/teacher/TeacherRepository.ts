@@ -3,4 +3,6 @@ import { Teacher } from './Teacher';
 export abstract class TeacherRepository {
   abstract save(teacher: Teacher): Promise<void>;
   abstract findByUserId(userId: string): Promise<Teacher | null>;
+  abstract findById(id: string): Promise<Teacher | null>;
+  abstract findAll(): Promise<Teacher[]>;
 }

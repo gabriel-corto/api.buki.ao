@@ -1,9 +1,15 @@
-import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 
 import { ParamsId } from '@/shared/dto/ParamsId';
 import type { ApiDataResponse } from '@/shared/types/ApiResponse';
 import { CreateBukiInformationDto } from './CreateBukiInformationDto';
 import { UpdateBukiInformationDto } from './UpdateBukiInformationDto';
+
+import { ListSubjectsUseCase } from '../../application/subjects/ListSubjectsUseCase';
+import { ListZonesUseCase } from '../../application/zones/ListZonesUseCase';
+import { ListGradeLevelsUseCase } from '../../application/grade-level/ListGradeLevelsUseCase';
+import { ListWeekDaysUseCase } from '../../application/lesson-days/ListWeekDaysUseCase';
+import { ListTeacherPricingTiersUseCase } from '../../application/teacher-pricing-tier/ListTeacherPricingTiersUseCase';
 
 import { CreateSubjectUseCase } from '../../application/subjects/CreateSubjectUseCase';
 import { CreateZoneUseCase } from '../../application/zones/CreateZoneUseCase';
@@ -40,29 +46,39 @@ export class BukiController {
   constructor(
     private createSubjectUseCase: CreateSubjectUseCase,
     private activateSubjectUseCase: ActivateSubjectUseCase,
+    private updateSubjectUseCase: UpdateSubjectUseCase,
+    private deleteSubjectUseCase: DeleteSubjectUseCase,
+    private deactivateSubjectUseCase: DeactivateSubjectUseCase,
+
     private createZoneUseCase: CreateZoneUseCase,
     private activateZoneUseCase: ActivateZoneUseCase,
+    private deactivateZoneUseCase: DeactivateZoneUseCase,
+    private deleteZoneUseCase: DeleteZoneUseCase,
+    private updateZoneUseCase: UpdateZoneUseCase,
+
     private createGradeLevelUseCase: CreateGradeLevelUseCase,
     private activateGradeLevelUseCase: ActivateGradeLevelUseCase,
+    private deactivateGradeLevelUseCase: DeactivateGradeLevelUseCase,
+    private deleteGradeLevelUseCase: DeleteGradeLevelUseCase,
+    private updateGradeLevelUseCase: UpdateGradeLevelUseCase,
+
     private createLessonDayUseCase: CreateWeekdayUseCase,
     private activateLessonDayUseCase: ActivateWeekDayUseCase,
+    private deactivateLessonDayUseCase: DeactivateWeekDayUseCase,
+    private deleteLessonDayUseCase: DeleteWeekDayUseCase,
+    private updateLessonDayUseCase: UpdateWeekDayUseCase,
+
     private createTeacherPricingTierUseCase: CreateTeacherPricingTierUseCase,
     private activateTeacherPricingTierUseCase: ActivateTeacherPricingTierUseCase,
-    private deactivateSubjectUseCase: DeactivateSubjectUseCase,
-    private deactivateZoneUseCase: DeactivateZoneUseCase,
-    private deactivateGradeLevelUseCase: DeactivateGradeLevelUseCase,
-    private deactivateLessonDayUseCase: DeactivateWeekDayUseCase,
     private deactivateTeacherPricingTierUseCase: DeactivateTeacherPricingTierUseCase,
-    private deleteSubjectUseCase: DeleteSubjectUseCase,
-    private deleteZoneUseCase: DeleteZoneUseCase,
-    private deleteGradeLevelUseCase: DeleteGradeLevelUseCase,
-    private deleteLessonDayUseCase: DeleteWeekDayUseCase,
     private deleteTeacherPricingTierUseCase: DeleteTeacherPricingTierUseCase,
-    private updateSubjectUseCase: UpdateSubjectUseCase,
-    private updateZoneUseCase: UpdateZoneUseCase,
-    private updateGradeLevelUseCase: UpdateGradeLevelUseCase,
-    private updateLessonDayUseCase: UpdateWeekDayUseCase,
     private updateTeacherPricingTierUseCase: UpdateBukiPricingTierUseCase,
+
+    private listSubjectsUseCase: ListSubjectsUseCase,
+    private listZonesUseCase: ListZonesUseCase,
+    private listGradeLevelsUseCase: ListGradeLevelsUseCase,
+    private listWeekDaysUseCase: ListWeekDaysUseCase,
+    private listTeacherPricingTiersUseCase: ListTeacherPricingTiersUseCase,
   ) {}
 
   @Post('/subject/create')
@@ -349,6 +365,56 @@ export class BukiController {
     return {
       success: true,
       message: 'Plano de preço actualizado com sucesso.',
+    };
+  }
+
+  @Get('/subjects')
+  async listSubjects(): Promise<ApiDataResponse> {
+    const subjects = await this.listSubjectsUseCase.execute();
+
+    return {
+      success: true,
+      data: subjects,
+    };
+  }
+
+  @Get('/zones')
+  async listZones(): Promise<ApiDataResponse> {
+    const zones = await this.listZonesUseCase.execute();
+
+    return {
+      success: true,
+      data: zones,
+    };
+  }
+
+  @Get('/gradeLevels')
+  async listGradeLevels(): Promise<ApiDataResponse> {
+    const gradeLevels = await this.listGradeLevelsUseCase.execute();
+
+    return {
+      success: true,
+      data: gradeLevels,
+    };
+  }
+
+  @Get('/lessonDays')
+  async listLessonDays(): Promise<ApiDataResponse> {
+    const days = await this.listWeekDaysUseCase.execute();
+
+    return {
+      success: true,
+      data: days,
+    };
+  }
+
+  @Get('/teacher-pricing-tiers')
+  async listTeacherPricingTiers(): Promise<ApiDataResponse> {
+    const tiers = await this.listTeacherPricingTiersUseCase.execute();
+
+    return {
+      success: true,
+      data: tiers,
     };
   }
 }

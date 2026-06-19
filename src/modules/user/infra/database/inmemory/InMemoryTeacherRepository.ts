@@ -25,4 +25,14 @@ export class InMemoryTeacherRepository implements TeacherRepository {
       this.teachers.push(teacher);
     }
   }
+
+  async findById(id: string): Promise<Teacher | null> {
+    await Promise.resolve();
+    return this.teachers.find((teacher) => teacher.getId() === id) || null;
+  }
+
+  async findAll(): Promise<Teacher[]> {
+    await Promise.resolve();
+    return this.teachers;
+  }
 }

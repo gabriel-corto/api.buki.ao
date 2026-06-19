@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
   Patch,
   Post,
   Put,
@@ -10,10 +12,14 @@ import {
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
-import { StartOnBoardingUseCase } from '../../application/StartOnboardingUseCase';
-import { UploadTeacherDocumentUseCase } from '../../application/UploadTeacherDocumentUseCase';
-import { UpdateTeacherBukiInformationUseCase } from '../../application/UpdateTeacherBukiInformationUseCase';
-import { UpdateTeacherPricingTierUseCase } from '../../application/UpdateTeacherPricingTierUseCase';
+import { StartOnBoardingUseCase } from '../../application/onboarding/StartOnboardingUseCase';
+import { UploadTeacherDocumentUseCase } from '../../application/onboarding/UploadTeacherDocumentUseCase';
+import { UpdateTeacherBukiInformationUseCase } from '../../application/onboarding/UpdateTeacherBukiInformationUseCase';
+import { UpdateTeacherPricingTierUseCase } from '../../application/onboarding/UpdateTeacherPricingTierUseCase';
+import { ListTeachersUseCase } from '../../application/teacher/ListTeachersUseCase';
+import { ApproveTeacherUseCase } from '../../application/teacher/ApproveTeacherUseCase';
+import { ReproveTeacherUseCase } from '../../application/teacher/ReproveTeacherUseCase';
+import { ListCustomersUseCase } from '../../application/customer/ListCustomersUseCase';
 
 import { StartOnBoardingDto } from './StartOnBoardingDto';
 import { UpdateTeacherPricingTierDto } from './UpdateTeacherPricingTierDto';
@@ -24,6 +30,7 @@ import { SkipAuth } from '@/shared/decorators/skip-auth.decorator';
 import { OnboardingGuard } from '@/shared/guard/onboarding.guard';
 
 import { type ApiDataResponse } from '@/shared/types/ApiResponse';
+import { ParamsId } from '@/shared/dto/ParamsId';
 import {
   type OnboardingTokenPayload,
   type TokenPayload,
@@ -36,6 +43,10 @@ export class UserController {
     private readonly uploadTeacherDocumentUseCase: UploadTeacherDocumentUseCase,
     private readonly updateTeacherBukiInformationUseCase: UpdateTeacherBukiInformationUseCase,
     private readonly updateTeacherPricingTierUseCase: UpdateTeacherPricingTierUseCase,
+    private readonly listTeachersUseCase: ListTeachersUseCase,
+    private readonly approveTeacherUseCase: ApproveTeacherUseCase,
+    private readonly reproveTeacherUseCase: ReproveTeacherUseCase,
+    private readonly listCustomersUseCase: ListCustomersUseCase,
   ) {}
 
   @Post('/profile/onboarding')
@@ -128,6 +139,46 @@ export class UserController {
       data: {},
       success: true,
       message: 'Informações atualizada com sucesso!',
+    };
+  }
+
+  @Get('/teachers')
+  async listTeachers(): Promise<ApiDataResponse> {
+    const teachers = await this.listTeachersUseCase.execute();
+
+    return {
+      data: teachers,
+      success: true,
+    };
+  }
+
+  @Patch('/teacher/:id/approve')
+  async approveTeacher(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.approveTeacherUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Professor aprovado com sucesso!',
+    };
+  }
+
+  @Patch('/teacher/:id/reprove')
+  async reproveTeacher(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.reproveTeacherUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Professor reprovado com sucesso!',
+    };
+  }
+
+  @Get('/customers')
+  async listCustomers(): Promise<ApiDataResponse> {
+    const customers = await this.listCustomersUseCase.execute();
+
+    return {
+      data: customers,
+      success: true,
     };
   }
 }

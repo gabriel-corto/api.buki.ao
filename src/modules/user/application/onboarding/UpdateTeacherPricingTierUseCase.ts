@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 
-import { TeacherRepository } from '../domain/teacher/TeacherRepository';
+import { TeacherRepository } from '../../domain/teacher/TeacherRepository';
 import { UpdateTeacherPricingTierUseCaseInput } from './UpdateTeacherPricingTierUseCaseInput';
 import { TeacherPricingTierRepository } from '@/modules/bukis/domain/teacher-pricing-tier/TeacherPricingTierRepository';
 
