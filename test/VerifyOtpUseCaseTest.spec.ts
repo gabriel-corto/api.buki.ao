@@ -3,6 +3,7 @@ import { VerifyOtpUseCase } from '@/modules/auth/application/VerifyOtpUseCase';
 
 import { InMemoryOtpRepository } from '@/modules/auth/infra/InMemoryOtpRepository';
 import { InMemoryUserRepository } from '@/modules/user/infra/database/inmemory/InMemoryUserRepository';
+import { InMemoryTeacherRepository } from '@/modules/user/infra/database/inmemory/InMemoryTeacherRepository';
 
 import { FakeSmsProvider } from '@/shared/infra/sms/FakeSmsProvider';
 import { FakeOtpService } from '@/modules/auth/infra/FakeOtpService';
@@ -13,6 +14,7 @@ import { User } from '@/shared/domain/user/User';
 describe('Verify OTP Use Case', () => {
   let otpRepository: InMemoryOtpRepository;
   let userRepository: InMemoryUserRepository;
+  let teacherRepository: InMemoryTeacherRepository;
   let otpService: FakeOtpService;
   let tokenService: FakeTokenService;
   let smsProvider: FakeSmsProvider;
@@ -20,6 +22,7 @@ describe('Verify OTP Use Case', () => {
   beforeEach(() => {
     otpRepository = new InMemoryOtpRepository();
     userRepository = new InMemoryUserRepository();
+    teacherRepository = new InMemoryTeacherRepository();
     otpService = new FakeOtpService('123456');
     tokenService = new FakeTokenService();
     smsProvider = new FakeSmsProvider();
@@ -36,6 +39,7 @@ describe('Verify OTP Use Case', () => {
       otpRepository,
       userRepository,
       tokenService,
+      teacherRepository,
     );
 
     await requestOtpUseCase.execute({
@@ -70,6 +74,7 @@ describe('Verify OTP Use Case', () => {
       otpRepository,
       userRepository,
       tokenService,
+      teacherRepository,
     );
 
     await requestOtpUseCase.execute({
@@ -96,6 +101,7 @@ describe('Verify OTP Use Case', () => {
       otpRepository,
       userRepository,
       tokenService,
+      teacherRepository,
     );
 
     await requestOtpUseCase.execute({
@@ -121,6 +127,7 @@ describe('Verify OTP Use Case', () => {
       otpRepository,
       userRepository,
       tokenService,
+      teacherRepository,
     );
 
     await requestOtpUseCase.execute({
