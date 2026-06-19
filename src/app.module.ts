@@ -12,6 +12,7 @@ import { PrismaModule } from './shared/infra/database/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { BukisModule } from './modules/bukis/bukis.module';
+import { GenerateManager } from './shared/infra/GenerateManager';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { BukisModule } from './modules/bukis/bukis.module';
   ],
   controllers: [AppController],
   providers: [
+    GenerateManager,
     {
       provide: APP_GUARD,
       useClass: AuthGuard,

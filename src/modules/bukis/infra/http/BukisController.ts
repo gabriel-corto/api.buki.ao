@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 
 import { ParamsId } from '@/shared/dto/ParamsId';
 import type { ApiDataResponse } from '@/shared/types/ApiResponse';
@@ -40,6 +49,9 @@ import { UpdateZoneUseCase } from '../../application/zones/UpdateZoneUseCase';
 import { UpdateGradeLevelUseCase } from '../../application/grade-level/UpdateGradeLevelUseCase';
 import { UpdateWeekDayUseCase } from '../../application/lesson-days/UpdateWeekDayUseCase';
 import { UpdateBukiPricingTierUseCase } from '../../application/teacher-pricing-tier/UpdateTeacherPricingTierUseCase';
+import { RoleGuard } from '@/shared/guard/role.guard';
+import { Roles } from '@/shared/decorators/roles.decorator';
+import { UserAccountType } from '@/shared/domain/user/UserAccountType';
 
 @Controller('bukis')
 export class BukiController {
@@ -82,6 +94,8 @@ export class BukiController {
   ) {}
 
   @Post('/subject/create')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async createSubject(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -94,6 +108,8 @@ export class BukiController {
   }
 
   @Patch('/subject/:id/activate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async activateSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.activateSubjectUseCase.execute(params.id);
 
@@ -104,6 +120,8 @@ export class BukiController {
   }
 
   @Post('/zone/create')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async createZone(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -116,6 +134,8 @@ export class BukiController {
   }
 
   @Patch('/zone/:id/activate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async activateZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.activateZoneUseCase.execute(params.id);
 
@@ -126,6 +146,8 @@ export class BukiController {
   }
 
   @Post('/gradeLevel/create')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async createGradeLevel(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -138,6 +160,8 @@ export class BukiController {
   }
 
   @Patch('/gradeLevel/:id/activate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async activateGradeLevel(
     @Param() params: ParamsId,
   ): Promise<ApiDataResponse> {
@@ -150,6 +174,8 @@ export class BukiController {
   }
 
   @Post('/lessonDay/create')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async createLessonDay(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -162,6 +188,8 @@ export class BukiController {
   }
 
   @Patch('/lessonDay/:id/activate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async activateLessonDay(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.activateLessonDayUseCase.execute(params.id);
 
@@ -172,6 +200,8 @@ export class BukiController {
   }
 
   @Post('/teacher-pricing-tier/create')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async createTeacherPricingTier(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -184,6 +214,8 @@ export class BukiController {
   }
 
   @Patch('/teacher-pricing-tier/:id/activate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async activateTeacherPricingTier(
     @Param() params: ParamsId,
   ): Promise<ApiDataResponse> {
@@ -196,6 +228,8 @@ export class BukiController {
   }
 
   @Patch('/subject/:id/deactivate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deactivateSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.deactivateSubjectUseCase.execute(params.id);
 
@@ -216,6 +250,8 @@ export class BukiController {
   }
 
   @Patch('/gradeLevel/:id/deactivate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deactivateGradeLevel(
     @Param() params: ParamsId,
   ): Promise<ApiDataResponse> {
@@ -228,6 +264,8 @@ export class BukiController {
   }
 
   @Patch('/lessonDay/:id/deactivate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deactivateLessonDay(
     @Param() params: ParamsId,
   ): Promise<ApiDataResponse> {
@@ -240,6 +278,8 @@ export class BukiController {
   }
 
   @Patch('/teacher-pricing-tier/:id/deactivate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deactivateTeacherPricingTier(
     @Param() params: ParamsId,
   ): Promise<ApiDataResponse> {
@@ -252,6 +292,8 @@ export class BukiController {
   }
 
   @Delete('/subject/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deleteSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.deleteSubjectUseCase.execute(params.id);
 
@@ -262,6 +304,8 @@ export class BukiController {
   }
 
   @Delete('/zone/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deleteZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.deleteZoneUseCase.execute(params.id);
 
@@ -272,6 +316,8 @@ export class BukiController {
   }
 
   @Delete('/gradeLevel/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deleteGradeLevel(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.deleteGradeLevelUseCase.execute(params.id);
 
@@ -282,6 +328,8 @@ export class BukiController {
   }
 
   @Delete('/lessonDay/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deleteLessonDay(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.deleteLessonDayUseCase.execute(params.id);
 
@@ -292,6 +340,8 @@ export class BukiController {
   }
 
   @Delete('/teacher-pricing-tier/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async deleteTeacherPricingTier(
     @Param() params: ParamsId,
   ): Promise<ApiDataResponse> {
@@ -304,6 +354,8 @@ export class BukiController {
   }
 
   @Patch('/subject/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async updateSubject(
     @Param() params: ParamsId,
     @Body() body: UpdateBukiInformationDto,
@@ -317,6 +369,8 @@ export class BukiController {
   }
 
   @Patch('/zone/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async updateZone(
     @Param() params: ParamsId,
     @Body() body: UpdateBukiInformationDto,
@@ -330,6 +384,8 @@ export class BukiController {
   }
 
   @Patch('/gradeLevel/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async updateGradeLevel(
     @Param() params: ParamsId,
     @Body() body: UpdateBukiInformationDto,
@@ -343,6 +399,8 @@ export class BukiController {
   }
 
   @Patch('/lessonDay/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async updateLessonDay(
     @Param() params: ParamsId,
     @Body() body: UpdateBukiInformationDto,
@@ -356,6 +414,8 @@ export class BukiController {
   }
 
   @Patch('/teacher-pricing-tier/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async updateTeacherPricingTier(
     @Param() params: ParamsId,
     @Body() body: UpdateBukiInformationDto,

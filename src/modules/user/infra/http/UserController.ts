@@ -129,6 +129,8 @@ export class UserController {
   }
 
   @Patch('/profile/onboarding/teacher-pricing-tier')
+  @SkipAuth()
+  @UseGuards(OnboardingGuard)
   async updateTeacherPricingTier(
     @CurrentUser() user: OnboardingTokenPayload,
     @Body() body: UpdateTeacherPricingTierDto,

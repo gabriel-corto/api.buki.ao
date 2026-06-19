@@ -34,7 +34,7 @@ export abstract class BaseJwtGuard implements CanActivate {
     const token = this.extractTokenFromHeader(request);
 
     if (!token) {
-      throw new UnauthorizedException('Token não fornecido.');
+      throw new UnauthorizedException('Token Inválido.');
     }
     try {
       const payload: TokenPayload = await this.jwtService.verify(token, {

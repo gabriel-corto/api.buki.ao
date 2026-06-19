@@ -14,6 +14,7 @@ import { VerifyOtpUseCase } from './application/VerifyOtpUseCase';
 
 import { SmsProvider } from '@/shared/domain/SmsProvider';
 import { TwilioSmsProvider } from '@/shared/infra/sms/TwilioSmsProvider';
+import { ZiettSmsProvider } from '@/shared/infra/sms/ZiettSmsProvider';
 
 @Module({
   imports: [UserModule],
@@ -35,7 +36,7 @@ import { TwilioSmsProvider } from '@/shared/infra/sms/TwilioSmsProvider';
     },
     {
       provide: SmsProvider,
-      useClass: TwilioSmsProvider,
+      useClass: ZiettSmsProvider,
     },
   ],
 })
