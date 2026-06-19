@@ -7,7 +7,7 @@ export class CreateGradeLevelUseCase {
   constructor(private readonly gradeLevelRepository: GradeLevelRepository) {}
 
   async execute(name: string) {
-    const zone = GradeLevel.create(name);
-    await this.gradeLevelRepository.save(zone);
+    const gradeLevel = GradeLevel.create(name);
+    await this.gradeLevelRepository.save(gradeLevel);
   }
 }

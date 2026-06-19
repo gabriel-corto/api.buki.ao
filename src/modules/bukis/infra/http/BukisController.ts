@@ -16,6 +16,12 @@ import { ActivateGradeLevelUseCase } from '../../application/grade-level/Activat
 import { ActivateWeekDayUseCase } from '../../application/lesson-days/ActivateWeekDayUseCase';
 import { ActivateTeacherPricingTierUseCase } from '../../application/teacher-pricing-tier/ActivateTeacherPricingTierUseCase';
 
+import { DeactivateSubjectUseCase } from '../../application/subjects/DeactivateSubjectUseCase';
+import { DeactivateZoneUseCase } from '../../application/zones/DeactivateZoneUseCase';
+import { DeactivateGradeLevelUseCase } from '../../application/grade-level/DeactivateGradeLevelUseCase';
+import { DeactivateWeekDayUseCase } from '../../application/lesson-days/DeactivateWeekDayUseCase';
+import { DeactivateTeacherPricingTierUseCase } from '../../application/teacher-pricing-tier/DeactivateTeacherPricingTierUseCase';
+
 @Controller('bukis')
 export class BukiController {
   constructor(
@@ -29,6 +35,11 @@ export class BukiController {
     private activateLessonDayUseCase: ActivateWeekDayUseCase,
     private createTeacherPricingTierUseCase: CreateTeacherPricingTierUseCase,
     private activateTeacherPricingTierUseCase: ActivateTeacherPricingTierUseCase,
+    private deactivateSubjectUseCase: DeactivateSubjectUseCase,
+    private deactivateZoneUseCase: DeactivateZoneUseCase,
+    private deactivateGradeLevelUseCase: DeactivateGradeLevelUseCase,
+    private deactivateLessonDayUseCase: DeactivateWeekDayUseCase,
+    private deactivateTeacherPricingTierUseCase: DeactivateTeacherPricingTierUseCase,
   ) {}
 
   @Post('/subject/create')
@@ -142,6 +153,62 @@ export class BukiController {
     return {
       success: true,
       message: 'Plano de preço activado com sucesso.',
+    };
+  }
+
+  @Patch('/subject/:id/deactivate')
+  async deactivateSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deactivateSubjectUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Disciplina desactivada com sucesso.',
+    };
+  }
+
+  @Patch('/zone/:id/deactivate')
+  async deactivateZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deactivateZoneUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Zona de aula desactivada com sucesso.',
+    };
+  }
+
+  @Patch('/gradeLevel/:id/deactivate')
+  async deactivateGradeLevel(
+    @Param() params: ParamsId,
+  ): Promise<ApiDataResponse> {
+    await this.deactivateGradeLevelUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Nível de ensino desactivado com sucesso.',
+    };
+  }
+
+  @Patch('/lessonDay/:id/deactivate')
+  async deactivateLessonDay(
+    @Param() params: ParamsId,
+  ): Promise<ApiDataResponse> {
+    await this.deactivateLessonDayUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Dia de aula desactivado com sucesso.',
+    };
+  }
+
+  @Patch('/teacher-pricing-tier/:id/deactivate')
+  async deactivateTeacherPricingTier(
+    @Param() params: ParamsId,
+  ): Promise<ApiDataResponse> {
+    await this.deactivateTeacherPricingTierUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Plano de preço desactivado com sucesso.',
     };
   }
 }

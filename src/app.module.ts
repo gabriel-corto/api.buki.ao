@@ -57,6 +57,11 @@ import { ActivateWeekDayUseCase } from './modules/bukis/application/lesson-days/
 import { CreateTeacherPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/CreateTeacherPricingTierUseCase';
 import { ActivateTeacherPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/ActivateTeacherPricingTierUseCase';
 import { BukiController } from './modules/bukis/infra/http/BukisController';
+import { DeactivateGradeLevelUseCase } from './modules/bukis/application/grade-level/DeactivateGradeLevelUseCase';
+import { DeactivateWeekDayUseCase } from './modules/bukis/application/lesson-days/DeactivateWeekDayUseCase';
+import { DeactivateSubjectUseCase } from './modules/bukis/application/subjects/DeactivateSubjectUseCase';
+import { DeactivateTeacherPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/DeactivateTeacherPricingTierUseCase';
+import { DeactivateZoneUseCase } from './modules/bukis/application/zones/DeactivateZoneUseCase';
 
 @Module({
   imports: [
@@ -81,14 +86,19 @@ import { BukiController } from './modules/bukis/infra/http/BukisController';
     UpdateTeacherPricingTierUseCase,
     CreateSubjectUseCase,
     ActivateSubjectUseCase,
+    DeactivateSubjectUseCase,
     CreateZoneUseCase,
     ActivateZoneUseCase,
+    DeactivateZoneUseCase,
     CreateGradeLevelUseCase,
     ActivateGradeLevelUseCase,
+    DeactivateGradeLevelUseCase,
     CreateWeekdayUseCase,
     ActivateWeekDayUseCase,
+    DeactivateWeekDayUseCase,
     CreateTeacherPricingTierUseCase,
     ActivateTeacherPricingTierUseCase,
+    DeactivateTeacherPricingTierUseCase,
     {
       provide: SmsProvider,
       useClass: TwilioSmsProvider,
