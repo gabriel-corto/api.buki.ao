@@ -75,6 +75,7 @@ model Teacher {
 }
 
 enum TeacherStatus {
+  DRAFT
   PENDING
   APPROVED
   REJECTED

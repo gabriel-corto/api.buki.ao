@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
-import { TeacherPricingTierRepository } from '../domain/teacher-pricing-tier/TeacherPricingTierRepository';
+import { TeacherPricingTierRepository } from '../../domain/teacher-pricing-tier/TeacherPricingTierRepository';
 
 @Injectable()
 export class ActivateTeacherPricingTierUseCase {

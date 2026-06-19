@@ -24,8 +24,8 @@ import { UserRepository } from './shared/domain/user/UserRepository';
 import { PrismaUserRepository } from './modules/user/infra/database/prisma/repositories/PrismaUserRepository';
 import { PrismaCustomerRepository } from './modules/user/infra/database/prisma/repositories/PrismaCustomerRepository';
 import { PrismaTeacherRepository } from './modules/user/infra/database/prisma/repositories/PrismaTeacherRepository';
-import { CustomerRepository } from './modules/user/domain/CustomerRepository';
-import { TeacherRepository } from './modules/user/domain/TeacherRepository';
+import { CustomerRepository } from './modules/user/domain/customer/CustomerRepository';
+import { TeacherRepository } from './modules/user/domain/teacher/TeacherRepository';
 
 import { GradeLevelRepository } from './modules/bukis/domain/grade-level/GradeLevelRepository';
 import { SubjectRepository } from './modules/bukis/domain/subject/SubjectRepository';
@@ -45,6 +45,18 @@ import { TeacherPricingTierRepository } from './modules/bukis/domain/teacher-pri
 import { PrismaTeacherPricingTierRepository } from './modules/bukis/infra/database/prisma/repositories/PrismaTeacherPricingTierRepository';
 import { ZoneRepository } from './modules/bukis/domain/zone/ZoneRepository';
 import { PrismaZoneRepository } from './modules/bukis/infra/database/prisma/repositories/PrismaZoneRepositiry';
+import { UpdateTeacherPricingTierUseCase } from './modules/user/application/UpdateTeacherPricingTierUseCase';
+import { CreateSubjectUseCase } from './modules/bukis/application/subjects/CreateSubjectUseCase';
+import { ActivateSubjectUseCase } from './modules/bukis/application/subjects/ActivateSubjectUseCase';
+import { CreateZoneUseCase } from './modules/bukis/application/zones/CreateZoneUseCase';
+import { ActivateZoneUseCase } from './modules/bukis/application/zones/ActivateZoneUseCase';
+import { CreateGradeLevelUseCase } from './modules/bukis/application/grade-level/CreateGradeLevelUseCase';
+import { ActivateGradeLevelUseCase } from './modules/bukis/application/grade-level/ActivateGradeLevelUseCase';
+import { CreateWeekdayUseCase } from './modules/bukis/application/lesson-days/CreateWeekdayUseCase';
+import { ActivateWeekDayUseCase } from './modules/bukis/application/lesson-days/ActivateWeekDayUseCase';
+import { CreateTeacherPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/CreateTeacherPricingTierUseCase';
+import { ActivateTeacherPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/ActivateTeacherPricingTierUseCase';
+import { BukiController } from './modules/bukis/infra/http/BukisController';
 
 @Module({
   imports: [
@@ -59,13 +71,24 @@ import { PrismaZoneRepository } from './modules/bukis/infra/database/prisma/repo
     RedisModule,
     PrismaModule,
   ],
-  controllers: [AppController, AuthController, UserController],
+  controllers: [AppController, AuthController, UserController, BukiController],
   providers: [
     RequestOtpUseCase,
     VerifyOtpUseCase,
     StartOnBoardingUseCase,
     UploadTeacherDocumentUseCase,
     UpdateTeacherBukiInformationUseCase,
+    UpdateTeacherPricingTierUseCase,
+    CreateSubjectUseCase,
+    ActivateSubjectUseCase,
+    CreateZoneUseCase,
+    ActivateZoneUseCase,
+    CreateGradeLevelUseCase,
+    ActivateGradeLevelUseCase,
+    CreateWeekdayUseCase,
+    ActivateWeekDayUseCase,
+    CreateTeacherPricingTierUseCase,
+    ActivateTeacherPricingTierUseCase,
     {
       provide: SmsProvider,
       useClass: TwilioSmsProvider,

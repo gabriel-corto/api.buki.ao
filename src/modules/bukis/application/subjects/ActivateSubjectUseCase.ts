@@ -3,13 +3,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-
 import { SharedStatus } from '@/shared/domain/SharedStatus';
-
-import { SubjectRepository } from '../domain/subject/SubjectRepository';
+import { SubjectRepository } from '../../domain/subject/SubjectRepository';
 
 @Injectable()
-export class DeactivateSubjectUseCase {
+export class ActivateSubjectUseCase {
   constructor(private readonly subjectRepository: SubjectRepository) {}
 
   async execute(id: string) {
@@ -19,11 +17,11 @@ export class DeactivateSubjectUseCase {
       throw new NotFoundException('Disciplina não encontrada.');
     }
 
-    if (subject.getStatus() === SharedStatus.INACTIVE) {
-      throw new BadRequestException('Disciplina já está inativa.');
+    if (subject.getStatus() === SharedStatus.ACTIVE) {
+      throw new BadRequestException('Disciplina já está ativa.');
     }
 
-    subject.deactivate();
+    subject.activate();
     await this.subjectRepository.save(subject);
   }
 }

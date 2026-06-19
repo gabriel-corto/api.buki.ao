@@ -93,6 +93,7 @@ export type SharedStatus = (typeof SharedStatus)[keyof typeof SharedStatus]
 
 
 export const TeacherStatus: {
+  DRAFT: 'DRAFT',
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED'

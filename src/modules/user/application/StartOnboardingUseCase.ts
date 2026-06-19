@@ -4,12 +4,12 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from '@/shared/domain/user/User';
 import { UserAccountType } from '@/shared/domain/user/UserAccountType';
 
-import { Customer } from '../domain/Customer';
+import { Customer } from '../domain/customer/Customer';
 
 import { UserRepository } from '@/shared/domain/user/UserRepository';
-import { CustomerRepository } from '../domain/CustomerRepository';
-import { Teacher } from '../domain/Teacher';
-import { TeacherRepository } from '../domain/TeacherRepository';
+import { CustomerRepository } from '../domain/customer/CustomerRepository';
+import { Teacher } from '../domain/teacher/Teacher';
+import { TeacherRepository } from '../domain/teacher/TeacherRepository';
 
 import { StartOnboardingUseCaseInput } from './StartOnboardingUseCaseInput';
 import { TokenPayload } from '@/modules/auth/domain/TokenService';
@@ -46,7 +46,7 @@ export class StartOnBoardingUseCase {
         id: user.getId(),
         role: user.getRole(),
         phone: user.getPhone().getValue(),
-        accountType: user.getAcountType(),
+        accountType: user.getAccountType(),
       };
       const accessToken = this.jwtService.sign(accessTokenPayload);
 

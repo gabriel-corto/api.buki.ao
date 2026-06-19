@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { StorageService } from '@/shared/domain/StorageService';
 
-import { TeacherRepository } from '../domain/TeacherRepository';
+import { TeacherRepository } from '../domain/teacher/TeacherRepository';
 import { UserRepository } from '@/shared/domain/user/UserRepository';
 
 import { UploadTeacherDocumentUseCaseInput } from './UploadTeacherDocumentUseCaseInput';

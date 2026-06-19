@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Subject } from '../domain/subject/Subject';
-import { SubjectRepository } from '../domain/subject/SubjectRepository';
+import { Subject } from '../../domain/subject/Subject';
+import { SubjectRepository } from '../../domain/subject/SubjectRepository';
 
 @Injectable()
 export class CreateSubjectUseCase {

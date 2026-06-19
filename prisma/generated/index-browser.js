@@ -208,6 +208,7 @@ exports.UserStatus = exports.$Enums.UserStatus = {
 };
 
 exports.TeacherStatus = exports.$Enums.TeacherStatus = {
+  DRAFT: 'DRAFT',
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED'

@@ -8,12 +8,12 @@ import {
   Prisma,
 } from 'prisma/generated';
 
-import { Teacher } from '@/modules/user/domain/Teacher';
+import { Teacher } from '@/modules/user/domain/teacher/Teacher';
 import { Subject } from '@/modules/bukis/domain/subject/Subject';
 import { WeekDay } from '@/modules/bukis/domain/weekday/WeekDay';
 import { Zone } from '@/modules/bukis/domain/zone/Zone';
 import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
-import { TeacherProfileStatus } from '@/modules/user/domain/TeacherProfileStatus';
+import { TeacherProfileStatus } from '@/modules/user/domain/teacher/TeacherProfileStatus';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
 import { TeacherPricingTier } from '@/modules/bukis/domain/teacher-pricing-tier/TeacherPricingTier';
 

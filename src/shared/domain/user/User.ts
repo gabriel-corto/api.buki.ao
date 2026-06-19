@@ -93,7 +93,7 @@ export class User {
   public getRole(): UserRole {
     return this.role;
   }
-  public getAcountType(): UserAccountType {
+  public getAccountType(): UserAccountType {
     return this.accountType;
   }
   public getStatus(): UserStatus {

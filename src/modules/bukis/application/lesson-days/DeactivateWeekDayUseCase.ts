@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
-import { WeekDayRepository } from '../domain/weekday/WeekDayRepository';
+import { WeekDayRepository } from '../../domain/weekday/WeekDayRepository';
 
 @Injectable()
 export class DeactivateWeekDayUseCase {

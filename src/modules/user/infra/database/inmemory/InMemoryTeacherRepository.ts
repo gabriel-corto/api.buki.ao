@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { Teacher } from '@/modules/user/domain/Teacher';
-import { TeacherRepository } from '@/modules/user/domain/TeacherRepository';
+import { Teacher } from '@/modules/user/domain/teacher/Teacher';
+import { TeacherRepository } from '@/modules/user/domain/teacher/TeacherRepository';
 
 @Injectable()
 export class InMemoryTeacherRepository implements TeacherRepository {

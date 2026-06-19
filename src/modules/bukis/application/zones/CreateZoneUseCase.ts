@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Zone } from '../domain/zone/Zone';
-import { ZoneRepository } from '../domain/zone/ZoneRepository';
+import { Zone } from '../../domain/zone/Zone';
+import { ZoneRepository } from '../../domain/zone/ZoneRepository';
 
 @Injectable()
 export class CreateZoneUseCase {

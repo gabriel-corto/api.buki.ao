@@ -13,8 +13,10 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { StartOnBoardingUseCase } from '../../application/StartOnboardingUseCase';
 import { UploadTeacherDocumentUseCase } from '../../application/UploadTeacherDocumentUseCase';
 import { UpdateTeacherBukiInformationUseCase } from '../../application/UpdateTeacherBukiInformationUseCase';
+import { UpdateTeacherPricingTierUseCase } from '../../application/UpdateTeacherPricingTierUseCase';
 
 import { StartOnBoardingDto } from './StartOnBoardingDto';
+import { UpdateTeacherPricingTierDto } from './UpdateTeacherPricingTierDto';
 import { UpdateTeacherBukiInformationDto } from './UpdateTeacherBukiInformationDto';
 
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
@@ -33,6 +35,7 @@ export class UserController {
     private readonly startOnBoardingUseCase: StartOnBoardingUseCase,
     private readonly uploadTeacherDocumentUseCase: UploadTeacherDocumentUseCase,
     private readonly updateTeacherBukiInformationUseCase: UpdateTeacherBukiInformationUseCase,
+    private readonly updateTeacherPricingTierUseCase: UpdateTeacherPricingTierUseCase,
   ) {}
 
   @Post('/profile/onboarding')
@@ -60,7 +63,7 @@ export class UserController {
     };
   }
 
-  @Patch('/profile/teacher-document')
+  @Put('/profile/onboarding/teacher-document')
   @SkipAuth()
   @UseGuards(OnboardingGuard)
   @UseInterceptors(
@@ -88,11 +91,11 @@ export class UserController {
         avatarUrl,
       },
       success: true,
-      message: 'Foto de perfil atualizada com sucesso!',
+      message: 'Informações atualizada com sucesso!',
     };
   }
 
-  @Put('/profile/teacher-buki-information')
+  @Put('/profile/onboarding/teacher-buki-information')
   @SkipAuth()
   @UseGuards(OnboardingGuard)
   async updateTeacherBukiInformation(
@@ -107,7 +110,24 @@ export class UserController {
     return {
       data: {},
       success: true,
-      message: 'Informações actualizadas com sucesso',
+      message: 'Informações atualizada com sucesso!',
+    };
+  }
+
+  @Patch('/profile/onboarding/teacher-pricing-tier')
+  async updateTeacherPricingTier(
+    @CurrentUser() user: OnboardingTokenPayload,
+    @Body() body: UpdateTeacherPricingTierDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateTeacherPricingTierUseCase.execute({
+      pricingTierId: body.pricingTier,
+      userId: user.userId as string,
+    });
+
+    return {
+      data: {},
+      success: true,
+      message: 'Informações atualizada com sucesso!',
     };
   }
 }

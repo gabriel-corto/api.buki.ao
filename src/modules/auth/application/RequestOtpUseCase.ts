@@ -20,7 +20,7 @@ export class RequestOtpUseCase {
 
     try {
       await this.smsProvider.send({
-        content: `Seu código de acesso é ${generatedOTP}`,
+        content: `Seu código de acesso é: ${generatedOTP}`,
         recipient: phone,
       });
     } catch {

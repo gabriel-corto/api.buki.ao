@@ -1,4 +1,4 @@
-import { Customer } from '@/modules/user/domain/Customer';
+import { Customer } from '@/modules/user/domain/customer/Customer';
 import { Customer as PrismaCustomer } from 'prisma/generated';
 
 export class PrismaCustomerMapper {

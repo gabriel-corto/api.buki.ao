@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { UserRepository } from '@/shared/domain/user/UserRepository';
-import { TeacherRepository } from '../domain/TeacherRepository';
+import { TeacherRepository } from '../domain/teacher/TeacherRepository';
 
 import { ZoneRepository } from '@/modules/bukis/domain/zone/ZoneRepository';
 import { SubjectRepository } from '@/modules/bukis/domain/subject/SubjectRepository';

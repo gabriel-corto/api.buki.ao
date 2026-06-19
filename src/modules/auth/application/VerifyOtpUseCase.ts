@@ -5,6 +5,9 @@ import { VerifyOtpUseCaseInput } from './VerifyOtpUseCaseInput';
 import { OtpRepository } from '@/modules/auth/domain/OtpRepository';
 import { UserRepository } from '@/shared/domain/user/UserRepository';
 import { TokenPayload, TokenService } from '../domain/TokenService';
+import { UserAccountType } from '@/shared/domain/user/UserAccountType';
+import { TeacherProfileStatus } from '@/modules/user/domain/teacher/TeacherProfileStatus';
+import { TeacherRepository } from '@/modules/user/domain/teacher/TeacherRepository';
 
 @Injectable()
 export class VerifyOtpUseCase {
@@ -12,6 +15,7 @@ export class VerifyOtpUseCase {
     private readonly otpRepository: OtpRepository,
     private readonly userRepository: UserRepository,
     private readonly tokenService: TokenService,
+    private readonly teacherRepository: TeacherRepository,
   ) {}
 
   async execute(input: VerifyOtpUseCaseInput) {
@@ -24,40 +28,42 @@ export class VerifyOtpUseCase {
     if (storedCode !== input.code) {
       throw new BadRequestException('Código OTP inválido.');
     }
+
     await this.otpRepository.delete(input.phone);
 
     const user = await this.userRepository.findByPhone(input.phone);
 
-    if (user) {
-      const accessTokenPayload: TokenPayload = {
-        scope: 'access',
-        id: user.getId(),
-        role: user.getRole(),
-        accountType: user.getAcountType(),
-        phone: user.getPhone().getValue(),
-      };
-
-      const accessToken =
-        this.tokenService.generateAccessToken(accessTokenPayload);
-
-      return {
-        accessToken,
-        hasUser: true,
-      };
+    if (!user) {
+      const onboardingToken = this.tokenService.generateOnboardingToken({
+        scope: 'onboarding',
+        phone: input.phone,
+      });
+      return { hasUser: false, onboardingToken };
     }
 
-    const onboardingTokenPayload: TokenPayload = {
-      scope: 'onboarding',
-      phone: input.phone,
-    };
+    if (user.getAccountType() === UserAccountType.TEACHER) {
+      const teacher = await this.teacherRepository.findByUserId(user.getId());
 
-    const onboardingToken = this.tokenService.generateOnboardingToken(
-      onboardingTokenPayload,
-    );
+      if (teacher && teacher.getStatus() === TeacherProfileStatus.DRAFT) {
+        const onboardingToken = this.tokenService.generateOnboardingToken({
+          scope: 'onboarding',
+          userId: user.getId(),
+          phone: input.phone,
+        });
+        return { hasUser: true, hasCompleted: false, onboardingToken };
+      }
+    }
 
-    return {
-      hasUser: false,
-      onboardingToken,
+    const accessTokenPayload: TokenPayload = {
+      scope: 'access',
+      id: user.getId(),
+      role: user.getRole(),
+      accountType: user.getAccountType(),
+      phone: user.getPhone().getValue(),
     };
+    const accessToken =
+      this.tokenService.generateAccessToken(accessTokenPayload);
+
+    return { accessToken, hasUser: true };
   }
 }

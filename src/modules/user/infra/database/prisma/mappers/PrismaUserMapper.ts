@@ -28,7 +28,7 @@ export class PrismaUserMapper {
       phone: user.getPhone().getValue(),
       email: user.getEmail(),
       role: user.getRole(),
-      accountType: user.getAcountType(),
+      accountType: user.getAccountType(),
       status: user.getStatus(),
       createdAt: user.getCreatedAt(),
       updatedAt: user.getUpdatedAt(),

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { WeekDayRepository } from '../domain/weekday/WeekDayRepository';
-import { WeekDay } from '../domain/weekday/WeekDay';
+import { WeekDayRepository } from '../../domain/weekday/WeekDayRepository';
+import { WeekDay } from '../../domain/weekday/WeekDay';
 
 @Injectable()
 export class CreateWeekdayUseCase {
