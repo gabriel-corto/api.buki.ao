@@ -62,6 +62,16 @@ import { DeactivateWeekDayUseCase } from './modules/bukis/application/lesson-day
 import { DeactivateSubjectUseCase } from './modules/bukis/application/subjects/DeactivateSubjectUseCase';
 import { DeactivateTeacherPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/DeactivateTeacherPricingTierUseCase';
 import { DeactivateZoneUseCase } from './modules/bukis/application/zones/DeactivateZoneUseCase';
+import { DeleteSubjectUseCase } from './modules/bukis/application/subjects/DeleteSubjectUseCase';
+import { DeleteZoneUseCase } from './modules/bukis/application/zones/DeleteZoneUseCase';
+import { DeleteGradeLevelUseCase } from './modules/bukis/application/grade-level/DeleteGradeLevelUseCase';
+import { DeleteWeekDayUseCase } from './modules/bukis/application/lesson-days/DeleteWeekDayUseCase';
+import { DeleteTeacherPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/DeleteTeacherPricingTierUseCase';
+import { UpdateSubjectUseCase } from './modules/bukis/application/subjects/UpdateSubjectUseCase';
+import { UpdateZoneUseCase } from './modules/bukis/application/zones/UpdateZoneUseCase';
+import { UpdateGradeLevelUseCase } from './modules/bukis/application/grade-level/UpdateGradeLevelUseCase';
+import { UpdateWeekDayUseCase } from './modules/bukis/application/lesson-days/UpdateWeekDayUseCase';
+import { UpdateBukiPricingTierUseCase } from './modules/bukis/application/teacher-pricing-tier/UpdateTeacherPricingTierUseCase';
 
 @Module({
   imports: [
@@ -87,18 +97,28 @@ import { DeactivateZoneUseCase } from './modules/bukis/application/zones/Deactiv
     CreateSubjectUseCase,
     ActivateSubjectUseCase,
     DeactivateSubjectUseCase,
+    DeleteSubjectUseCase,
     CreateZoneUseCase,
     ActivateZoneUseCase,
     DeactivateZoneUseCase,
+    DeleteZoneUseCase,
     CreateGradeLevelUseCase,
     ActivateGradeLevelUseCase,
     DeactivateGradeLevelUseCase,
+    DeleteGradeLevelUseCase,
     CreateWeekdayUseCase,
     ActivateWeekDayUseCase,
     DeactivateWeekDayUseCase,
+    DeleteWeekDayUseCase,
     CreateTeacherPricingTierUseCase,
     ActivateTeacherPricingTierUseCase,
     DeactivateTeacherPricingTierUseCase,
+    DeleteTeacherPricingTierUseCase,
+    UpdateSubjectUseCase,
+    UpdateZoneUseCase,
+    UpdateGradeLevelUseCase,
+    UpdateWeekDayUseCase,
+    UpdateBukiPricingTierUseCase,
     {
       provide: SmsProvider,
       useClass: TwilioSmsProvider,

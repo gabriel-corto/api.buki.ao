@@ -1,8 +1,9 @@
-import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
 
 import { ParamsId } from '@/shared/dto/ParamsId';
 import type { ApiDataResponse } from '@/shared/types/ApiResponse';
 import { CreateBukiInformationDto } from './CreateBukiInformationDto';
+import { UpdateBukiInformationDto } from './UpdateBukiInformationDto';
 
 import { CreateSubjectUseCase } from '../../application/subjects/CreateSubjectUseCase';
 import { CreateZoneUseCase } from '../../application/zones/CreateZoneUseCase';
@@ -22,6 +23,18 @@ import { DeactivateGradeLevelUseCase } from '../../application/grade-level/Deact
 import { DeactivateWeekDayUseCase } from '../../application/lesson-days/DeactivateWeekDayUseCase';
 import { DeactivateTeacherPricingTierUseCase } from '../../application/teacher-pricing-tier/DeactivateTeacherPricingTierUseCase';
 
+import { DeleteSubjectUseCase } from '../../application/subjects/DeleteSubjectUseCase';
+import { DeleteZoneUseCase } from '../../application/zones/DeleteZoneUseCase';
+import { DeleteGradeLevelUseCase } from '../../application/grade-level/DeleteGradeLevelUseCase';
+import { DeleteWeekDayUseCase } from '../../application/lesson-days/DeleteWeekDayUseCase';
+import { DeleteTeacherPricingTierUseCase } from '../../application/teacher-pricing-tier/DeleteTeacherPricingTierUseCase';
+
+import { UpdateSubjectUseCase } from '../../application/subjects/UpdateSubjectUseCase';
+import { UpdateZoneUseCase } from '../../application/zones/UpdateZoneUseCase';
+import { UpdateGradeLevelUseCase } from '../../application/grade-level/UpdateGradeLevelUseCase';
+import { UpdateWeekDayUseCase } from '../../application/lesson-days/UpdateWeekDayUseCase';
+import { UpdateBukiPricingTierUseCase } from '../../application/teacher-pricing-tier/UpdateTeacherPricingTierUseCase';
+
 @Controller('bukis')
 export class BukiController {
   constructor(
@@ -40,6 +53,16 @@ export class BukiController {
     private deactivateGradeLevelUseCase: DeactivateGradeLevelUseCase,
     private deactivateLessonDayUseCase: DeactivateWeekDayUseCase,
     private deactivateTeacherPricingTierUseCase: DeactivateTeacherPricingTierUseCase,
+    private deleteSubjectUseCase: DeleteSubjectUseCase,
+    private deleteZoneUseCase: DeleteZoneUseCase,
+    private deleteGradeLevelUseCase: DeleteGradeLevelUseCase,
+    private deleteLessonDayUseCase: DeleteWeekDayUseCase,
+    private deleteTeacherPricingTierUseCase: DeleteTeacherPricingTierUseCase,
+    private updateSubjectUseCase: UpdateSubjectUseCase,
+    private updateZoneUseCase: UpdateZoneUseCase,
+    private updateGradeLevelUseCase: UpdateGradeLevelUseCase,
+    private updateLessonDayUseCase: UpdateWeekDayUseCase,
+    private updateTeacherPricingTierUseCase: UpdateBukiPricingTierUseCase,
   ) {}
 
   @Post('/subject/create')
@@ -209,6 +232,123 @@ export class BukiController {
     return {
       success: true,
       message: 'Plano de preço desactivado com sucesso.',
+    };
+  }
+
+  @Delete('/subject/:id')
+  async deleteSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteSubjectUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Disciplina eliminada com sucesso.',
+    };
+  }
+
+  @Delete('/zone/:id')
+  async deleteZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteZoneUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Zona de aula eliminada com sucesso.',
+    };
+  }
+
+  @Delete('/gradeLevel/:id')
+  async deleteGradeLevel(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteGradeLevelUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Nível de ensino eliminado com sucesso.',
+    };
+  }
+
+  @Delete('/lessonDay/:id')
+  async deleteLessonDay(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteLessonDayUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Dia de aula eliminado com sucesso.',
+    };
+  }
+
+  @Delete('/teacher-pricing-tier/:id')
+  async deleteTeacherPricingTier(
+    @Param() params: ParamsId,
+  ): Promise<ApiDataResponse> {
+    await this.deleteTeacherPricingTierUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Plano de preço eliminado com sucesso.',
+    };
+  }
+
+  @Patch('/subject/:id')
+  async updateSubject(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateSubjectUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Disciplina actualizada com sucesso.',
+    };
+  }
+
+  @Patch('/zone/:id')
+  async updateZone(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateZoneUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Zona de aula actualizada com sucesso.',
+    };
+  }
+
+  @Patch('/gradeLevel/:id')
+  async updateGradeLevel(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateGradeLevelUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Nível de ensino actualizado com sucesso.',
+    };
+  }
+
+  @Patch('/lessonDay/:id')
+  async updateLessonDay(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateLessonDayUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Dia de aula actualizado com sucesso.',
+    };
+  }
+
+  @Patch('/teacher-pricing-tier/:id')
+  async updateTeacherPricingTier(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateTeacherPricingTierUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Plano de preço actualizado com sucesso.',
     };
   }
 }
