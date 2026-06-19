@@ -11,6 +11,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { RoleGuard } from '@/shared/guard/role.guard';
+import { Roles } from '@/shared/decorators/roles.decorator';
+import { UserAccountType } from '@/shared/domain/user/UserAccountType';
 
 import { StartOnBoardingUseCase } from '../../application/onboarding/StartOnboardingUseCase';
 import { UploadTeacherDocumentUseCase } from '../../application/onboarding/UploadTeacherDocumentUseCase';
@@ -143,6 +146,8 @@ export class UserController {
   }
 
   @Get('/teachers')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async listTeachers(): Promise<ApiDataResponse> {
     const teachers = await this.listTeachersUseCase.execute();
 
@@ -153,6 +158,8 @@ export class UserController {
   }
 
   @Patch('/teacher/:id/approve')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async approveTeacher(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.approveTeacherUseCase.execute(params.id);
 
@@ -163,6 +170,8 @@ export class UserController {
   }
 
   @Patch('/teacher/:id/reprove')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async reproveTeacher(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.reproveTeacherUseCase.execute(params.id);
 
@@ -173,6 +182,8 @@ export class UserController {
   }
 
   @Get('/customers')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
   async listCustomers(): Promise<ApiDataResponse> {
     const customers = await this.listCustomersUseCase.execute();
 
