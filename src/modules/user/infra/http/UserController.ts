@@ -11,6 +11,14 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiBearerAuth,
+  ApiConsumes,
+} from '@nestjs/swagger';
 import { RoleGuard } from '@/shared/guard/role.guard';
 import { Roles } from '@/shared/decorators/roles.decorator';
 import { UserAccountType } from '@/shared/domain/user/UserAccountType';
@@ -39,6 +47,8 @@ import {
   type TokenPayload,
 } from '@/modules/auth/domain/TokenService';
 
+@ApiTags('Users')
+@ApiBearerAuth()
 @Controller('users')
 export class UserController {
   constructor(
@@ -55,6 +65,8 @@ export class UserController {
   @Post('/profile/onboarding')
   @SkipAuth()
   @UseGuards(OnboardingGuard)
+  @ApiOperation({ summary: 'Start user onboarding' })
+  @ApiResponse({ status: 201, description: 'Onboarding started successfully' })
   async startOnBoarding(
     @CurrentUser() user: TokenPayload,
     @Body() body: StartOnBoardingDto,
@@ -86,6 +98,18 @@ export class UserController {
       { name: 'bi', maxCount: 1 },
     ]),
   )
+  @ApiOperation({ summary: 'Upload teacher documents (avatar and BI)' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        avatar: { type: 'string', format: 'binary' },
+        bi: { type: 'string', format: 'binary' },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Documents uploaded successfully' })
   async uploadTeacherAvatar(
     @CurrentUser() user: OnboardingTokenPayload,
     @UploadedFiles()
@@ -112,6 +136,8 @@ export class UserController {
   @Put('/profile/onboarding/teacher-buki-information')
   @SkipAuth()
   @UseGuards(OnboardingGuard)
+  @ApiOperation({ summary: 'Update teacher Buki information' })
+  @ApiResponse({ status: 200, description: 'Information updated successfully' })
   async updateTeacherBukiInformation(
     @CurrentUser() user: OnboardingTokenPayload,
     @Body() body: UpdateTeacherBukiInformationDto,
@@ -131,6 +157,11 @@ export class UserController {
   @Patch('/profile/onboarding/teacher-pricing-tier')
   @SkipAuth()
   @UseGuards(OnboardingGuard)
+  @ApiOperation({ summary: 'Update teacher pricing tier' })
+  @ApiResponse({
+    status: 200,
+    description: 'Pricing tier updated successfully',
+  })
   async updateTeacherPricingTier(
     @CurrentUser() user: OnboardingTokenPayload,
     @Body() body: UpdateTeacherPricingTierDto,
@@ -150,6 +181,11 @@ export class UserController {
   @Get('/teachers')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'List all teachers' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of teachers retrieved successfully',
+  })
   async listTeachers(): Promise<ApiDataResponse> {
     const teachers = await this.listTeachersUseCase.execute();
 
@@ -162,6 +198,8 @@ export class UserController {
   @Patch('/teacher/:id/approve')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Approve teacher' })
+  @ApiResponse({ status: 200, description: 'Teacher approved successfully' })
   async approveTeacher(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.approveTeacherUseCase.execute(params.id);
 
@@ -174,6 +212,8 @@ export class UserController {
   @Patch('/teacher/:id/reprove')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Reprove teacher' })
+  @ApiResponse({ status: 200, description: 'Teacher reproved successfully' })
   async reproveTeacher(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.reproveTeacherUseCase.execute(params.id);
 
@@ -186,6 +226,11 @@ export class UserController {
   @Get('/customers')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'List all customers' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of customers retrieved successfully',
+  })
   async listCustomers(): Promise<ApiDataResponse> {
     const customers = await this.listCustomersUseCase.execute();
 

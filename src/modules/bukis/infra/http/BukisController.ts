@@ -8,6 +8,12 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { ParamsId } from '@/shared/dto/ParamsId';
 import type { ApiDataResponse } from '@/shared/types/ApiResponse';
@@ -53,6 +59,8 @@ import { RoleGuard } from '@/shared/guard/role.guard';
 import { Roles } from '@/shared/decorators/roles.decorator';
 import { UserAccountType } from '@/shared/domain/user/UserAccountType';
 
+@ApiTags('Bukis')
+@ApiBearerAuth()
 @Controller('bukis')
 export class BukiController {
   constructor(
@@ -96,6 +104,8 @@ export class BukiController {
   @Post('/subject/create')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Create a new subject' })
+  @ApiResponse({ status: 201, description: 'Subject created successfully' })
   async createSubject(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -110,6 +120,8 @@ export class BukiController {
   @Patch('/subject/:id/activate')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Activate a subject' })
+  @ApiResponse({ status: 200, description: 'Subject activated successfully' })
   async activateSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.activateSubjectUseCase.execute(params.id);
 
@@ -122,6 +134,8 @@ export class BukiController {
   @Post('/zone/create')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Create a new zone' })
+  @ApiResponse({ status: 201, description: 'Zone created successfully' })
   async createZone(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -136,6 +150,8 @@ export class BukiController {
   @Patch('/zone/:id/activate')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Activate a zone' })
+  @ApiResponse({ status: 200, description: 'Zone activated successfully' })
   async activateZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.activateZoneUseCase.execute(params.id);
 
@@ -148,6 +164,11 @@ export class BukiController {
   @Post('/gradeLevel/create')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Create a new teaching level' })
+  @ApiResponse({
+    status: 201,
+    description: 'Teaching level created successfully',
+  })
   async createGradeLevel(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -162,6 +183,11 @@ export class BukiController {
   @Patch('/gradeLevel/:id/activate')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Activate a teaching level' })
+  @ApiResponse({
+    status: 200,
+    description: 'Teaching level activated successfully',
+  })
   async activateGradeLevel(
     @Param() params: ParamsId,
   ): Promise<ApiDataResponse> {
@@ -176,6 +202,8 @@ export class BukiController {
   @Post('/lessonDay/create')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Create a new lesson day' })
+  @ApiResponse({ status: 201, description: 'Lesson day created successfully' })
   async createLessonDay(
     @Body() body: CreateBukiInformationDto,
   ): Promise<ApiDataResponse> {
@@ -190,6 +218,11 @@ export class BukiController {
   @Patch('/lessonDay/:id/activate')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Activate a lesson day' })
+  @ApiResponse({
+    status: 200,
+    description: 'Lesson day activated successfully',
+  })
   async activateLessonDay(@Param() params: ParamsId): Promise<ApiDataResponse> {
     await this.activateLessonDayUseCase.execute(params.id);
 
@@ -356,6 +389,8 @@ export class BukiController {
   @Patch('/subject/:id')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Update a subject' })
+  @ApiResponse({ status: 200, description: 'Subject updated successfully' })
   async updateSubject(
     @Param() params: ParamsId,
     @Body() body: UpdateBukiInformationDto,
@@ -429,6 +464,8 @@ export class BukiController {
   }
 
   @Get('/subjects')
+  @ApiOperation({ summary: 'List all subjects' })
+  @ApiResponse({ status: 200, description: 'Subjects retrieved successfully' })
   async listSubjects(): Promise<ApiDataResponse> {
     const subjects = await this.listSubjectsUseCase.execute();
 

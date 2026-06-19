@@ -1,4 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Public } from '@/shared/decorators/public.decorator';
 
 import { RequestOtpUseCase } from '../application/RequestOtpUseCase';
@@ -12,6 +13,7 @@ import type {
   ApiNoDataResponse,
 } from '@/shared/types/ApiResponse';
 
+@ApiTags('Auth')
 @Controller('/auth')
 export class AuthController {
   constructor(
@@ -21,6 +23,8 @@ export class AuthController {
 
   @Public()
   @Post('/request-otp')
+  @ApiOperation({ summary: 'Request OTP code' })
+  @ApiResponse({ status: 200, description: 'OTP code sent successfully' })
   async request(@Body() body: RequestOtpDto): Promise<ApiNoDataResponse> {
     await this.requestOtp.execute(body);
 
@@ -32,6 +36,8 @@ export class AuthController {
 
   @Public()
   @Post('/verify-otp')
+  @ApiOperation({ summary: 'Verify OTP code' })
+  @ApiResponse({ status: 200, description: 'OTP code verified successfully' })
   async verify(@Body() body: VerifyOtpDto): Promise<ApiDataResponse> {
     const { hasUser, accessToken, onboardingToken } =
       await this.verifyOtp.execute(body);
