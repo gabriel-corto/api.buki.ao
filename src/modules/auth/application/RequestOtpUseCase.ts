@@ -16,17 +16,17 @@ export class RequestOtpUseCase {
 
   async execute(input: RequestOtpUseCaseInput): Promise<void> {
     const phone = input.phone;
-    const generatedOTP = this.otpService.generate();
+    const otp = this.otpService.generate();
 
     try {
       await this.smsProvider.send({
-        content: `Seu código de acesso é: ${generatedOTP}`,
+        content: `Seu código de acesso é ${otp}`,
         recipient: phone,
       });
     } catch {
-      throw new BadGatewayException();
+      throw new BadGatewayException('Serviço Indisponível');
     }
 
-    return await this.otpRepository.save(phone, generatedOTP);
+    return await this.otpRepository.save(phone, otp);
   }
 }

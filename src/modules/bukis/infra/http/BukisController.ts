@@ -101,6 +101,109 @@ export class BukiController {
     private listTeacherPricingTiersUseCase: ListTeacherPricingTiersUseCase,
   ) {}
 
+  //GRADE LEVEL
+  @Get('/grade-level')
+  async listGradeLevels(): Promise<ApiDataResponse> {
+    const gradeLevels = await this.listGradeLevelsUseCase.execute();
+
+    return {
+      success: true,
+      data: gradeLevels,
+    };
+  }
+
+  @Post('/grade-level/create')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Create a new teaching level' })
+  @ApiResponse({
+    status: 201,
+    description: 'Teaching level created successfully',
+  })
+  async createGradeLevel(
+    @Body() body: CreateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.createGradeLevelUseCase.execute(body.name);
+
+    return {
+      success: true,
+      message: 'Nível de ensino criado com sucesso.',
+    };
+  }
+
+  @Patch('/grade-level/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async updateGradeLevel(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateGradeLevelUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Nível de ensino actualizado com sucesso.',
+    };
+  }
+
+  @Patch('/grade-level/:id/activate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Activate a teaching level' })
+  @ApiResponse({
+    status: 200,
+    description: 'Teaching level activated successfully',
+  })
+  async activateGradeLevel(
+    @Param() params: ParamsId,
+  ): Promise<ApiDataResponse> {
+    await this.activateGradeLevelUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Nível de ensino activado com sucesso.',
+    };
+  }
+
+  @Patch('/grade-level/:id/deactivate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async deactivateGradeLevel(
+    @Param() params: ParamsId,
+  ): Promise<ApiDataResponse> {
+    await this.deactivateGradeLevelUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Nível de ensino desactivado com sucesso.',
+    };
+  }
+
+  @Delete('/grade-level/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async deleteGradeLevel(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteGradeLevelUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Nível de ensino eliminado com sucesso.',
+    };
+  }
+
+  //SUBJECTS
+  @Get('/subjects')
+  @ApiOperation({ summary: 'List all subjects' })
+  @ApiResponse({ status: 200, description: 'Subjects retrieved successfully' })
+  async listSubjects(): Promise<ApiDataResponse> {
+    const subjects = await this.listSubjectsUseCase.execute();
+
+    return {
+      success: true,
+      data: subjects,
+    };
+  }
+
   @Post('/subject/create')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
@@ -117,6 +220,23 @@ export class BukiController {
     };
   }
 
+  @Patch('/subject/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Update a subject' })
+  @ApiResponse({ status: 200, description: 'Subject updated successfully' })
+  async updateSubject(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateSubjectUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Disciplina actualizada com sucesso.',
+    };
+  }
+
   @Patch('/subject/:id/activate')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
@@ -128,6 +248,43 @@ export class BukiController {
     return {
       success: true,
       message: 'Disciplina activada com sucesso.',
+    };
+  }
+
+  @Patch('/subject/:id/deactivate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  @ApiOperation({ summary: 'Deactivate a subject' })
+  @ApiResponse({ status: 201, description: 'Subject deactivated successfully' })
+  async deactivateSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deactivateSubjectUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Disciplina desactivada com sucesso.',
+    };
+  }
+
+  @Delete('/subject/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async deleteSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteSubjectUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Disciplina eliminada com sucesso.',
+    };
+  }
+
+  //ZONE
+  @Get('/zone')
+  async listZones(): Promise<ApiDataResponse> {
+    const zones = await this.listZonesUseCase.execute();
+
+    return {
+      success: true,
+      data: zones,
     };
   }
 
@@ -161,45 +318,55 @@ export class BukiController {
     };
   }
 
-  @Post('/gradeLevel/create')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  @ApiOperation({ summary: 'Create a new teaching level' })
-  @ApiResponse({
-    status: 201,
-    description: 'Teaching level created successfully',
-  })
-  async createGradeLevel(
-    @Body() body: CreateBukiInformationDto,
-  ): Promise<ApiDataResponse> {
-    await this.createGradeLevelUseCase.execute(body.name);
+  @Patch('/zone/:id/deactivate')
+  async deactivateZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deactivateZoneUseCase.execute(params.id);
 
     return {
       success: true,
-      message: 'Nível de ensino criado com sucesso.',
+      message: 'Zona de aula desactivada com sucesso.',
     };
   }
 
-  @Patch('/gradeLevel/:id/activate')
+  @Delete('/zone/:id')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
-  @ApiOperation({ summary: 'Activate a teaching level' })
-  @ApiResponse({
-    status: 200,
-    description: 'Teaching level activated successfully',
-  })
-  async activateGradeLevel(
+  async deleteZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteZoneUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Zona de aula eliminada com sucesso.',
+    };
+  }
+
+  @Patch('/zone/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async updateZone(
     @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
   ): Promise<ApiDataResponse> {
-    await this.activateGradeLevelUseCase.execute(params.id);
+    await this.updateZoneUseCase.execute(params.id, body.name);
 
     return {
       success: true,
-      message: 'Nível de ensino activado com sucesso.',
+      message: 'Zona de aula actualizada com sucesso.',
     };
   }
 
-  @Post('/lessonDay/create')
+  //LESSON DAY
+  @Get('/lesson-day')
+  async listLessonDays(): Promise<ApiDataResponse> {
+    const days = await this.listWeekDaysUseCase.execute();
+
+    return {
+      success: true,
+      data: days,
+    };
+  }
+
+  @Post('/lesson-day/create')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
   @ApiOperation({ summary: 'Create a new lesson day' })
@@ -215,7 +382,7 @@ export class BukiController {
     };
   }
 
-  @Patch('/lessonDay/:id/activate')
+  @Patch('/lesson-day/:id/activate')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
   @ApiOperation({ summary: 'Activate a lesson day' })
@@ -232,6 +399,48 @@ export class BukiController {
     };
   }
 
+  @Patch('/lesson-day/:id/deactivate')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async deactivateLessonDay(
+    @Param() params: ParamsId,
+  ): Promise<ApiDataResponse> {
+    await this.deactivateLessonDayUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Dia de aula desactivado com sucesso.',
+    };
+  }
+
+  @Delete('/lesson-day/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async deleteLessonDay(@Param() params: ParamsId): Promise<ApiDataResponse> {
+    await this.deleteLessonDayUseCase.execute(params.id);
+
+    return {
+      success: true,
+      message: 'Dia de aula eliminado com sucesso.',
+    };
+  }
+
+  @Patch('/lesson-day/:id')
+  @Roles(UserAccountType.MANAGER)
+  @UseGuards(RoleGuard)
+  async updateLessonDay(
+    @Param() params: ParamsId,
+    @Body() body: UpdateBukiInformationDto,
+  ): Promise<ApiDataResponse> {
+    await this.updateLessonDayUseCase.execute(params.id, body.name);
+
+    return {
+      success: true,
+      message: 'Dia de aula actualizado com sucesso.',
+    };
+  }
+
+  //TEACHER PRICING TIER
   @Post('/teacher-pricing-tier/create')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
@@ -260,56 +469,6 @@ export class BukiController {
     };
   }
 
-  @Patch('/subject/:id/deactivate')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async deactivateSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
-    await this.deactivateSubjectUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Disciplina desactivada com sucesso.',
-    };
-  }
-
-  @Patch('/zone/:id/deactivate')
-  async deactivateZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
-    await this.deactivateZoneUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Zona de aula desactivada com sucesso.',
-    };
-  }
-
-  @Patch('/gradeLevel/:id/deactivate')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async deactivateGradeLevel(
-    @Param() params: ParamsId,
-  ): Promise<ApiDataResponse> {
-    await this.deactivateGradeLevelUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Nível de ensino desactivado com sucesso.',
-    };
-  }
-
-  @Patch('/lessonDay/:id/deactivate')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async deactivateLessonDay(
-    @Param() params: ParamsId,
-  ): Promise<ApiDataResponse> {
-    await this.deactivateLessonDayUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Dia de aula desactivado com sucesso.',
-    };
-  }
-
   @Patch('/teacher-pricing-tier/:id/deactivate')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
@@ -324,54 +483,6 @@ export class BukiController {
     };
   }
 
-  @Delete('/subject/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async deleteSubject(@Param() params: ParamsId): Promise<ApiDataResponse> {
-    await this.deleteSubjectUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Disciplina eliminada com sucesso.',
-    };
-  }
-
-  @Delete('/zone/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async deleteZone(@Param() params: ParamsId): Promise<ApiDataResponse> {
-    await this.deleteZoneUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Zona de aula eliminada com sucesso.',
-    };
-  }
-
-  @Delete('/gradeLevel/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async deleteGradeLevel(@Param() params: ParamsId): Promise<ApiDataResponse> {
-    await this.deleteGradeLevelUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Nível de ensino eliminado com sucesso.',
-    };
-  }
-
-  @Delete('/lessonDay/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async deleteLessonDay(@Param() params: ParamsId): Promise<ApiDataResponse> {
-    await this.deleteLessonDayUseCase.execute(params.id);
-
-    return {
-      success: true,
-      message: 'Dia de aula eliminado com sucesso.',
-    };
-  }
-
   @Delete('/teacher-pricing-tier/:id')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
@@ -383,68 +494,6 @@ export class BukiController {
     return {
       success: true,
       message: 'Plano de preço eliminado com sucesso.',
-    };
-  }
-
-  @Patch('/subject/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  @ApiOperation({ summary: 'Update a subject' })
-  @ApiResponse({ status: 200, description: 'Subject updated successfully' })
-  async updateSubject(
-    @Param() params: ParamsId,
-    @Body() body: UpdateBukiInformationDto,
-  ): Promise<ApiDataResponse> {
-    await this.updateSubjectUseCase.execute(params.id, body.name);
-
-    return {
-      success: true,
-      message: 'Disciplina actualizada com sucesso.',
-    };
-  }
-
-  @Patch('/zone/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async updateZone(
-    @Param() params: ParamsId,
-    @Body() body: UpdateBukiInformationDto,
-  ): Promise<ApiDataResponse> {
-    await this.updateZoneUseCase.execute(params.id, body.name);
-
-    return {
-      success: true,
-      message: 'Zona de aula actualizada com sucesso.',
-    };
-  }
-
-  @Patch('/gradeLevel/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async updateGradeLevel(
-    @Param() params: ParamsId,
-    @Body() body: UpdateBukiInformationDto,
-  ): Promise<ApiDataResponse> {
-    await this.updateGradeLevelUseCase.execute(params.id, body.name);
-
-    return {
-      success: true,
-      message: 'Nível de ensino actualizado com sucesso.',
-    };
-  }
-
-  @Patch('/lessonDay/:id')
-  @Roles(UserAccountType.MANAGER)
-  @UseGuards(RoleGuard)
-  async updateLessonDay(
-    @Param() params: ParamsId,
-    @Body() body: UpdateBukiInformationDto,
-  ): Promise<ApiDataResponse> {
-    await this.updateLessonDayUseCase.execute(params.id, body.name);
-
-    return {
-      success: true,
-      message: 'Dia de aula actualizado com sucesso.',
     };
   }
 
@@ -463,49 +512,7 @@ export class BukiController {
     };
   }
 
-  @Get('/subjects')
-  @ApiOperation({ summary: 'List all subjects' })
-  @ApiResponse({ status: 200, description: 'Subjects retrieved successfully' })
-  async listSubjects(): Promise<ApiDataResponse> {
-    const subjects = await this.listSubjectsUseCase.execute();
-
-    return {
-      success: true,
-      data: subjects,
-    };
-  }
-
-  @Get('/zones')
-  async listZones(): Promise<ApiDataResponse> {
-    const zones = await this.listZonesUseCase.execute();
-
-    return {
-      success: true,
-      data: zones,
-    };
-  }
-
-  @Get('/gradeLevels')
-  async listGradeLevels(): Promise<ApiDataResponse> {
-    const gradeLevels = await this.listGradeLevelsUseCase.execute();
-
-    return {
-      success: true,
-      data: gradeLevels,
-    };
-  }
-
-  @Get('/lessonDays')
-  async listLessonDays(): Promise<ApiDataResponse> {
-    const days = await this.listWeekDaysUseCase.execute();
-
-    return {
-      success: true,
-      data: days,
-    };
-  }
-
-  @Get('/teacher-pricing-tiers')
+  @Get('/teacher-pricing-tier')
   async listTeacherPricingTiers(): Promise<ApiDataResponse> {
     const tiers = await this.listTeacherPricingTiersUseCase.execute();
 

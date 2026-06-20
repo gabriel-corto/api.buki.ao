@@ -10,11 +10,13 @@ import { TokenService } from './domain/TokenService';
 import { JwtTokenService } from './infra/JwtTokenService';
 
 import { RequestOtpUseCase } from './application/RequestOtpUseCase';
+import { GetMeUseCase } from './application/GetMeUseCase';
 import { VerifyOtpUseCase } from './application/VerifyOtpUseCase';
 
 import { SmsProvider } from '@/shared/domain/SmsProvider';
 import { TwilioSmsProvider } from '@/shared/infra/sms/TwilioSmsProvider';
 import { ZiettSmsProvider } from '@/shared/infra/sms/ZiettSmsProvider';
+import { FakeSmsProvider } from '@/shared/infra/sms/FakeSmsProvider';
 
 @Module({
   imports: [UserModule],
@@ -22,6 +24,7 @@ import { ZiettSmsProvider } from '@/shared/infra/sms/ZiettSmsProvider';
   providers: [
     RequestOtpUseCase,
     VerifyOtpUseCase,
+    GetMeUseCase,
     {
       provide: OtpRepository,
       useClass: RedisOtpRepository,
@@ -36,7 +39,7 @@ import { ZiettSmsProvider } from '@/shared/infra/sms/ZiettSmsProvider';
     },
     {
       provide: SmsProvider,
-      useClass: ZiettSmsProvider,
+      useClass: FakeSmsProvider,
     },
   ],
 })

@@ -5,6 +5,7 @@ import { SmsProvider, SmsProviderPayload } from '@/shared/domain/SmsProvider';
 export class FakeSmsProvider implements SmsProvider {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async send(data: SmsProviderPayload): Promise<void> {
+    console.log(data.content);
     await Promise.resolve();
   }
 }
