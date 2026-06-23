@@ -3,7 +3,6 @@ import { AuthController } from './infra/AuthController';
 import { UserModule } from '../user/user.module';
 
 import { OtpRepository } from './domain/OtpRepository';
-import { RedisOtpRepository } from './infra/RedisOtpRepository';
 import { OtpService } from './domain/OtpService';
 import { JsGeneratorOtpService } from './infra/JsGeneratorOtpService';
 import { TokenService } from './domain/TokenService';
@@ -14,9 +13,8 @@ import { GetMeUseCase } from './application/GetMeUseCase';
 import { VerifyOtpUseCase } from './application/VerifyOtpUseCase';
 
 import { SmsProvider } from '@/shared/domain/SmsProvider';
-import { TwilioSmsProvider } from '@/shared/infra/sms/TwilioSmsProvider';
-import { ZiettSmsProvider } from '@/shared/infra/sms/ZiettSmsProvider';
 import { FakeSmsProvider } from '@/shared/infra/sms/FakeSmsProvider';
+import { InMemoryOtpRepository } from './infra/InMemoryOtpRepository';
 
 @Module({
   imports: [UserModule],
@@ -27,7 +25,7 @@ import { FakeSmsProvider } from '@/shared/infra/sms/FakeSmsProvider';
     GetMeUseCase,
     {
       provide: OtpRepository,
-      useClass: RedisOtpRepository,
+      useClass: InMemoryOtpRepository,
     },
     {
       provide: OtpService,
