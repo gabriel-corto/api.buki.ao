@@ -9,15 +9,20 @@ export class PrismaTeacherRepository implements TeacherRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async save(teacher: Teacher): Promise<void> {
-    const prismaData = PrismaTeacherMapper.toPrisma(teacher);
-
-    await this.prisma.teacher.upsert({
-      where: {
-        userId: teacher.getUserId(),
-      },
-      update: prismaData,
-      create: prismaData,
+    const existing = await this.prisma.teacher.findUnique({
+      where: { userId: teacher.getUserId() },
     });
+
+    if (existing) {
+      await this.prisma.teacher.update({
+        where: { userId: teacher.getUserId() },
+        data: PrismaTeacherMapper.toPrisma(teacher),
+      });
+    } else {
+      await this.prisma.teacher.create({
+        data: PrismaTeacherMapper.toCreatePrisma(teacher),
+      });
+    }
   }
 
   async findAll(): Promise<Teacher[]> {
@@ -28,8 +33,10 @@ export class PrismaTeacherRepository implements TeacherRepository {
         zones: true,
         gradeLevels: true,
         priceTier: true,
+        user: true,
       },
     });
+
     return teachers.map((teacher) => PrismaTeacherMapper.toDomain(teacher));
   }
 

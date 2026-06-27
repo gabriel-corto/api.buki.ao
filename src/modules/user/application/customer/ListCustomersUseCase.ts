@@ -7,8 +7,6 @@ export class ListCustomersUseCase {
 
   async execute() {
     const customers = await this.customerRepository.findAll();
-    return customers.map((customer) => ({
-      userId: customer.getUserId(),
-    }));
+    return { customers };
   }
 }

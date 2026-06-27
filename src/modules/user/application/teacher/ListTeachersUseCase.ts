@@ -7,11 +7,6 @@ export class ListTeachersUseCase {
 
   async execute() {
     const teachers = await this.teacherRepository.findAll();
-    return teachers.map((teacher) => ({
-      id: teacher.getId(),
-      userId: teacher.getUserId(),
-      avatar: teacher.getAvatar(),
-      status: teacher.getStatus(),
-    }));
+    return { teachers };
   }
 }

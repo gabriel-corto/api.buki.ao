@@ -28,6 +28,7 @@ export class UpdateTeacherPricingTierUseCase {
     }
 
     teacher.updatePriceTier(pricingTier);
+    teacher.updateToPendingProfile();
     await this.teacherRepository.save(teacher);
   }
 }

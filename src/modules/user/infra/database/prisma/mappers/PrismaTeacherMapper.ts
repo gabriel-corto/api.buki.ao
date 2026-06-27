@@ -5,13 +5,13 @@ import {
   Zone as PrismaZone,
   GradeLevel as PrismaGradeLevel,
   TeacherPricingTier as PrismaTeacherPricingTier,
-  Prisma,
 } from 'prisma/generated';
 
 import { Teacher } from '@/modules/user/domain/teacher/Teacher';
 import { Subject } from '@/modules/bukis/domain/subject/Subject';
 import { WeekDay } from '@/modules/bukis/domain/weekday/WeekDay';
 import { Zone } from '@/modules/bukis/domain/zone/Zone';
+
 import { GradeLevel } from '@/modules/bukis/domain/grade-level/GradeLevel';
 import { TeacherProfileStatus } from '@/modules/user/domain/teacher/TeacherProfileStatus';
 import { SharedStatus } from '@/shared/domain/SharedStatus';
@@ -49,16 +49,52 @@ export class PrismaTeacherMapper {
     );
   }
 
-  static toPrisma(teacher: Teacher): Prisma.TeacherCreateInput {
+  static toPrisma(teacher: Teacher) {
+    return {
+      avatar: teacher.getAvatar(),
+      biUrl: teacher.getBiUrl(),
+      status: teacher.getStatus(),
+      subjects: {
+        set: teacher.getSubjects().map((s) => ({ id: s.getId() })),
+      },
+      weekDays: {
+        set: teacher.getWeekDays().map((w) => ({ id: w.getId() })),
+      },
+      zones: {
+        set: teacher.getLessonZones().map((z) => ({ id: z.getId() })),
+      },
+      gradeLevels: {
+        set: teacher.getGradeLevels().map((g) => ({ id: g.getId() })),
+      },
+      priceTier: teacher.getPriceTier()
+        ? { connect: { id: teacher.getPriceTier()!.getId() } }
+        : { disconnect: true },
+    };
+  }
+
+  static toCreatePrisma(teacher: Teacher) {
     return {
       id: teacher.getId(),
       avatar: teacher.getAvatar(),
       biUrl: teacher.getBiUrl(),
       status: teacher.getStatus(),
+      subjects: {
+        connect: teacher.getSubjects().map((s) => ({ id: s.getId() })),
+      },
+      weekDays: {
+        connect: teacher.getWeekDays().map((w) => ({ id: w.getId() })),
+      },
+      zones: {
+        connect: teacher.getLessonZones().map((z) => ({ id: z.getId() })),
+      },
+      gradeLevels: {
+        connect: teacher.getGradeLevels().map((g) => ({ id: g.getId() })),
+      },
+      ...(teacher.getPriceTier()
+        ? { priceTier: { connect: { id: teacher.getPriceTier()!.getId() } } }
+        : {}),
       user: {
-        connect: {
-          id: teacher.getUserId(),
-        },
+        connect: { id: teacher.getUserId() },
       },
     };
   }

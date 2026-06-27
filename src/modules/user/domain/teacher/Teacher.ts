@@ -55,7 +55,7 @@ export class Teacher {
       [],
       [],
       null,
-      TeacherProfileStatus.PENDING,
+      TeacherProfileStatus.DRAFT,
     );
   }
 
@@ -159,5 +159,9 @@ export class Teacher {
 
   public reject(): void {
     this.status = TeacherProfileStatus.REJECTED;
+  }
+
+  public updateToPendingProfile() {
+    this.status = TeacherProfileStatus.PENDING;
   }
 }

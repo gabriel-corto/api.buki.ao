@@ -5,5 +5,5 @@ export class UpdateTeacherPricingTierDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  pricingTier: string;
+  pricingTierId: string;
 }

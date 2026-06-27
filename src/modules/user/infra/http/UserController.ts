@@ -167,7 +167,7 @@ export class UserController {
     @Body() body: UpdateTeacherPricingTierDto,
   ): Promise<ApiDataResponse> {
     await this.updateTeacherPricingTierUseCase.execute({
-      pricingTierId: body.pricingTier,
+      pricingTierId: body.pricingTierId,
       userId: user.userId as string,
     });
 
@@ -187,7 +187,7 @@ export class UserController {
     description: 'List of teachers retrieved successfully',
   })
   async listTeachers(): Promise<ApiDataResponse> {
-    const teachers = await this.listTeachersUseCase.execute();
+    const { teachers } = await this.listTeachersUseCase.execute();
 
     return {
       data: teachers,
