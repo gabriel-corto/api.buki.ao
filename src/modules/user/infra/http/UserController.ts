@@ -187,10 +187,10 @@ export class UserController {
     description: 'List of teachers retrieved successfully',
   })
   async listTeachers(): Promise<ApiDataResponse> {
-    const { teachers } = await this.listTeachersUseCase.execute();
+    const { output } = await this.listTeachersUseCase.execute();
 
     return {
-      data: teachers,
+      data: output,
       success: true,
     };
   }

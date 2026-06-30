@@ -5,6 +5,8 @@ import {
   Zone as PrismaZone,
   GradeLevel as PrismaGradeLevel,
   TeacherPricingTier as PrismaTeacherPricingTier,
+  User as PrismaUser,
+  Prisma,
 } from 'prisma/generated';
 
 import { Teacher } from '@/modules/user/domain/teacher/Teacher';
