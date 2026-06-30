@@ -10,15 +10,15 @@ import { InMemoryOtpRepository } from '@/modules/auth/infra/InMemoryOtpRepositor
 import { RedisOtpRepository } from '@/modules/auth/infra/RedisOtpRepository';
 
 export function getSmsProvider(): Type<SmsProvider> {
-  if (process.env.ENVIROMENT === 'LOCAL') return FakeSmsProvider;
-  if (process.env.ENVIROMENT === 'DEV') return TwilioSmsProvider;
+  if (process.env.ENVIRONMENT === 'LOCAL') return FakeSmsProvider;
+  if (process.env.ENVIRONMENT === 'DEV') return TwilioSmsProvider;
 
   return ZiettSmsProvider;
 }
 
 export function getOtpRepository(): Type<OtpRepository> {
-  if (process.env.ENVIROMENT === 'LOCAL') return InMemoryOtpRepository;
-  if (process.env.ENVIROMENT === 'DEV') return RedisOtpRepository;
+  if (process.env.ENVIRONMENT === 'LOCAL') return InMemoryOtpRepository;
+  if (process.env.ENVIRONMENT === 'DEV') return RedisOtpRepository;
 
   return RedisOtpRepository;
 }
