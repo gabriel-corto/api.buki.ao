@@ -5,8 +5,6 @@ import {
   Zone as PrismaZone,
   GradeLevel as PrismaGradeLevel,
   TeacherPricingTier as PrismaTeacherPricingTier,
-  User as PrismaUser,
-  Prisma,
 } from 'prisma/generated';
 
 import { Teacher } from '@/modules/user/domain/teacher/Teacher';
@@ -46,7 +44,13 @@ export class PrismaTeacherMapper {
       raw.gradeLevels.map((g) =>
         GradeLevel.restore(g.id, g.name, g.status as SharedStatus),
       ),
-      raw.priceTier as TeacherPricingTier | null,
+      raw.priceTier
+        ? TeacherPricingTier.restore(
+            raw.priceTier.id,
+            raw.priceTier.value,
+            raw.priceTier.status as SharedStatus,
+          )
+        : null,
       raw.status as TeacherProfileStatus,
     );
   }

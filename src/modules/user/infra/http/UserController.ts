@@ -195,7 +195,7 @@ export class UserController {
     };
   }
 
-  @Patch('/teacher/:id/approve')
+  @Patch('/teachers/:id/approve')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
   @ApiOperation({ summary: 'Approve teacher' })
@@ -209,7 +209,7 @@ export class UserController {
     };
   }
 
-  @Patch('/teacher/:id/reprove')
+  @Patch('/teachers/:id/reprove')
   @Roles(UserAccountType.MANAGER)
   @UseGuards(RoleGuard)
   @ApiOperation({ summary: 'Reprove teacher' })
@@ -232,10 +232,10 @@ export class UserController {
     description: 'List of customers retrieved successfully',
   })
   async listCustomers(): Promise<ApiDataResponse> {
-    const customers = await this.listCustomersUseCase.execute();
+    const { output } = await this.listCustomersUseCase.execute();
 
     return {
-      data: customers,
+      data: output,
       success: true,
     };
   }
