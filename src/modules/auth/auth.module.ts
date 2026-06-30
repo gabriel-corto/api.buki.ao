@@ -17,7 +17,7 @@ import { SmsProvider } from '@/shared/domain/SmsProvider';
 import {
   getOtpRepository,
   getSmsProvider,
-} from '@/shared/helpers/Environments';
+} from '@/shared/helpers/EnvProviders';
 
 @Module({
   imports: [UserModule],
