@@ -11,7 +11,31 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.useGlobalPipes(new ValidationPipe());
-  app.enableCors({ origin: 'http://localhost:3000', credentials: true });
+
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://buki.ao',
+    'https://www.buki.ao',
+    'https://manager.buki.ao',
+  ];
+
+  app.enableCors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const isAllowed =
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.buki.ao') ||
+        /^http:\/\/localhost:\d+$/.test(origin);
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Buki API')
