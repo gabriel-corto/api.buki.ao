@@ -13,8 +13,11 @@ import { GetMeUseCase } from './application/GetMeUseCase';
 import { VerifyOtpUseCase } from './application/VerifyOtpUseCase';
 
 import { SmsProvider } from '@/shared/domain/SmsProvider';
-import { FakeSmsProvider } from '@/shared/infra/sms/FakeSmsProvider';
-import { InMemoryOtpRepository } from './infra/InMemoryOtpRepository';
+
+import {
+  getOtpRepository,
+  getSmsProvider,
+} from '@/shared/helpers/Environments';
 
 @Module({
   imports: [UserModule],
@@ -25,7 +28,7 @@ import { InMemoryOtpRepository } from './infra/InMemoryOtpRepository';
     GetMeUseCase,
     {
       provide: OtpRepository,
-      useClass: InMemoryOtpRepository,
+      useClass: getOtpRepository(),
     },
     {
       provide: OtpService,
@@ -37,7 +40,7 @@ import { InMemoryOtpRepository } from './infra/InMemoryOtpRepository';
     },
     {
       provide: SmsProvider,
-      useClass: FakeSmsProvider,
+      useClass: getSmsProvider(),
     },
   ],
 })

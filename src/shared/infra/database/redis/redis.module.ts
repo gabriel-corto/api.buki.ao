@@ -8,6 +8,12 @@ import { Redis } from 'ioredis';
     {
       provide: Redis,
       useFactory: (configService: ConfigService) => {
+        const redisUrl = configService.get<string>('REDIS_URL');
+
+        if (redisUrl) {
+          return new Redis(redisUrl);
+        }
+
         return new Redis({
           port: configService.getOrThrow<number>('REDIS_PORT'),
           host: configService.getOrThrow<string>('REDIS_HOST'),
